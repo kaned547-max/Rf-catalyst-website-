@@ -1,47 +1,1389 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RF Catalyst Automotive</title>
-  <meta name="description" content="RF Plasma–Catalyst systems. Education and evaluation access. Proprietary IP withheld.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="RF Catalyst Automotive — RF plasma-catalyst integrated systems for emissions reduction, industrial process efficiency, and advanced propulsion." />
+  <title>RF Catalyst Automotive | Deep-Tech Emissions & Propulsion Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    body{font-family:system-ui,Arial;margin:0;padding:36px;background:#fff;color:#111}
-    .wrap{max-width:960px;margin:0 auto}
-    .btn{display:inline-block;padding:14px 24px;background:#000;color:#fff;
-         text-decoration:none;border-radius:8px;font-weight:700}
-    .card{border:1px solid #e6e6e6;border-radius:10px;padding:20px;margin-top:20px}
+    :root {
+      --bg-primary: #080A0C;
+      --bg-secondary: #0C0F12;
+      --bg-card: #0F1318;
+      --bg-card-hover: #141920;
+      --cyan: #00E5FF;
+      --cyan-dim: rgba(0, 229, 255, 0.12);
+      --cyan-glow: rgba(0, 229, 255, 0.25);
+      --amber: #FFB300;
+      --amber-dim: rgba(255, 179, 0, 0.12);
+      --green: #00FF88;
+      --green-dim: rgba(0, 255, 136, 0.1);
+      --text-primary: #E8EDF2;
+      --text-secondary: #8A9BB0;
+      --text-muted: #4A5568;
+      --border: rgba(0, 229, 255, 0.15);
+      --border-amber: rgba(255, 179, 0, 0.2);
+      --font-display: 'Orbitron', monospace;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-body: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); opacity: 0.5; border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(8, 10, 12, 0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .nav-logo-primary {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+    }
+
+    .nav-logo-sub {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--bg-primary) !important;
+      background: var(--cyan);
+      padding: 8px 20px;
+      letter-spacing: 0.1em;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; color: var(--bg-primary) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 179, 0, 0.04) 0%, transparent 70%);
+      bottom: 50px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.3em;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      max-width: 900px;
+      animation: fadeUp 0.8s 0.1s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-headline .accent-cyan { color: var(--cyan); }
+    .hero-headline .accent-amber { color: var(--amber); }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-top: 24px;
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+      opacity: 0;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 40px;
+      animation: fadeUp 0.8s 0.3s ease forwards;
+      opacity: 0;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .tag-cyan { border-color: rgba(0, 229, 255, 0.3); color: var(--cyan); }
+    .tag-amber { border-color: rgba(255, 179, 0, 0.3); color: var(--amber); }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 48px;
+      animation: fadeUp 0.8s 0.4s ease forwards;
+      opacity: 0;
+    }
+
+    .btn-primary {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      padding: 14px 32px;
+      background: var(--cyan);
+      color: var(--bg-primary);
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      color: var(--bg-primary);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      padding: 14px 32px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 48px;
+      margin-top: 80px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.8s 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .metric-item {}
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: -0.02em;
+    }
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 100px 48px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--cyan);
+      letter-spacing: 0.3em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      max-width: 700px;
+    }
+
+    .section-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin-top: 20px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── TECH SECTION ── */
+    #technology {
+      background: var(--bg-secondary);
+      position: relative;
+    }
+
+    .physics-chain {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 60px 0 48px;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .physics-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px 28px;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .physics-node:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--cyan);
+    }
+
+    .physics-node-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+    }
+
+    .physics-node-desc {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .physics-arrow {
+      width: 32px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      font-size: 16px;
+      opacity: 0.5;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      margin-top: 48px;
+    }
+
+    .tech-card {
+      background: var(--bg-card);
+      padding: 36px 32px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--cyan);
+      transition: height 0.4s;
+    }
+
+    .tech-card:hover { background: var(--bg-card-hover); }
+    .tech-card:hover::before { height: 100%; }
+
+    .tech-card-num {
+      font-family: var(--font-display);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+
+    .tech-card-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .tech-card-body {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── MARKETS ── */
+    #markets {
+      position: relative;
+    }
+
+    .markets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .market-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .market-card:hover {
+      border-color: var(--amber);
+      background: var(--bg-card-hover);
+    }
+
+    .market-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--amber), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .market-card:hover::after { opacity: 1; }
+
+    .market-tier {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--amber);
+      letter-spacing: 0.25em;
+      margin-bottom: 12px;
+    }
+
+    .market-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .market-body {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .market-stat {
+      display: flex;
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-block {}
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-top: 2px;
+    }
+
+    /* ── REGULATORY ── */
+    #regulatory {
+      background: var(--bg-secondary);
+    }
+
+    .reg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      margin-top: 60px;
+    }
+
+    .reg-card {
+      background: var(--bg-card);
+      padding: 32px 28px;
+      transition: background 0.3s;
+    }
+
+    .reg-card:hover { background: var(--bg-card-hover); }
+
+    .reg-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      margin-bottom: 10px;
+    }
+
+    .reg-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+
+    .reg-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── VALIDATION ── */
+    #validation {
+      position: relative;
+    }
+
+    .validation-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 60px;
+      align-items: start;
+    }
+
+    .validation-left {}
+
+    .trl-bar {
+      margin-top: 32px;
+    }
+
+    .trl-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .trl-label-text {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+    }
+
+    .trl-value {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .trl-track {
+      height: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .trl-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), rgba(0, 229, 255, 0.4));
+      transition: width 1.5s ease;
+    }
+
+    .trl-notches {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .trl-notch {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .validation-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .val-step {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .val-step:last-child { border-bottom: none; }
+
+    .val-step-num {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cyan);
+      width: 32px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .val-step-content {}
+    .val-step-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .val-step-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .val-step-status {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      padding: 3px 10px;
+      margin-top: 8px;
+      display: inline-block;
+    }
+
+    .status-complete { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0, 255, 136, 0.2); }
+    .status-active { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0, 229, 255, 0.2); }
+    .status-pending { background: rgba(255, 179, 0, 0.08); color: var(--amber); border: 1px solid rgba(255, 179, 0, 0.2); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg-secondary);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 32px 24px;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .contact-card:hover {
+      border-color: var(--cyan);
+      background: var(--bg-card-hover);
+    }
+
+    .contact-card-icon {
+      font-size: 20px;
+      margin-bottom: 12px;
+      filter: grayscale(100%) brightness(0.6);
+      transition: filter 0.3s;
+    }
+
+    .contact-card:hover .contact-card-icon {
+      filter: none;
+    }
+
+    .contact-card-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .contact-card-value {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .contact-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 32px;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+    }
+
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin: 24px 0 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: rgba(0, 229, 255, 0.06);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker {
+      display: inline-block;
+      animation: ticker 40s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+      padding: 0 48px;
+    }
+
+    .ticker-item span { color: var(--cyan); margin-right: 8px; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      #hero { padding: 100px 24px 60px; }
+      .hero-metrics { flex-wrap: wrap; gap: 32px; }
+      .physics-chain { gap: 0; }
+      .physics-arrow { display: none; }
+      .physics-node { min-width: 80px; padding: 14px 12px; }
+      .physics-node-label { font-size: 9px; }
+      .validation-layout { grid-template-columns: 1fr; gap: 48px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>RF Catalyst Automotive</h1>
-    <p>
-      RF Plasma–Catalyst platform for emissions and energy systems.
-      This site provides <strong>education and evaluation access</strong>.
-      Core IP (solvers, coefficients, materials, geometries) is withheld.
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-primary">RFCA</div>
+      <div class="nav-logo-sub">RF CATALYST AUTOMOTIVE LTD</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#technology">TECHNOLOGY</a></li>
+      <li><a href="#markets">MARKETS</a></li>
+      <li><a href="#regulatory">REGULATORY</a></li>
+      <li><a href="#validation">VALIDATION</a></li>
+      <li><a href="#contact" class="nav-cta">CONTACT</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-eyebrow">DEEP-TECH EMISSIONS &amp; PROPULSION SYSTEMS</div>
+
+    <h1 class="hero-headline">
+      RF Plasma-Catalyst<br/>
+      <span class="accent-cyan">Integrated</span> Systems for<br/>
+      <span class="accent-amber">Industrial-Scale</span> Impact
+    </h1>
+
+    <p class="hero-sub">
+      RF Catalyst Automotive develops plasma-catalyst integrated systems combining six coupled physics domains. Targeting heavy transport, industrial emissions, and advanced propulsion markets across the 2026–2032 capital cycle.
     </p>
 
-    <a class="btn" href="https://kaned.gumroad.com/l/lxkxq" target="_blank">
-      Buy Technical Pack (£99)
-    </a>
-
-    <div class="card">
-      <h2>What You Get</h2>
-      <ul>
-        <li>Technical overview of RF plasma–catalyst systems</li>
-        <li>Digital twin concepts (non-invertible)</li>
-        <li>Evaluation framing for partners and investors</li>
-      </ul>
+    <div class="hero-tags">
+      <span class="tag tag-cyan">TRL 3</span>
+      <span class="tag tag-cyan">DIGITAL MODELLING COMPLETE</span>
+      <span class="tag tag-amber">OXFORD VALIDATION PARTNER</span>
+      <span class="tag">EURO 7 ALIGNED</span>
+      <span class="tag">EPA 2027+ ALIGNED</span>
+      <span class="tag">UK REGISTERED</span>
     </div>
 
-    <div class="card">
-      <h2>IP Boundary</h2>
-      <p>
-        This product does NOT include source code, calibration constants,
-        catalyst composition, or dimensioned reactor drawings.
-      </p>
+    <div class="hero-actions">
+      <a href="#technology" class="btn-primary">EXPLORE TECHNOLOGY</a>
+      <a href="#contact" class="btn-secondary">ENQUIRIES</a>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-value">6</div>
+        <div class="metric-label">COUPLED PHYSICS DOMAINS</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$41B</div>
+        <div class="metric-label">CORE MARKET TAM (2024)</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$142B</div>
+        <div class="metric-label">PROJECTED TAM (2030)</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">T1–T3</div>
+        <div class="metric-label">MARKET SEGMENTS ACTIVE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item"><span>◆</span>HEAVY TRANSPORT AFTERTREATMENT</span>
+      <span class="ticker-item"><span>◆</span>INDUSTRIAL EMISSIONS CONTROL</span>
+      <span class="ticker-item"><span>◆</span>DEFENSE RF-ASSISTED COMBUSTION</span>
+      <span class="ticker-item"><span>◆</span>HYDROGEN PROCESSING</span>
+      <span class="ticker-item"><span>◆</span>AEROSPACE ENVIRONMENTAL SYSTEMS</span>
+      <span class="ticker-item"><span>◆</span>CHEMICAL ENERGY CONVERSION</span>
+      <span class="ticker-item"><span>◆</span>HEAVY TRANSPORT AFTERTREATMENT</span>
+      <span class="ticker-item"><span>◆</span>INDUSTRIAL EMISSIONS CONTROL</span>
+      <span class="ticker-item"><span>◆</span>DEFENSE RF-ASSISTED COMBUSTION</span>
+      <span class="ticker-item"><span>◆</span>HYDROGEN PROCESSING</span>
+      <span class="ticker-item"><span>◆</span>AEROSPACE ENVIRONMENTAL SYSTEMS</span>
+      <span class="ticker-item"><span>◆</span>CHEMICAL ENERGY CONVERSION</span>
     </div>
   </div>
+
+  <!-- ── TECHNOLOGY ── -->
+  <section id="technology">
+    <div class="section-eyebrow">CORE TECHNOLOGY</div>
+    <h2 class="section-title">Six Coupled Physics Domains — Unified Design Framework</h2>
+    <p class="section-desc">
+      No competitor currently integrates all six domains into a single design framework. This multi-physics integration constitutes the primary defensible technical position.
+    </p>
+    <div class="section-divider"></div>
+
+    <div class="physics-chain reveal">
+      <div class="physics-node">
+        <div class="physics-node-label">FLOW</div>
+        <div class="physics-node-desc">Exhaust dynamics</div>
+      </div>
+      <div class="physics-arrow">→</div>
+      <div class="physics-node">
+        <div class="physics-node-label">FIELD</div>
+        <div class="physics-node-desc">RF electromagnetic</div>
+      </div>
+      <div class="physics-arrow">→</div>
+      <div class="physics-node">
+        <div class="physics-node-label">PLASMA</div>
+        <div class="physics-node-desc">Generation &amp; control</div>
+      </div>
+      <div class="physics-arrow">→</div>
+      <div class="physics-node">
+        <div class="physics-node-label">CATALYST</div>
+        <div class="physics-node-desc">HEA compositions</div>
+      </div>
+      <div class="physics-arrow">→</div>
+      <div class="physics-node">
+        <div class="physics-node-label">AGEING</div>
+        <div class="physics-node-desc">Lifetime prediction</div>
+      </div>
+      <div class="physics-arrow">→</div>
+      <div class="physics-node">
+        <div class="physics-node-label">CONTROL</div>
+        <div class="physics-node-desc">Closed-loop adaptive</div>
+      </div>
+    </div>
+
+    <div class="tech-grid reveal">
+      <div class="tech-card">
+        <div class="tech-card-num">01</div>
+        <div class="tech-card-title">RF PLASMA GENERATION</div>
+        <div class="tech-card-body">RF plasma generation with adaptive impedance control enabling precise energy coupling into exhaust chemistry at atmospheric operating conditions.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-num">02</div>
+        <div class="tech-card-title">HIGH-ENTROPY ALLOY CATALYSTS</div>
+        <div class="tech-card-body">Proprietary high-entropy alloy catalyst compositions designed for RF-enhanced activation, extended operational lifetime, and reduced precious metal dependence.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-num">03</div>
+        <div class="tech-card-title">VELOCITY-SHAPED REACTOR GEOMETRY</div>
+        <div class="tech-card-body">Reactor geometry co-optimised with field distribution and catalyst placement for maximum conversion efficiency across the full exhaust flow envelope.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-num">04</div>
+        <div class="tech-card-title">MULTI-PHYSICS DIGITAL TWIN</div>
+        <div class="tech-card-body">Full-system digital twin modelling across all six physics domains. Digital modelling is complete and validated against first-principles frameworks ahead of bench testing.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-num">05</div>
+        <div class="tech-card-title">CLOSED-LOOP ADAPTIVE CONTROL</div>
+        <div class="tech-card-body">Firmware-level closed-loop control architecture enabling real-time system adaptation to exhaust condition changes, load transients, and catalyst state variation.</div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-card-num">06</div>
+        <div class="tech-card-title">AGEING &amp; LIFETIME PREDICTION</div>
+        <div class="tech-card-body">Integrated ageing physics model provides predictive lifetime assessment, enabling proactive maintenance scheduling and durability guarantee frameworks.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MARKETS ── -->
+  <section id="markets">
+    <div class="section-eyebrow">TARGET MARKETS</div>
+    <h2 class="section-title">Tier 1 Markets: Heavy Transport, Industrial, Defense</h2>
+    <p class="section-desc">
+      Capital allocation prioritises near-term revenue segments with strong regulatory pull. Three Tier 1 markets targeted within a 0–3 year commercial horizon.
+    </p>
+    <div class="section-divider"></div>
+
+    <div class="markets-grid reveal">
+      <div class="market-card">
+        <div class="market-tier">TIER 1 — 0–3 YEARS</div>
+        <div class="market-title">HEAVY TRANSPORT &amp; AUTOMOTIVE AFTERTREATMENT</div>
+        <div class="market-body">Regulatory drivers Euro 7 (2025–2027) and EPA 2027+ create near-term replacement demand for aftertreatment systems. Target buyers include Tier 1 suppliers, truck OEMs, fleet operators, and retrofit providers.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$8.2B</div>
+            <div class="stat-label">2024 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$12.1B</div>
+            <div class="stat-label">2030 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">6.7%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-tier">TIER 1 — 0–3 YEARS</div>
+        <div class="market-title">INDUSTRIAL EMISSIONS &amp; PROCESS EXHAUST</div>
+        <div class="market-body">VOC/NOx regulation tightening and carbon pricing pressure are driving demand for high-performance catalyst recovery in chemical plants, refineries, waste processors, and maritime operators.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$22.0B</div>
+            <div class="stat-label">2024 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$31.4B</div>
+            <div class="stat-label">2030 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">6.1%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-tier">TIER 1 — 0–3 YEARS</div>
+        <div class="market-title">DEFENSE RF-ASSISTED COMBUSTION CONTROL</div>
+        <div class="market-body">DoD advanced propulsion programmes cover hypersonic, ramjet/scramjet, and solid propellant applications. SBIR/STTR pathway provides funded R&amp;D entry with ~$180M/year addressable Phase I programme funding.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$2.1B</div>
+            <div class="stat-label">2024 DoD BUDGET</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$3.8B</div>
+            <div class="stat-label">2030 PROJECTED</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">10.4%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-tier">TIER 2 — 3–7 YEARS</div>
+        <div class="market-title">HYDROGEN &amp; AMMONIA PROCESSING</div>
+        <div class="market-body">Ammonia cracking, hydrogen purification, and methane steam reforming applications. Green hydrogen market growth driven by EU and US policy mandates provides strong long-horizon demand pull.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$2.5B</div>
+            <div class="stat-label">2024 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$72.0B</div>
+            <div class="stat-label">2030 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">72.1%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-tier">TIER 2 — 3–7 YEARS</div>
+        <div class="market-title">AEROSPACE ENVIRONMENTAL SYSTEMS</div>
+        <div class="market-body">Cabin air treatment, hydrogen fuel purification, and life support systems. Entry pathway through DO-160 and FAA TSO certification. 3–5 year certification cycle aligned with Tier 2 commercial horizon.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$1.8B</div>
+            <div class="stat-label">2024 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$4.2B</div>
+            <div class="stat-label">2030 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">15.2%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-card">
+        <div class="market-tier">TIER 2 — 3–7 YEARS</div>
+        <div class="market-title">GRID-SCALE CHEMICAL ENERGY CONVERSION</div>
+        <div class="market-body">Power-to-X synthetic fuel production, CO₂ conversion, and waste gas valorisation. EU e-fuels mandates (2026+) and US IRA incentives provide clear policy-driven demand signal across this segment.</div>
+        <div class="market-stat">
+          <div class="stat-block">
+            <div class="stat-value">$4.3B</div>
+            <div class="stat-label">2024 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">$18.7B</div>
+            <div class="stat-label">2030 TAM</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-value">28.3%</div>
+            <div class="stat-label">CAGR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REGULATORY ── -->
+  <section id="regulatory">
+    <div class="section-eyebrow">REGULATORY TAILWINDS</div>
+    <h2 class="section-title">Policy Drivers Creating Mandatory Upgrade Cycles</h2>
+    <p class="section-desc">
+      Converging international regulatory mandates generate structural demand across RFCA's primary and secondary market segments.
+    </p>
+    <div class="section-divider"></div>
+
+    <div class="reg-grid reveal">
+      <div class="reg-card">
+        <div class="reg-label">ACTIVE — 2025–2027</div>
+        <div class="reg-name">EURO 7</div>
+        <div class="reg-desc">European Union emissions standard for new light and heavy vehicles. Tightens NOx limits and introduces real-world driving emissions requirements, driving aftertreatment system upgrades across OEM production lines.</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-label">ACTIVE — 2027+</div>
+        <div class="reg-name">EPA HEAVY-DUTY 2027+</div>
+        <div class="reg-desc">US EPA heavy-duty vehicle emissions rule. Significant tightening of NOx standards for commercial trucks and buses. Estimated to require fleet-wide powertrain and aftertreatment system upgrades.</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-label">ACTIVE — EU</div>
+        <div class="reg-name">EU INNOVATION FUND</div>
+        <div class="reg-desc">European Commission fund supporting low-carbon industrial technology deployment. Aligned with RFCA's industrial emissions and energy transition applications. Relevant for Scale-up and first-of-kind projects.</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-label">ACTIVE — US</div>
+        <div class="reg-name">INFLATION REDUCTION ACT</div>
+        <div class="reg-desc">US federal clean energy investment incentives. Relevant to hydrogen processing, power-to-X, and industrial decarbonisation applications. Supports RFCA's Tier 2 market development timeline.</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-label">MANDATE — 2030+</div>
+        <div class="reg-name">EU E-FUELS MANDATE</div>
+        <div class="reg-desc">European Union mandate for sustainable aviation fuel blending from 2030. Drives industrial investment in synthetic fuel production pathways, directly relevant to RFCA's power-to-X and hydrogen processing segments.</div>
+      </div>
+      <div class="reg-card">
+        <div class="reg-label">PROGRAMME — ONGOING</div>
+        <div class="reg-name">DoD ADVANCED PROPULSION</div>
+        <div class="reg-desc">US Department of Defense annual advanced propulsion R&amp;D budget. SBIR/STTR Phase I programme provides structured, funded entry path into hypersonic and advanced combustion system development.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VALIDATION ── -->
+  <section id="validation">
+    <div class="section-eyebrow">VALIDATION PROGRAMME</div>
+    <h2 class="section-title">Structured Technical Validation with Oxford University</h2>
+    <p class="section-desc">
+      RFCA's validation programme proceeds through confirmed digital modelling completion toward Oxford University bench testing. Each gate is a prerequisite for the next.
+    </p>
+    <div class="section-divider"></div>
+
+    <div class="validation-layout reveal">
+      <div class="validation-left">
+        <div class="trl-bar">
+          <div class="trl-label">
+            <span class="trl-label-text">CURRENT TRL</span>
+            <span class="trl-value">TRL 3 — CONFIRMED</span>
+          </div>
+          <div class="trl-track">
+            <div class="trl-fill" style="width: 33%"></div>
+          </div>
+          <div class="trl-notches">
+            <span class="trl-notch">TRL 1</span>
+            <span class="trl-notch">TRL 3</span>
+            <span class="trl-notch">TRL 5</span>
+            <span class="trl-notch">TRL 7</span>
+            <span class="trl-notch">TRL 9</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 28px; background: var(--bg-card); border: 1px solid var(--border);">
+          <div class="section-eyebrow" style="margin-bottom: 12px; font-size: 9px;">VALIDATION PARTNER</div>
+          <div style="font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 8px;">University of Oxford</div>
+          <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); font-weight: 300; line-height: 1.7;">Active technical validation partnership. Oxford bench testing programme scoped and priced. Independent third-party validation of RFCA digital modelling outputs.</div>
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <span class="val-step-status status-active">VALIDATION IN PROGRESS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="validation-steps">
+        <div class="val-step">
+          <div class="val-step-num">VG1</div>
+          <div class="val-step-content">
+            <div class="val-step-title">DIGITAL MODELLING — SIX DOMAINS</div>
+            <div class="val-step-desc">Full multi-physics digital twin modelling across all six coupled domains. First-principles framework with 10 independent simulation convergence methods completed.</div>
+            <span class="val-step-status status-complete">COMPLETE</span>
+          </div>
+        </div>
+
+        <div class="val-step">
+          <div class="val-step-num">VG2</div>
+          <div class="val-step-content">
+            <div class="val-step-title">OXFORD BENCH VALIDATION PROGRAMME</div>
+            <div class="val-step-desc">Oxford University bench testing programme (OxVal-01 through OxVal-07). Independent experimental validation of digital modelling outputs across primary test conditions.</div>
+            <span class="val-step-status status-active">IN PROGRESS</span>
+          </div>
+        </div>
+
+        <div class="val-step">
+          <div class="val-step-num">VG3</div>
+          <div class="val-step-content">
+            <div class="val-step-title">HARDWARE PROTOTYPE — SYSTEM BUILD</div>
+            <div class="val-step-desc">Physical prototype construction integrating all six physics domains. System-level functional testing against validated digital model predictions.</div>
+            <span class="val-step-status status-pending">PENDING VG2</span>
+          </div>
+        </div>
+
+        <div class="val-step">
+          <div class="val-step-num">VG4</div>
+          <div class="val-step-content">
+            <div class="val-step-title">OEM EVALUATION PROGRAMME</div>
+            <div class="val-step-desc">Structured technical evaluation programme with identified OEM and Tier 1 partners. Performance validation under representative operating conditions for target applications.</div>
+            <span class="val-step-status status-pending">PENDING VG3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-eyebrow" style="justify-content: center;">CONTACT</div>
+      <h2 class="section-title" style="max-width: 100%;">Technical &amp; Commercial Enquiries</h2>
+      <p class="section-desc" style="max-width: 100%; margin-left: auto; margin-right: auto; text-align: center;">
+        OEM evaluation, technical partnership, and investment enquiries are welcome. Initial contact subject to standard confidentiality terms.
+      </p>
+
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:kaned547@gmail.com">
+          <div class="contact-card-icon">✉</div>
+          <div class="contact-card-label">EMAIL</div>
+          <div class="contact-card-value">kaned547@gmail.com</div>
+        </a>
+        <a class="contact-card" href="https://kaned.gumroad.com" target="_blank" rel="noopener">
+          <div class="contact-card-icon">↗</div>
+          <div class="contact-card-label">TECHNICAL RESOURCES</div>
+          <div class="contact-card-value">kaned.gumroad.com</div>
+        </a>
+      </div>
+
+      <p class="contact-note">
+        RFCA is a UK-registered deep-technology company.<br/>
+        All technical discussions subject to mutual confidentiality agreement.<br/>
+        OEM evaluation and partnership enquiries should include organisation name and area of interest.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-logo">RF CATALYST AUTOMOTIVE LTD</div>
+    <div class="footer-links">
+      <a href="#technology">TECHNOLOGY</a>
+      <a href="#markets">MARKETS</a>
+      <a href="#contact">CONTACT</a>
+      <a href="https://kaned.gumroad.com" target="_blank" rel="noopener">RESOURCES</a>
+    </div>
+    <div class="footer-meta">© 2026 RF CATALYST AUTOMOTIVE LTD — UK REGISTERED — DISCLOSURE: PUBLIC</div>
+  </footer>
+
+  <script>
+    // ── SCROLL REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── TRL BAR ANIMATE ──
+    const trlFill = document.querySelector('.trl-fill');
+    const trlObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          trlFill.style.width = '33%';
+          trlObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    if (trlFill) {
+      trlFill.style.width = '0';
+      trlObserver.observe(trlFill.parentElement);
+    }
+
+    // ── NAV ACTIVE STATE ──
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--cyan)' : '';
+      });
+    });
+  </script>
 </body>
-  </html>
+</html>
