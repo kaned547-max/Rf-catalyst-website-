@@ -1,45 +1,906 @@
-<section class="max-w-4xl mx-auto mt-16 mb-20">
-    <h2 class="text-2xl font-bold mb-8 text-center uppercase tracking-widest">Available Tech Assets & Services</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-blue-500">
-            <div>
-                <h3 class="font-bold text-lg">Technical Dossier</h3>
-                <p class="text-xs text-zinc-400 mt-2">Full HEA Synthesis & RF-Plasma Bench Test Results (TRL-4).</p>
-                <p class="text-xl font-mono mt-4 text-white">£1,250</p>
-            </div>
-            <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Technical Dossier Package&body=I wish to purchase the TRL-4 Technical Dossier. Please send the invoice and secure download link to this email address." 
-               class="mt-6 block text-center py-2 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-500 transition-colors">
-                Order Now
-            </a>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RF Catalyst Automotive — Deep-Tech Emissions Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0A0E14;
+    --bg2:       #0D1118;
+    --bg3:       #111820;
+    --cyan:      #00E5FF;
+    --cyan-dim:  #00B8CC;
+    --amber:     #FFB300;
+    --amber-dim: #CC8F00;
+    --white:     #E8EDF5;
+    --grey:      #4A5568;
+    --grey-lt:   #8A9AB0;
+    --border:    rgba(0,229,255,0.15);
+    --border-am: rgba(255,179,0,0.2);
+    --glow-c:    0 0 20px rgba(0,229,255,0.25);
+    --glow-a:    0 0 20px rgba(255,179,0,0.25);
+  }
 
-        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-emerald-500">
-            <div>
-                <h3 class="font-bold text-lg">Feasibility Study</h3>
-                <p class="text-xs text-zinc-400 mt-2">Custom Digital Twin simulation based on your engine/exhaust specs.</p>
-                <p class="text-xl font-mono mt-4 text-white">£4,500</p>
-            </div>
-            <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Custom Feasibility Study&body=I wish to commission a Feasibility Study. Attached/Following are our engine flow parameters. Please confirm receipt and lead time." 
-               class="mt-6 block text-center py-2 bg-emerald-600 rounded-lg text-sm font-bold hover:bg-emerald-500 transition-colors">
-                Commission Study
-            </a>
-        </div>
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-purple-500">
-            <div>
-                <h3 class="font-bold text-lg">Licensing Intro</h3>
-                <p class="text-xs text-zinc-400 mt-2">Exclusive 12-month IP option for specific regional markets.</p>
-                <p class="text-xl font-mono mt-4 text-white">£15,000+</p>
-            </div>
-            <a href="mailto:kaned547@gmail.com?subject=INQUIRY: IP Licensing Option&body=We are interested in discussing the 12-month IP exclusivity option for [Insert Region/Sector]. Please schedule a technical review." 
-               class="mt-6 block text-center py-2 bg-purple-600 rounded-lg text-sm font-bold hover:bg-purple-500 transition-colors">
-                Request Terms
-            </a>
-        </div>
+  html { scroll-behavior: smooth; }
 
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCANLINE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* GRID BACKGROUND */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    background: rgba(10,14,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    text-decoration: none;
+    text-shadow: var(--glow-c);
+  }
+
+  .nav-logo span { color: var(--amber); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--grey-lt);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 80px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-ring {
+    position: absolute;
+    right: -200px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.08);
+    animation: ring-pulse 6s ease-in-out infinite;
+  }
+
+  .hero-ring::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,179,0,0.06);
+    animation: ring-pulse 6s ease-in-out infinite reverse;
+  }
+
+  .hero-ring::after {
+    content: '';
+    position: absolute;
+    inset: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.05);
+  }
+
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.03); }
+  }
+
+  .hero-content { max-width: 800px; z-index: 2; }
+
+  .hero-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fade-up 0.8s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fade-up 0.8s ease 0.4s forwards;
+  }
+
+  .hero-title .line-cyan { color: var(--cyan); text-shadow: var(--glow-c); }
+  .hero-title .line-white { color: var(--white); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--grey-lt);
+    max-width: 560px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fade-up 0.8s ease 0.6s forwards;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fade-up 0.8s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--cyan);
+    color: var(--bg);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--white);
+    box-shadow: 0 0 30px rgba(0,229,255,0.4);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,179,0,0.1);
+    box-shadow: 0 0 30px rgba(255,179,0,0.25);
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* STAT BAR */
+  .stat-bar {
+    position: relative;
+    z-index: 1;
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    flex: 1;
+    max-width: 220px;
+    text-align: center;
+    padding: 0 24px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+    display: block;
+  }
+
+  .stat-num.amber { color: var(--amber); text-shadow: var(--glow-a); }
+
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--grey-lt);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 48px;
+    line-height: 1.2;
+  }
+
+  .section-title .accent { color: var(--cyan); }
+
+  /* DIVIDER */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--cyan-dim), var(--border), transparent);
+    margin: 0 auto;
+    max-width: 1200px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ACHIEVEMENTS GRID */
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .achievement-card {
+    background: var(--bg2);
+    padding: 36px 32px;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--cyan);
+    transition: height 0.3s ease;
+  }
+
+  .achievement-card:hover::before { height: 100%; }
+  .achievement-card:hover { background: var(--bg3); }
+
+  .ach-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .ach-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .ach-body {
+    font-size: 0.95rem;
+    color: var(--grey-lt);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* TECHNOLOGY DOMAINS */
+  .domain-chain {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+    justify-content: center;
+  }
+
+  .domain-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 14px 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.2s;
+  }
+
+  .domain-node:hover {
+    background: rgba(0,229,255,0.08);
+    border-color: var(--cyan);
+    box-shadow: var(--glow-c);
+  }
+
+  .domain-arrow {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--amber);
+    font-size: 1rem;
+    padding: 0 8px;
+  }
+
+  .tech-description {
+    color: var(--grey-lt);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 760px;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  /* MARKET TABLE */
+  .market-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .market-table th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-am);
+    background: var(--bg3);
+  }
+
+  .market-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--grey-lt);
+    font-weight: 300;
+  }
+
+  .market-table td:first-child { color: var(--white); font-weight: 500; }
+
+  .market-table tr:hover td { background: rgba(0,229,255,0.03); }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .badge-tier1 { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.25); }
+  .badge-tier2 { background: rgba(255,179,0,0.1); color: var(--amber); border: 1px solid rgba(255,179,0,0.25); }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .product-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,229,255,0.12);
+    border-color: var(--cyan);
+  }
+
+  .product-header {
+    background: var(--bg3);
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-ref {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .product-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+  }
+
+  .product-body {
+    padding: 20px 24px;
+    flex: 1;
+  }
+
+  .product-desc {
+    font-size: 0.9rem;
+    color: var(--grey-lt);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .product-features li {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--grey-lt);
+    padding: 5px 0;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .product-features li::before {
+    content: '//';
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .product-footer {
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .product-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+  }
+
+  .btn-purchase {
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+
+  .btn-purchase:hover {
+    background: var(--cyan);
+    color: var(--bg);
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+  }
+
+  .products-note {
+    background: var(--bg3);
+    border: 1px solid var(--border-am);
+    border-left: 3px solid var(--amber);
+    padding: 16px 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .products-note-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: 0.1em;
+  }
+
+  .products-note p {
+    font-size: 0.85rem;
+    color: var(--grey-lt);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* REGULATORY */
+  .reg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .reg-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reg-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, transparent 50%, rgba(0,229,255,0.05) 50%);
+  }
+
+  .reg-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cyan);
+    margin-bottom: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .reg-desc {
+    font-size: 0.85rem;
+    color: var(--grey-lt);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .reg-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    margin-top: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    max-width: 100%;
+    padding: 100px 40px;
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left .section-title { margin-bottom: 20px; }
+
+  .contact-desc {
+    color: var(--grey-lt);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .contact-detail-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    min-width: 60px;
+  }
+
+  .contact-detail-value {
+    color: var(--grey-lt);
+    font-size: 0.9rem;
+  }
+
+  .contact-detail-value a {
+    color: var(--cyan);
+    text-decoration: none;
+  }
+
+  .contact-detail-value a:hover {
+    text-decoration: underline;
+  }
+
+  .quick-enquiry {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quick-enquiry-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quick-link::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: rgba(0,229,255,0.06);
+    transition: width 0.3s;
+  }
+
+  .quick-link:hover::before { width: 100%; }
+  .quick-link:hover { border-color: var(--cyan); }
+
+  .quick-link-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quick-link-product {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .quick-link-name {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .quick-link-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  .quick-link-arrow {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--cyan);
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+  }
+
+  .quick-link:hover .quick-link-arrow { transform: translateX(4px); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 40px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+  }
+
+  .footer-logo span { color: var(--grey-lt); }
+
+  .footer-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--grey);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .disclosure-bar {
+    background: rgba(255,179,0,0.04);
+    border: 1px solid var(--border-am);
+    padding: 10px 40px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    section { padding: 60px 20px; }
+    .stat-bar { padding: 20px; flex-wrap: wrap; gap: 20px; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0 0 16px; }
+    .stat-item:last-child { border-bottom: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; padding: 28px 20px; }
+    .footer-meta { text-align: left; }
+    .contact-section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RF<span>C</span>A</a>
+  <ul class="nav-links">
+    <li><a href="#technology">Technology</a></li>
+    <li><a href="#achievements">Milestones</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" style="max-width:100%; padding-left:10%; padding-right:10%;">
+  <div class="hero-content">
+    <span class="hero-eyebrow">// RF Catalyst Automotive Ltd — UK Deep-Tech</span>
+    <h1 class="hero-title">
+      <span class="line-cyan">Plasma-Catalyst</span><br>
+      <span class="line-white">Integration Systems</span><br>
+      <span class="line-cyan" style="font-size:0.6em; letter-spacing:0.12em;">for the Emissions Transition</span>
+    </h1>
+    <p class="hero-sub">
+      RFCA develops RF plasma-catalyst integrated systems combining advanced physics modelling with next-generation catalyst architectures — targeting heavy transport, industrial emissions, and energy transition applications.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#products" class="btn-primary">View Products</a>
+      <a href="#contact" class="btn-secondary">Enquire</a>
     </div>
+  </div>
+  <div class="hero-ring"></div>
 </section>
 <section class="max-w-4xl mx-auto my-12 glass p-8 rounded-3xl border border-blue-900/30">
     <div class="flex items-center gap-4 mb-6">
@@ -81,3 +942,428 @@
     </div>
 </section>
 
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <span class="stat-num">TRL 3</span>
+    <span class="stat-label">Technology Readiness</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">6</span>
+    <span class="stat-label">Coupled Physics Domains</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num amber">Oxford</span>
+    <span class="stat-label">Validation Partner</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">$41B</span>
+    <span class="stat-label">Core Market TAM (2024)</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num amber">2026</span>
+    <span class="stat-label">Active Development</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- TECHNOLOGY -->
+<section id="technology">
+  <span class="section-label">// Core Technology</span>
+  <h2 class="section-title">Six-Domain <span class="accent">Physics Integration</span></h2>
+
+  <div class="domain-chain">
+    <div class="domain-node">Flow</div>
+    <span class="domain-arrow">→</span>
+    <div class="domain-node">Field</div>
+    <span class="domain-arrow">→</span>
+    <div class="domain-node">Plasma</div>
+    <span class="domain-arrow">→</span>
+    <div class="domain-node">Catalyst</div>
+    <span class="domain-arrow">→</span>
+    <div class="domain-node">Ageing</div>
+    <span class="domain-arrow">→</span>
+    <div class="domain-node">Control</div>
+  </div>
+
+  <p class="tech-description">
+    RFCA's core technology integrates RF plasma generation, impedance control, and advanced catalyst architectures within a unified multi-physics design framework. Digital twin modelling is complete across all six coupled domains. Physical validation is underway in partnership with Oxford University.
+  </p>
+  <p class="tech-description">
+    The system architecture addresses the fundamental limitations of passive catalyst systems — enabling adaptive, real-time control of emission conversion processes across dynamic operating conditions. No commercially available system currently integrates all six physics domains in a single design framework.
+  </p>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <span class="section-label">// Company Milestones</span>
+  <h2 class="section-title">Development <span class="accent">Achievements</span></h2>
+
+  <div class="achievements-grid">
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-01 ]</span>
+      <div class="ach-title">Multi-Physics Digital Modelling — Complete</div>
+      <p class="ach-body">Full digital twin modelling completed across all six coupled physics domains: Flow, Field, Plasma, Catalyst, Ageing, and Control. The model framework provides the foundational simulation layer for validation testing and system design.</p>
+    </div>
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-02 ]</span>
+      <div class="ach-title">Oxford University Validation Partnership</div>
+      <p class="ach-body">Physical hardware validation of the RFCA digital modelling framework has been outsourced to Oxford University. Validation testing is scoped, priced, and actively progressing — establishing independent third-party technical credibility.</p>
+    </div>
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-03 ]</span>
+      <div class="ach-title">TRL 3 — Technology Readiness Confirmed</div>
+      <p class="ach-body">RFCA has confirmed Technology Readiness Level 3 — analytical and experimental proof of concept complete. The digital modelling phase is closed. Progression to TRL 4–5 is the active target through Oxford validation and hardware demonstration.</p>
+    </div>
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-04 ]</span>
+      <div class="ach-title">Six-Domain Integration — No Known Equivalent</div>
+      <p class="ach-body">The integration of RF plasma, impedance control, HEA catalyst design, velocity-shaped geometry, lifetime prediction, and closed-loop control into a unified system architecture has no known direct commercial equivalent among traditional catalyst OEMs or plasma equipment vendors.</p>
+    </div>
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-05 ]</span>
+      <div class="ach-title">Digital Product Line — In Market</div>
+      <p class="ach-body">RFCA has developed a portfolio of digital simulation and analysis products currently available for direct purchase. These products deliver simulation frameworks and technology intelligence to engineering, industrial, and research organisations.</p>
+    </div>
+
+    <div class="achievement-card">
+      <span class="ach-icon">[ ACH-06 ]</span>
+      <div class="ach-title">Multi-Market Application Framework</div>
+      <p class="ach-body">RFCA's technology framework has been validated across six primary application domains: heavy transport aftertreatment, industrial emissions control, defense advanced propulsion, hydrogen processing, aerospace environmental systems, and chemical energy conversion.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- MARKETS -->
+<section id="markets">
+  <span class="section-label">// Target Markets</span>
+  <h2 class="section-title">Application <span class="accent">Domains</span></h2>
+
+  <table class="market-table">
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th>TAM (2024)</th>
+        <th>TAM (2030)</th>
+        <th>Primary Driver</th>
+        <th>Tier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Heavy Transport Aftertreatment</td>
+        <td>$8.2B</td>
+        <td>$12.1B</td>
+        <td>Euro 7 / EPA 2027+</td>
+        <td><span class="badge badge-tier1">Tier 1</span></td>
+      </tr>
+      <tr>
+        <td>Industrial Emissions Control</td>
+        <td>$22.0B</td>
+        <td>$31.4B</td>
+        <td>VOC/NOx regulation, carbon pricing</td>
+        <td><span class="badge badge-tier1">Tier 1</span></td>
+      </tr>
+      <tr>
+        <td>Defense Advanced Propulsion</td>
+        <td>$2.1B</td>
+        <td>$3.8B</td>
+        <td>DoD advanced propulsion R&D</td>
+        <td><span class="badge badge-tier1">Tier 1</span></td>
+      </tr>
+      <tr>
+        <td>Hydrogen &amp; Ammonia Processing</td>
+        <td>$2.5B</td>
+        <td>$72.0B</td>
+        <td>Green hydrogen scale-up</td>
+        <td><span class="badge badge-tier2">Tier 2</span></td>
+      </tr>
+      <tr>
+        <td>Aerospace Environmental</td>
+        <td>$1.8B</td>
+        <td>$4.2B</td>
+        <td>Aviation decarbonisation</td>
+        <td><span class="badge badge-tier2">Tier 2</span></td>
+      </tr>
+      <tr>
+        <td>Chemical Energy Conversion</td>
+        <td>$4.3B</td>
+        <td>$18.7B</td>
+        <td>EU e-fuels mandates, Power-to-X</td>
+        <td><span class="badge badge-tier2">Tier 2</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- REGULATORY -->
+<section id="regulatory" style="padding-top:0;">
+  <span class="section-label">// Regulatory Context</span>
+  <h2 class="section-title">Compliance <span class="accent">Landscape</span></h2>
+
+  <div class="reg-grid">
+    <div class="reg-card">
+      <div class="reg-name">Euro 7</div>
+      <p class="reg-desc">EU heavy-duty vehicle emissions standard introducing stricter NOx, particle number, and ammonia slip limits across truck, bus, and van categories.</p>
+      <div class="reg-date">// 2025–2027 PHASED ENTRY</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">EPA 2027+</div>
+      <p class="reg-desc">US Environmental Protection Agency heavy-duty emissions standards with significantly tightened NOx limits, requiring catalyst system advancement.</p>
+      <div class="reg-date">// EFFECTIVE 2027</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">EU Innovation Fund</div>
+      <p class="reg-desc">European Union programme funding large-scale deployment of low-carbon technologies across industry, energy, and transport sectors.</p>
+      <div class="reg-date">// ACTIVE FUNDING ROUNDS</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">IRA (US)</div>
+      <p class="reg-desc">US Inflation Reduction Act providing incentives for clean energy, industrial decarbonisation, and advanced manufacturing technology deployment.</p>
+      <div class="reg-date">// MULTI-YEAR PROGRAMME</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">EU e-Fuels Mandate</div>
+      <p class="reg-desc">European mandate requiring synthetic fuel use in aviation from 2030, driving demand for advanced chemical energy conversion technology.</p>
+      <div class="reg-date">// AVIATION: 2030+</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">IMO 2030</div>
+      <p class="reg-desc">International Maritime Organisation emissions reduction targets for the global shipping fleet, creating aftertreatment retrofit and system upgrade demand.</p>
+      <div class="reg-date">// 2030 TARGET</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <span class="section-label">// Digital Products — Available Now</span>
+  <h2 class="section-title">Simulation &amp; Intelligence <span class="accent">Products</span></h2>
+
+  <div class="products-grid">
+
+    <!-- P01 -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-ref">P01 — Digital Resource</div>
+        <div class="product-name">RF Plasma-Catalyst<br>Technology Overview Pack</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">A structured technical overview of RF plasma-catalyst integration principles, system architecture, and application context. Designed for engineers and technical evaluators entering the space.</p>
+        <ul class="product-features">
+          <li>Six-domain physics framework explained</li>
+          <li>System architecture overview</li>
+          <li>Application domain mapping</li>
+          <li>Regulatory context reference</li>
+          <li>Immediate digital delivery</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">£149</span>
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P01%20RF%20Plasma-Catalyst%20Technology%20Overview%20Pack%20(%C2%A3149)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P01%20RF%20Plasma-Catalyst%20Technology%20Overview%20Pack%20(%C2%A3149).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="btn-purchase">Enquire to Buy →</a>
+      </div>
+    </div>
+
+    <!-- P04 -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-ref">P04 — Digital Resource</div>
+        <div class="product-name">Industry Application<br>Analysis Pack</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">Detailed application analysis across RFCA's primary and secondary market domains. Covers regulatory drivers, technology gaps, and application-specific deployment context for engineering and commercial teams.</p>
+        <ul class="product-features">
+          <li>Primary market domain analysis</li>
+          <li>Regulatory landscape mapping</li>
+          <li>Technology gap assessment</li>
+          <li>Application feasibility context</li>
+          <li>Immediate digital delivery</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">£249</span>
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P04%20Industry%20Application%20Analysis%20Pack%20(%C2%A3249)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P04%20Industry%20Application%20Analysis%20Pack%20(%C2%A3249).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="btn-purchase">Enquire to Buy →</a>
+      </div>
+    </div>
+
+    <!-- P05 -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-ref">P05 — Digital Resource</div>
+        <div class="product-name">Emissions Compliance<br>Framework Pack</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">A structured reference framework covering emissions compliance requirements across Euro 7, EPA, IMO, and industrial standards. Designed for programme managers, engineering leads, and compliance teams.</p>
+        <ul class="product-features">
+          <li>Euro 7 / EPA compliance mapping</li>
+          <li>Industrial emissions standards</li>
+          <li>IMO 2030 maritime context</li>
+          <li>Technology-to-standard alignment</li>
+          <li>Immediate digital delivery</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">£199</span>
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P05%20Emissions%20Compliance%20Framework%20Pack%20(%C2%A3199)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P05%20Emissions%20Compliance%20Framework%20Pack%20(%C2%A3199).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="btn-purchase">Enquire to Buy →</a>
+      </div>
+    </div>
+
+    <!-- P06 -->
+    <div class="product-card">
+      <div class="product-header">
+        <div class="product-ref">P06 — Digital Resource</div>
+        <div class="product-name">Emissions Technology<br>Market Intelligence Pack</div>
+      </div>
+      <div class="product-body">
+        <p class="product-desc">Comprehensive market intelligence covering the global emissions technology landscape — TAM data, competitive positioning, regulatory tailwinds, and technology transition signals across all primary RFCA application domains.</p>
+        <ul class="product-features">
+          <li>TAM data across six market segments</li>
+          <li>Competitive technology landscape</li>
+          <li>Regulatory driver synthesis</li>
+          <li>Market timing and transition analysis</li>
+          <li>Immediate digital delivery</li>
+        </ul>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">£299</span>
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P06%20Emissions%20Technology%20Market%20Intelligence%20Pack%20(%C2%A3299)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P06%20Emissions%20Technology%20Market%20Intelligence%20Pack%20(%C2%A3299).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="btn-purchase">Enquire to Buy →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="products-note">
+    <span class="products-note-icon">// NOTE</span>
+    <p>All products are digital downloads delivered electronically. Enterprise evaluation and partnership programmes are available for OEM and industrial organisations — contact us directly for a scoped evaluation proposal. Additional advanced technical products are in development and will be announced upon release clearance.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+
+    <div class="contact-left">
+      <span class="section-label">// Contact & Enquiries</span>
+      <h2 class="section-title">Partner, Evaluate<br><span class="accent">or Purchase</span></h2>
+      <p class="contact-desc">RFCA welcomes enquiries from OEM engineering teams, industrial operators, research institutions, grant bodies, and investment organisations. For product purchases, evaluation partnerships, or technical discussions — contact us directly.</p>
+      <div class="contact-detail">
+        <span class="contact-detail-label">EMAIL</span>
+        <span class="contact-detail-value"><a href="mailto:kaned547@gmail.com">kaned547@gmail.com</a></span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">ENTITY</span>
+        <span class="contact-detail-value">RF Catalyst Automotive Ltd</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">REG.</span>
+        <span class="contact-detail-value">United Kingdom</span>
+      </div>
+      <div class="contact-detail" style="margin-top:16px;">
+        <span class="contact-detail-label">OEM</span>
+        <span class="contact-detail-value"><a href="mailto:kaned547@gmail.com?subject=OEM%20Evaluation%20Enquiry%20%E2%80%94%20RFCA&body=Hello%2C%0A%0AWe%20are%20interested%20in%20an%20OEM%20technical%20evaluation%20of%20RFCA%E2%80%99s%20RF%20plasma-catalyst%20system.%0A%0AOrganisation%3A%0AContact%20Name%3A%0ARole%3A%0AApplication%20of%20interest%3A%0A%0APlease%20contact%20us%20to%20discuss%20further.">Request OEM Evaluation Pack →</a></span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">INVEST</span>
+        <span class="contact-detail-value"><a href="mailto:kaned547@gmail.com?subject=Investment%20Enquiry%20%E2%80%94%20RFCA&body=Hello%2C%0A%0AWe%20are%20interested%20in%20discussing%20investment%20in%20RF%20Catalyst%20Automotive%20Ltd.%0A%0AOrganisation%3A%0AContact%20Name%3A%0AInvestment%20focus%3A%0A%0APlease%20contact%20us%20to%20arrange%20an%20initial%20conversation.">Investment Enquiry →</a></span>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="quick-enquiry-title">Quick Purchase Links</div>
+      <div class="quick-enquiry">
+
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P01%20RF%20Plasma-Catalyst%20Technology%20Overview%20Pack%20(%C2%A3149)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P01%20RF%20Plasma-Catalyst%20Technology%20Overview%20Pack%20(%C2%A3149).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="quick-link">
+          <div class="quick-link-left">
+            <span class="quick-link-product">P01</span>
+            <span class="quick-link-name">Technology Overview Pack</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="quick-link-price">£149</span>
+            <span class="quick-link-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P05%20Emissions%20Compliance%20Framework%20Pack%20(%C2%A3199)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P05%20Emissions%20Compliance%20Framework%20Pack%20(%C2%A3199).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="quick-link">
+          <div class="quick-link-left">
+            <span class="quick-link-product">P05</span>
+            <span class="quick-link-name">Compliance Framework Pack</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="quick-link-price">£199</span>
+            <span class="quick-link-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P04%20Industry%20Application%20Analysis%20Pack%20(%C2%A3249)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P04%20Industry%20Application%20Analysis%20Pack%20(%C2%A3249).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="quick-link">
+          <div class="quick-link-left">
+            <span class="quick-link-product">P04</span>
+            <span class="quick-link-name">Industry Application Analysis Pack</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="quick-link-price">£249</span>
+            <span class="quick-link-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="mailto:kaned547@gmail.com?subject=Purchase%20Enquiry%20%E2%80%94%20P06%20Emissions%20Technology%20Market%20Intelligence%20Pack%20(%C2%A3299)&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%20the%20P06%20Emissions%20Technology%20Market%20Intelligence%20Pack%20(%C2%A3299).%0A%0APlease%20send%20me%20purchase%20and%20payment%20details.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0A%0AThank%20you." class="quick-link">
+          <div class="quick-link-left">
+            <span class="quick-link-product">P06</span>
+            <span class="quick-link-name">Market Intelligence Pack</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="quick-link-price">£299</span>
+            <span class="quick-link-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="mailto:kaned547@gmail.com?subject=General%20Enquiry%20%E2%80%94%20RFCA&body=Hello%2C%0A%0AI%20would%20like%20to%20enquire%20about%20RFCA%E2%80%99s%20technology%20and%20products.%0A%0AName%3A%0AOrganisation%3A%0ARole%3A%0AEnquiry%3A%0A%0AThank%20you." class="quick-link" style="border-color:var(--border-am);">
+          <div class="quick-link-left">
+            <span class="quick-link-product" style="color:var(--grey-lt);">General</span>
+            <span class="quick-link-name">Other Enquiries</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="quick-link-price" style="color:var(--amber); font-size:0.75rem;">EMAIL</span>
+            <span class="quick-link-arrow" style="color:var(--amber);">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DISCLOSURE BAR -->
+<div class="disclosure-bar">
+  Disclosure Level: PUBLIC — This page contains no proprietary IP, synthesis methods, composition data, or confidential performance figures. &nbsp;|&nbsp; RF Catalyst Automotive Ltd &nbsp;|&nbsp; United Kingdom
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RF <span>CATALYST AUTOMOTIVE LTD</span></div>
+  <div class="footer-meta">
+    © 2026 RF Catalyst Automotive Ltd. All rights reserved.<br>
+    Deep-tech emissions intelligence &amp; RF plasma-catalyst systems.<br>
+    <a href="mailto:kaned547@gmail.com" style="color:var(--cyan-dim); text-decoration:none;">kaned547@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,15 +1,9 @@
-/rf-catalyst-digital
-├── /components          # UI Elements
-│   ├── Calculator.js    # The HEA Efficiency Tool
-│   ├── DataVisuals.js   # RF-Plasma stability charts (D3.js/Chart.js)
-│   └── PartnerLogin.js  # Gated access for OEMs
-├── /lib                 # Abstracted IP (The "Black Box")
-│   ├── rf-logic.js      # Non-linear conversion math (Approximated)
-│   └── physics-cons.js  # HEA thermal constants
-├── /public              # Assets
-│   └── tech-whitepaper.pdf
-├── /pages               # Routing
-│   ├── index.js         # Public Pitch
-│   └── validation.js    # Detailed OEM-only data
-├── vercel.json          # Deployment config
-└── package.json         # Dependencies
+# Create Core Folders
+mkdir -p components lib data docs styles public/assets
+
+# Create Essential Files
+touch components/Header.js components/Calculator.js components/ProductGrid.js
+touch lib/sim-engine.js lib/auth-gate.js
+touch data/baseline-metrics.json
+touch docs/TRL-Roadmap.md docs/IP-Protection-Notice.md
+touch vercel.json README.md .gitignore
