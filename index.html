@@ -3,56 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF Catalyst Digital | OEM Portal</title>
+    <title>RFCA | Digital Twin & HEA Catalyst Systems</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Core Aesthetic Fixes */
-        body { background-color: #0a0a0b; color: #e4e4e7; font-family: sans-serif; }
-        .glass { background: #17171b; border: 1px solid #27272a; border-radius: 1rem; padding: 1.5rem; }
-        .accent-text { color: #3b82f6; font-weight: bold; }
-        .btn-blue { background: #2563eb; color: white; padding: 0.75rem; border-radius: 0.5rem; text-align: center; display: block; font-weight: bold; text-decoration: none; }
-        .btn-blue:hover { background: #1d4ed8; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap');
+        
+        body { background: #050505; color: #a1a1aa; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(20, 20, 25, 0.7); backdrop-filter: blur(12px); border: 1px solid #27272a; transition: all 0.3s ease; }
+        .glass:hover { border-color: #3b82f6; box-shadow: 0 0 40px rgba(59, 130, 246, 0.1); }
+        .glow-text { text-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Telemetry Animation */
+        .telemetry-bar { height: 4px; background: #18181b; overflow: hidden; border-radius: 2px; }
+        .telemetry-progress { height: 100%; background: linear-gradient(90deg, #3b82f6, #2dd4bf); transition: width 0.3s ease; }
+        
+        input[type=range] { -webkit-appearance: none; background: #18181b; height: 6px; border-radius: 5px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%; background: #3b82f6; cursor: pointer; border: 2px solid #fff; }
     </style>
 </head>
-<body class="p-6 max-w-5xl mx-auto">
+<body class="p-4 md:p-12">
 
-    <header class="mb-12 border-b border-zinc-800 pb-6">
-        <h1 class="text-3xl font-extrabold tracking-tight text-white">RF CATALYST <span class="text-blue-500">DIGITAL</span></h1>
-        <p class="text-zinc-500 text-sm uppercase tracking-widest mt-1">TRL-4 Automotive Systems & HEA Synthesis</p>
+    <header class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
+        <div>
+            <h1 class="text-4xl font-black text-white tracking-tighter glow-text italic">RFCA <span class="text-blue-500">DIGITAL</span></h1>
+            <div class="flex gap-3 mt-3">
+                <span class="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded border border-emerald-500/20 font-bold tracking-tighter uppercase">● System Live</span>
+                <span class="text-[10px] bg-blue-500/10 text-blue-500 px-2 py-1 rounded border border-blue-500/20 font-bold tracking-tighter uppercase">TRL-4 Verified</span>
+            </div>
+        </div>
+        
+        <div class="glass p-5 rounded-2xl w-full md:w-72">
+            <div class="flex justify-between text-[10px] mb-2 uppercase font-black text-zinc-500">
+                <span>RF-Plasma Stability</span>
+                <span id="stab-val" class="text-blue-400 mono">98.2%</span>
+            </div>
+            <div class="telemetry-bar"><div id="stab-bar" class="telemetry-progress" style="width: 98%;"></div></div>
+        </div>
     </header>
 
-    <section>
-        <h2 class="text-xl font-bold mb-6 text-zinc-300">Available Tech Assets & Services</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+        
+        <section class="lg:col-span-2 glass p-10 rounded-3xl relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 opacity-5">
+                <svg width="300" height="300" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2v20M2 12h20"></path></svg>
+            </div>
             
-            <div class="glass">
-                <h3 class="text-lg font-bold">Technical Dossier</h3>
-                <p class="text-sm text-zinc-400 mt-2 italic">Full HEA Synthesis & RF-Plasma Bench Test Results (TRL-4).</p>
-                <p class="text-2xl font-mono my-4">£1,250</p>
-                <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Technical Dossier&body=I wish to purchase the TRL-4 Dossier." class="btn-blue">Order Now</a>
-            </div>
-
-            <div class="glass border-blue-900">
-                <h3 class="text-lg font-bold text-blue-400">Feasibility Study</h3>
-                <p class="text-sm text-zinc-400 mt-2 italic">Custom Digital Twin simulation based on your engine/exhaust specs.</p>
-                <p class="text-2xl font-mono my-4">£4,500</p>
-                <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Feasibility Study&body=I wish to commission a study." class="btn-blue">Commission Study</a>
-            </div>
-
-            <div class="glass">
-                <h3 class="text-lg font-bold">Licensing Intro</h3>
-                <p class="text-sm text-zinc-400 mt-2 italic">Exclusive 12-month IP option for specific regional markets.</p>
-                <p class="text-2xl font-mono my-4">£15,000+</p>
-                <a href="mailto:kaned547@gmail.com?subject=INQUIRY: IP Licensing&body=We are interested in licensing terms." class="btn-blue">Request Terms</a>
-            </div>
-
-        </div>
-    </section>
-
-    <footer class="mt-20 pt-8 border-t border-zinc-900 text-[10px] text-zinc-600 uppercase flex justify-between">
-        <div>Contact: kaned547@gmail.com</div>
-        <div>Confidentiality: Pre-NDA Phase | © 2026</div>
-    </footer>
-
-</body>
-</html>
+            <h2 class="text-xl font-black text-white mb-8 uppercase italic tracking-widest">RF-HEA Digital Twin Simulator</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex justify-between mb-
