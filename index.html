@@ -1,11 +1,44 @@
-// This simulates our HEA performance curve vs. standard Pt/Pd catalysts
-function runSimulation(exhaustFlow, baselineCO2) {
-    const rfEfficiencyGain = 0.22; // 22% improvement from RF-Plasma field
-    const heaStabilityFactor = 1.15; // 15% better thermal retention
+<section class="max-w-4xl mx-auto mt-16 mb-20">
+    <h2 class="text-2xl font-bold mb-8 text-center uppercase tracking-widest">Available Tech Assets & Services</h2>
     
-    const projectedReduction = (baselineCO2 * rfEfficiencyGain * heaStabilityFactor).toFixed(2);
-    const lightOffDelta = -45; // Starts 45°C earlier than standard
-    
-    return { projectedReduction, lightOffDelta };
-}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-blue-500">
+            <div>
+                <h3 class="font-bold text-lg">Technical Dossier</h3>
+                <p class="text-xs text-zinc-400 mt-2">Full HEA Synthesis & RF-Plasma Bench Test Results (TRL-4).</p>
+                <p class="text-xl font-mono mt-4 text-white">£1,250</p>
+            </div>
+            <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Technical Dossier Package&body=I wish to purchase the TRL-4 Technical Dossier. Please send the invoice and secure download link to this email address." 
+               class="mt-6 block text-center py-2 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-500 transition-colors">
+                Order Now
+            </a>
+        </div>
+
+        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-emerald-500">
+            <div>
+                <h3 class="font-bold text-lg">Feasibility Study</h3>
+                <p class="text-xs text-zinc-400 mt-2">Custom Digital Twin simulation based on your engine/exhaust specs.</p>
+                <p class="text-xl font-mono mt-4 text-white">£4,500</p>
+            </div>
+            <a href="mailto:kaned547@gmail.com?subject=PURCHASE: Custom Feasibility Study&body=I wish to commission a Feasibility Study. Attached/Following are our engine flow parameters. Please confirm receipt and lead time." 
+               class="mt-6 block text-center py-2 bg-emerald-600 rounded-lg text-sm font-bold hover:bg-emerald-500 transition-colors">
+                Commission Study
+            </a>
+        </div>
+
+        <div class="glass p-6 rounded-2xl flex flex-col justify-between border-t-2 border-purple-500">
+            <div>
+                <h3 class="font-bold text-lg">Licensing Intro</h3>
+                <p class="text-xs text-zinc-400 mt-2">Exclusive 12-month IP option for specific regional markets.</p>
+                <p class="text-xl font-mono mt-4 text-white">£15,000+</p>
+            </div>
+            <a href="mailto:kaned547@gmail.com?subject=INQUIRY: IP Licensing Option&body=We are interested in discussing the 12-month IP exclusivity option for [Insert Region/Sector]. Please schedule a technical review." 
+               class="mt-6 block text-center py-2 bg-purple-600 rounded-lg text-sm font-bold hover:bg-purple-500 transition-colors">
+                Request Terms
+            </a>
+        </div>
+
+    </div>
+</section>
 
