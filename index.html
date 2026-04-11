@@ -1,120 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFCA | Technical Validation & Global Impact</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .card { background: #1e293b; border: 1px solid #334155; }
-    </style>
-</head>
-<body class="antialiased">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RF Catalyst Automotive Ltd \u2014 Deep-Tech Emissions Reduction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00E5FF;
+    --cyan-dim: #00b8cc;
+    --amber: #FFB300;
+    --amber-dim: #cc8f00;
+    --bg-0: #020408;
+    --bg-1: #060d14;
+    --bg-2: #0a1520;
+    --bg-3: #0f1e2d;
+    --bg-card: #0d1a26;
+    --text-primary: #e8f4f8;
+    --text-secondary: #8ab0c0;
+    --text-dim: #4a6070;
+    --border: rgba(0,229,255,0.12);
+    --border-hover: rgba(0,229,255,0.4);
+    --glow-cyan: 0 0 20px rgba(0,229,255,0.3);
+    --glow-amber: 0 0 20px rgba(255,179,0,0.3);
+  }
 
-    <nav class="border-b border-slate-800 p-6 flex justify-between items-center bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
-        <div class="text-2xl font-bold tracking-tighter text-emerald-500">RFCA <span class="text-slate-400 font-light">| AUTOMOTIVE</span></div>
-        <div class="text-sm font-mono text-slate-500">IP PROTECTED | kaned547@gmail.com</div>
-    </nav>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <section class="py-16 px-6 max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center">Global Performance Deltas</h2>
-        <div class="grid md:grid-cols-2 gap-8 mb-16">
-            <div class="card p-6 rounded-lg">
-                <h3 class="text-emerald-400 font-bold mb-4 uppercase text-xs tracking-widest">Light-Off Optimization</h3>
-                <canvas id="lightOffChart"></canvas>
-            </div>
-            <div class="card p-6 rounded-lg">
-                <h3 class="text-emerald-400 font-bold mb-4 uppercase text-xs tracking-widest">NOx Reduction Potential (Fleet Scale)</h3>
-                <canvas id="emissionChart"></canvas>
-            </div>
-        </div>
-    </section>
+  html { scroll-behavior: smooth; }
 
-    <section class="py-16 px-6 bg-emerald-900/10 border-y border-emerald-900/30">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold">RF-Catalytic ROI Estimator</h2>
-                <p class="text-slate-400">Estimate potential energy-boundary efficiency gains for your specific substrate.</p>
-            </div>
-            
-            <div class="card p-8 rounded-xl shadow-2xl">
-                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Exhaust Gas Temp (°C)</label>
-                        <input type="number" id="tempInput" value="150" class="w-full bg-slate-950 border border-slate-700 p-3 rounded text-emerald-400">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Flow Rate (kg/h)</label>
-                        <input type="number" id="flowInput" value="100" class="w-full bg-slate-950 border border-slate-700 p-3 rounded text-emerald-400">
-                    </div>
-                </div>
-                <button onclick="calculateGain()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 font-bold rounded transition mb-6">Calculate Projected Efficiency Gain</button>
-                
-                <div id="resultBox" class="hidden border-t border-slate-700 pt-6 text-center">
-                    <p class="text-slate-400 mb-1">Projected Reactivity Increase:</p>
-                    <div id="gainOutput" class="text-4xl font-black text-emerald-500 mb-4">+0%</div>
-                    <p class="text-xs text-slate-500 mb-6 italic">Note: These figures are based on TRL 4 bench-test data and require validation via Phase 0 Audit.</p>
-                    <a href="mailto:kaned547@gmail.com" class="inline-block bg-white text-slate-950 px-6 py-2 rounded-full font-bold text-sm">Validate These Results</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  body {
+    background: var(--bg-0);
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-    <script>
-        // Light-Off Chart Logic
-        const ctx1 = document.getElementById('lightOffChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ['0s', '10s', '20s', '30s', '40s', '50s', '60s'],
-                datasets: [{
-                    label: 'Standard Catalyst Efficiency',
-                    data: [0, 5, 10, 15, 40, 85, 98],
-                    borderColor: '#475569',
-                    borderDash: [5, 5],
-                    fill: false
-                }, {
-                    label: 'RFCA Hybrid System',
-                    data: [0, 60, 92, 98, 99, 99, 100],
-                    borderColor: '#10b981',
-                    fill: false,
-                    tension: 0.4
-                }]
-            },
-            options: { responsive: true, plugins: { legend: { labels: { color: '#94a3b8' } } } }
-        });
+  /* \u2500\u2500\u2500 NOISE OVERLAY \u2500\u2500\u2500 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
 
-        // Emission Chart Logic
-        const ctx2 = document.getElementById('emissionChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Euro 6d', 'Euro 7 (Proposed)', 'RFCA Potential'],
-                datasets: [{
-                    label: 'NOx (mg/km)',
-                    data: [80, 60, 12],
-                    backgroundColor: ['#1e293b', '#334155', '#10b981']
-                }]
-            },
-            options: { responsive: true, plugins: { legend: { display: false } } }
-        });
+  /* \u2500\u2500\u2500 GRID BACKGROUND \u2500\u2500\u2500 */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-        // Interactive Tool Logic
-        function calculateGain() {
-            const temp = document.getElementById('tempInput').value;
-            const flow = document.getElementById('flowInput').value;
-            // Abstracted logic: Lower temps see higher relative gains from RF excitation
-            let baseGain = (400 - temp) * 0.15; 
-            if (baseGain < 5) baseGain = 5;
-            if (baseGain > 85) baseGain = 85;
-            
-            document.getElementById('gainOutput').innerText = "+" + baseGain.toFixed(1) + "%";
-            document.getElementById('resultBox').classList.remove('hidden');
-        }
-    </script>
+  /* \u2500\u2500\u2500 NAV \u2500\u2500\u2500 */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(2,4,8,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
 
-</body>
-</html>
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 44px;
+    width: 44px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .nav-wordmark {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+    line-height: 1.2;
+  }
+
+  .nav-wordmark span {
+    display: block;
+    font-size: 9px;
+    color: var(--text-secondary);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* \u2500\u2500\u2500 HERO \u2500\u2500\u2500 */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(255,179,0,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 0 auto 32px;
+    display: block;
+    filter: drop-shadow(0 0 24px rgba(0,229,255,0.4));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--amber);
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(28px, 5vw, 58px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 12px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero-title .cyan { color: var(--cyan); }
+
+  .hero-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(11px, 1.5vw, 14px);
+    color: var(--cyan);
+    letter-spacing: 0.25em;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto 48px;
+    font-weight: 400;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.4s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* \u2500\u2500\u2500 BUTTONS \u2500\u2500\u2500 */
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 32px;
+    background: var(--cyan);
+    color: var(--bg-0);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--border-hover);
+    color: var(--cyan);
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.05);
+    transform: translateY(-2px);
+  }
+
+  /* \u2500\u2500\u2500 SECTIONS \u2500\u2500\u2500 */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 5%;
+  }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: 60px;
+    font-weight: 400;
+  }
+
+  /* \u2500\u2500\u2500 STATS ROW \u2500\u2500\u2500 */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+
+  .stat-cell {
+    background: var(--bg-1);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 8px;
+    text-shadow: var(--glow-cyan);
+  }
+
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+
+  /* \u2500\u2500\u2500 TRL SECTION \u2500\u2500\u2500 */
+  #trl { background: var(--bg-1); }
+
+  .trl-track {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .trl-step {
+    flex: 1;
+    padding: 16px 8px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    border-right: 1px solid var(--border);
+    position: relative;
+    color: var(--text-dim);
+    background: var(--bg-2);
+    transition: all 0.3s;
+  }
+
+  .trl-step:last-child { border-right: none; }
+
+  .trl-step.active {
+    background: rgba(0,229,255,0
