@@ -1,614 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RF Catalyst Automotive Ltd</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-:root{
-  --c:#00E5FF;--a:#FFB300;
-  --bg0:#060c12;--bg1:#0a1520;--bg2:#0f1e2e;
-  --t1:#deeef5;--t2:#7aaabb;--t3:#3a5a6a;
-  --b:rgba(0,229,255,0.12);
-}
-body{background:var(--bg0);color:var(--t1);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFCA | RF-Plasma Catalyst Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00E5FF; --amber: #FFB300; --bg: #0A0E14; --bg-card: #111820; --border: rgba(0,229,255,0.2);
+        }
+        body { background: var(--bg); color: #E8EDF5; font-family: 'Rajdhani', sans-serif; margin: 0; overflow-x: hidden; }
+        .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 50px 50px; z-index: -1; opacity: 0.1; }
+        
+        nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(10,14,20,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; align-items: center; justify-content: space-around; }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
+        
+        header { padding: 150px 10% 80px; text-align: left; position: relative; }
+        .hero-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 4rem); margin: 0; line-height: 1.1; }
+        .accent { color: var(--cyan); text-shadow: 0 0 15px rgba(0,229,255,0.5); }
+        
+        /* TECHNICAL GALLERY */
+        .tech-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 50px 10%; }
+        .tech-card { background: var(--bg-card); border: 1px solid var(--border); padding: 15px; border-radius: 4px; transition: 0.3s; }
+        .tech-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
+        .tech-card img { width: 100%; border-radius: 2px; opacity: 0.8; }
+        .tech-card h4 { font-family: 'Share Tech Mono', monospace; color: var(--amber); margin: 10px 0 5px; }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(6,12,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--b);}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-brand img{height:40px;width:40px;object-fit:contain;border-radius:4px;}
-.nav-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--c);letter-spacing:.1em;line-height:1.3;}
-.nav-name small{display:block;font-size:9px;color:var(--t2);letter-spacing:.25em;font-weight:400;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--t2);text-decoration:none;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--c);}
-@media(max-width:768px){.nav-links{display:none;}}
+        /* PRODUCT REVENUE GRID */
+        .products { padding: 80px 10%; background: rgba(0,0,0,0.3); }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .p-card { background: #0D1117; border-left: 3px solid var(--cyan); padding: 30px; position: relative; }
+        .p-price { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.5rem; display: block; margin: 15px 0; }
+        .buy-btn { display: inline-block; padding: 10px 20px; border: 1px solid var(--cyan); color: var(--cyan); text-decoration: none; font-family: 'Share Tech Mono'; transition: 0.3s; }
+        .buy-btn:hover { background: var(--cyan); color: var(--bg); }
 
-/* WRAP */
-.wrap{position:relative;z-index:1;}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 5% 80px;background:var(--bg0);position:relative;overflow:hidden;}
-.hero-glow{position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,229,255,0.07) 0%,transparent 70%);pointer-events:none;}
-.hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto;}
-.hero-logo{width:110px;height:110px;object-fit:contain;margin:0 auto 28px;display:block;filter:drop-shadow(0 0 28px rgba(0,229,255,0.5));animation:float 6s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border:1px solid var(--a);border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--a);margin-bottom:24px;}
-.dot{width:6px;height:6px;background:var(--a);border-radius:50%;animation:blink 2s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-.hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,56px);font-weight:900;line-height:1.1;color:#fff;margin-bottom:10px;}
-.hero h1 .c{color:var(--c);}
-.hero-sub{font-family:'Share Tech Mono',monospace;font-size:clamp(10px,1.4vw,13px);color:var(--c);letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px;}
-.hero-desc{font-size:17px;color:var(--t2);max-width:620px;margin:0 auto 44px;}
-.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-
-/* BUTTONS */
-.btn{display:inline-block;padding:13px 30px;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .2s;border:none;}
-.btn-c{background:var(--c);color:#060c12;}
-.btn-c:hover{background:#fff;box-shadow:0 0 24px rgba(0,229,255,.4);transform:translateY(-2px);}
-.btn-o{background:transparent;border:1px solid rgba(0,229,255,.4);color:var(--c);}
-.btn-o:hover{border-color:var(--c);background:rgba(0,229,255,.06);transform:translateY(-2px);}
-
-/* SECTIONS */
-.sec{position:relative;z-index:1;padding:88px 5%;}
-.sec.alt{background:var(--bg1);}
-.sec-label{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--c);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
-.sec-label::before{content:'';display:inline-block;width:28px;height:1px;background:var(--c);}
-.sec h2{font-family:'Orbitron',monospace;font-size:clamp(20px,2.8vw,32px);font-weight:700;color:#fff;margin-bottom:12px;line-height:1.2;}
-.sec-desc{font-size:16px;color:var(--t2);max-width:580px;margin-bottom:52px;}
-
-/* SEP */
-.sep{height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);opacity:.15;position:relative;z-index:1;}
-
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--b);border:1px solid var(--b);}
-.stat{background:var(--bg1);padding:28px 20px;text-align:center;}
-.stat-v{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:var(--c);line-height:1;margin-bottom:6px;text-shadow:0 0 16px rgba(0,229,255,.3);}
-.stat-l{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--t2);text-transform:uppercase;}
-
-/* TRL */
-.trl-bar{display:flex;gap:0;border:1px solid var(--b);overflow:hidden;margin-bottom:36px;flex-wrap:wrap;}
-.trl-step{flex:1;min-width:80px;padding:14px 8px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;border-right:1px solid var(--b);color:var(--t3);background:var(--bg2);}
-.trl-step:last-child{border-right:none;}
-.trl-step.done{color:var(--t2);background:rgba(0,229,255,.03);}
-.trl-step.now{background:rgba(0,229,255,.1);color:var(--c);}
-.trl-n{font-family:'Orbitron',monospace;font-size:16px;font-weight:700;display:block;margin-bottom:4px;}
-.trl-step.now .trl-n{color:var(--c);text-shadow:0 0 12px rgba(0,229,255,.4);}
-.trl-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;}
-@media(max-width:640px){.trl-cards{grid-template-columns:1fr;}}
-.trl-card{background:var(--bg2);border:1px solid var(--b);padding:26px;}
-.trl-ct{font-family:'Orbitron',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--a);margin-bottom:12px;text-transform:uppercase;}
-.trl-card p{font-size:14px;color:var(--t2);line-height:1.7;}
-
-/* DOMAINS */
-.domains{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--b);border:1px solid var(--b);}
-@media(max-width:768px){.domains{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:420px){.domains{grid-template-columns:repeat(2,1fr);}}
-.domain{background:var(--bg2);padding:24px 12px;text-align:center;transition:background .3s;}
-.domain:hover{background:rgba(0,229,255,.06);}
-.d-icon{font-size:20px;color:var(--c);display:block;margin-bottom:10px;}
-.d-name{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:.15em;color:#fff;margin-bottom:6px;text-transform:uppercase;}
-.d-desc{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--t2);line-height:1.5;}
-
-/* WORLD FIRSTS */
-.firsts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
-.first{background:var(--bg2);border:1px solid var(--b);padding:32px 28px;transition:all .3s;border-top:2px solid var(--a);}
-.first:hover{border-color:rgba(255,179,0,.5);transform:translateY(-3px);box-shadow:0 0 24px rgba(255,179,0,.1);}
-.first-tag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--a);margin-bottom:10px;text-transform:uppercase;}
-.first h3{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.4;}
-.first p{font-size:14px;color:var(--t2);line-height:1.7;}
-
-/* ACHIEVEMENTS */
-.achs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
-.ach{background:var(--bg2);border:1px solid var(--b);padding:24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .3s;}
-.ach:hover{border-color:rgba(0,229,255,.3);}
-.ach-ico{width:40px;height:40px;flex-shrink:0;background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--c);}
-.ach h4{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--c);margin-bottom:6px;text-transform:uppercase;}
-.ach p{font-size:13px;color:var(--t2);line-height:1.6;}
-
-/* TOOLS */
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;}
-.tool{background:var(--bg2);border:1px solid var(--b);padding:24px;transition:all .3s;}
-.tool:hover{border-color:rgba(0,229,255,.3);transform:translateY(-2px);}
-.tool-type{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--a);margin-bottom:6px;text-transform:uppercase;}
-.tool h4{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;margin-bottom:10px;}
-.tool p{font-size:13px;color:var(--t2);line-height:1.6;}
-
-/* PRODUCTS */
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
-.product{background:var(--bg2);border:1px solid var(--b);padding:32px 28px;display:flex;flex-direction:column;transition:all .3s;border-bottom:2px solid rgba(0,229,255,.15);}
-.product:hover{border-color:rgba(0,229,255,.35);border-bottom-color:var(--c);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 20px rgba(0,229,255,.1);}
-.product.hold{opacity:.45;pointer-events:none;}
-.p-ref{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--t3);margin-bottom:6px;}
-.p-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.3;}
-.p-desc{font-size:14px;color:var(--t2);line-height:1.7;flex:1;margin-bottom:22px;}
-.p-feats{list-style:none;margin-bottom:22px;}
-.p-feats li{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--t2);padding:5px 0;border-bottom:1px solid var(--b);display:flex;align-items:center;gap:8px;}
-.p-feats li::before{content:'▸';color:var(--c);font-size:9px;}
-.p-price{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;color:var(--c);margin-bottom:20px;}
-.hold-tag{display:inline-block;padding:4px 12px;border:1px solid rgba(255,179,0,.4);color:var(--a);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;}
-.btn-buy{display:block;text-align:center;padding:13px 20px;border:1px solid var(--c);color:var(--c);font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;background:transparent;transition:all .2s;margin-top:auto;}
-.btn-buy:hover{background:var(--c);color:var(--bg0);box-shadow:0 0 20px rgba(0,229,255,.3);}
-.btn-buy.off{opacity:.3;cursor:not-allowed;pointer-events:none;}
-
-/* TABLE */
-.tbl-wrap{overflow-x:auto;margin-bottom:28px;}
-table{width:100%;border-collapse:collapse;border:1px solid var(--b);min-width:600px;}
-th{background:var(--bg2);padding:18px 20px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--c);text-align:left;border-bottom:1px solid var(--b);text-transform:uppercase;}
-td{padding:18px 20px;font-size:14px;color:var(--t2);border-bottom:1px solid var(--b);vertical-align:top;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(0,229,255,.025);color:var(--t1);}
-.t-ref{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--a);letter-spacing:.08em;}
-.t-note{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;display:block;margin-top:3px;}
-.t-link{color:var(--c);font-family:'Share Tech Mono',monospace;font-size:12px;text-decoration:none;transition:color .2s;}
-.t-link:hover{color:#fff;}
-
-/* MARKETS */
-.markets{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
-.market{background:var(--bg2);border:1px solid var(--b);padding:26px;transition:border-color .3s;}
-.market:hover{border-color:rgba(0,229,255,.3);}
-.m-badge{display:inline-block;padding:3px 10px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;}
-.t1b{border:1px solid var(--c);color:var(--c);}
-.t2b{border:1px solid var(--a);color:var(--a);}
-.market h4{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
-.m-size{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--t2);margin-bottom:8px;}
-.market p{font-size:13px;color:var(--t2);line-height:1.6;}
-
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
-@media(max-width:768px){.contact-grid{grid-template-columns:1fr;}}
-.c-title{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.3;}
-.c-desc{font-size:15px;color:var(--t2);margin-bottom:28px;line-height:1.7;}
-.c-row{display:flex;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--b);}
-.c-lbl{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;min-width:90px;}
-.c-val{font-size:14px;color:var(--t1);}
-.c-val a{color:var(--c);text-decoration:none;transition:color .2s;}
-.c-val a:hover{color:#fff;}
-.channels{display:flex;flex-direction:column;gap:14px;}
-.channel{background:var(--bg2);border:1px solid var(--b);padding:20px 22px;display:flex;gap:16px;align-items:center;text-decoration:none;transition:all .3s;}
-.channel:hover{border-color:rgba(0,229,255,.35);background:rgba(0,229,255,.04);transform:translateX(4px);}
-.ch-ico{width:44px;height:44px;flex-shrink:0;background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;}
-.ch-lbl{font-family:'Orbitron',monospace;font-size:11px;font-weight:600;color:var(--c);margin-bottom:3px;letter-spacing:.08em;}
-.ch-detail{font-size:13px;color:var(--t2);}
-
-/* FOOTER */
-footer{position:relative;z-index:1;background:var(--bg1);border-top:1px solid var(--b);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.f-left{display:flex;align-items:center;gap:12px;}
-.f-logo{height:32px;width:32px;object-fit:contain;opacity:.65;}
-.f-text{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:.08em;line-height:1.7;}
-.f-right{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.12em;text-align:right;line-height:1.8;}
-.f-email{color:var(--c);}
-</style>
+        /* SIMULATOR HOOK */
+        .sim-cta { margin: 50px 10%; padding: 40px; border: 1px dashed var(--amber); text-align: center; background: rgba(255,179,0,0.05); }
+    </style>
 </head>
 <body>
+    <div class="grid-bg"></div>
+    <nav><div class="logo">RFCA [CORE]</div></nav>
 
-<nav>
-  <a href="#hero" class="nav-brand">
-    <img src="logo.png" alt="RFCA" onerror="this.style.display='none'">
-    <div class="nav-name">RF CATALYST<small>AUTOMOTIVE LTD</small></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#technology">Technology</a></li>
-    <li><a href="#achievements">Achievements</a></li>
-    <li><a href="#firsts">World Firsts</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#enterprise">Enterprise</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+    <header>
+        <span style="font-family:'Share Tech Mono'; color:var(--amber);">// TRL 4-5 VALIDATION ACTIVE</span>
+        <h1 class="hero-title">INTEGRATED <span class="accent">RF PLASMA</span><br>CATALYST SYSTEMS</h1>
+        <p style="max-width: 600px; font-size: 1.2rem; opacity: 0.8;">Neutralizing NOx and CO2 through co-optimized energy-boundary manipulation. Proprietary High Entropy Alloy (HEA) integration.</p>
+        <div style="margin-top: 30px;">
+            <a href="#simulator" class="buy-btn" style="background:var(--cyan); color:var(--bg);">Launch Lab →</a>
+            <a href="#products" class="buy-btn" style="margin-left:15px;">View Data Packs</a>
+        </div>
+    </header>
 
-<div class="wrap">
+    <section class="tech-gallery">
+        <div class="tech-card">
+            <img src="1000016471.png" alt="Six Domain">
+            <h4>[A-G] SYSTEM INTEGRATION</h4>
+            <p style="font-size:0.8rem; color:#8A9AB0;">Co-optimizing Fluid Flow, Plasma Chemistry, and Control.</p>
+        </div>
+        <div class="tech-card">
+            <img src="1000016474.png" alt="Impedance">
+            <h4>DYNAMIC TUNING NETWORK</h4>
+            <p style="font-size:0.8rem; color:#8A9AB0;">Variable Reactance Blocks for real-time plasma stability.</p>
+        </div>
+        <div class="tech-card">
+            <img src="1000016472.png" alt="Electrode">
+            <h4>HEA MONOLITH ASSEMBLY</h4>
+            <p style="font-size:0.8rem; color:#8A9AB0;">Dielectric coated monoliths optimized for RF-Field excitation.</p>
+        </div>
+    </section>
 
-<div class="hero" id="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <img src="logo.png" alt="RF Catalyst Automotive" class="hero-logo" onerror="this.style.display='none'">
-    <div class="hero-badge"><span class="dot"></span>UK Registered Deep-Technology Company</div>
-    <h1>RF PLASMA<br><span class="c">CATALYST SYSTEMS</span></h1>
-    <p class="hero-sub">Flow &middot; Field &middot; Plasma &middot; Catalyst &middot; Ageing &middot; Control</p>
-    <p class="hero-desc">Integrated multi-physics systems for industrial decarbonisation, emissions reduction, and energy transition. Six coupled physics domains. No known comparable technology exists.</p>
-    <div class="cta-row">
-      <a href="#products" class="btn btn-c">View Products</a>
-      <a href="#contact" class="btn btn-o">Enquire Now</a>
-    </div>
-  </div>
-</div>
+    <section class="sim-cta" id="simulator">
+        <h2 style="font-family:'Orbitron';">INTERACTIVE PHYSICS SIMULATOR</h2>
+        <p>Validate NOx reduction deltas vs. Standard SCR systems using our Digital Twin API.</p>
+        <a href="https://rfca-alpha-sim.streamlit.app" target="_blank" class="buy-btn">OPEN ALPHA LAB (EXTERNAL)</a>
+    </section>
 
-<div class="sec alt" style="padding:52px 5%;">
-  <div class="stats">
-    <div class="stat"><div class="stat-v">TRL 3</div><div class="stat-l">Technology Readiness</div></div>
-    <div class="stat"><div class="stat-v">6</div><div class="stat-l">Coupled Physics Domains</div></div>
-    <div class="stat"><div class="stat-v">£41B</div><div class="stat-l">2024 TAM</div></div>
-    <div class="stat"><div class="stat-v">£142B</div><div class="stat-l">2030 Market</div></div>
-    <div class="stat"><div class="stat-v">Oxford</div><div class="stat-l">Validation Partner</div></div>
-    <div class="stat"><div class="stat-v">5&ndash;8yr</div><div class="stat-l">Competitor Lead</div></div>
-  </div>
-</div>
+    <section class="products" id="products">
+        <h2 style="font-family:'Orbitron'; text-align:center; margin-bottom:50px;">AVAILABLE <span class="accent">INTELLIGENCE</span></h2>
+        <div class="product-grid">
+            <div class="p-card">
+                <span style="color:var(--amber); font-family:'Share Tech Mono'; font-size:0.7rem;">P01 / OVERVIEW</span>
+                <h3>Technology Pack</h3>
+                <span class="p-price">£149</span>
+                <a href="mailto:kaned547@gmail.com?subject=Purchase P01" class="buy-btn">Enquire</a>
+            </div>
+            <div class="p-card">
+                <span style="color:var(--amber); font-family:'Share Tech Mono'; font-size:0.7rem;">P02 / DIGITAL TWIN</span>
+                <h3>Sim Framework</h3>
+                <span class="p-price">£850</span>
+                <a href="mailto:kaned547@gmail.com?subject=Purchase P02" class="buy-btn">Enquire</a>
+            </div>
+            <div class="p-card">
+                <span style="color:var(--amber); font-family:'Share Tech Mono'; font-size:0.7rem;">P03 / ENERGETICS</span>
+                <h3>HEA Catalyst Analysis</h3>
+                <span class="p-price">£1,200</span>
+                <a href="mailto:kaned547@gmail.com?subject=Purchase P03" class="buy-btn">Enquire</a>
+            </div>
+             <div class="p-card">
+                <span style="color:var(--amber); font-family:'Share Tech Mono'; font-size:0.7rem;">P04-06 / MARKET & COMPLIANCE</span>
+                <h3>Global Strategy Bundle</h3>
+                <span class="p-price">£599</span>
+                <a href="mailto:kaned547@gmail.com?subject=Purchase Bundle" class="buy-btn">Enquire</a>
+            </div>
+        </div>
+    </section>
 
-<div class="sep"></div>
-
-<div class="sec" id="trl">
-  <div class="sec-label">Technology Readiness</div>
-  <h2>Current TRL Status</h2>
-  <p class="sec-desc">Digital modelling complete across all six physics domains. Physical bench validation active at Oxford University.</p>
-  <div class="trl-bar">
-    <div class="trl-step done"><span class="trl-n">1</span>Principles</div>
-    <div class="trl-step done"><span class="trl-n">2</span>Concept</div>
-    <div class="trl-step now"><span class="trl-n">3</span>&#9664; NOW</div>
-    <div class="trl-step"><span class="trl-n">4</span>Lab valid.</div>
-    <div class="trl-step"><span class="trl-n">5</span>Environment</div>
-    <div class="trl-step"><span class="trl-n">6</span>Demo</div>
-    <div class="trl-step"><span class="trl-n">7</span>Prototype</div>
-    <div class="trl-step"><span class="trl-n">8</span>Complete</div>
-    <div class="trl-step"><span class="trl-n">9</span>Proven</div>
-  </div>
-  <div class="trl-cards">
-    <div class="trl-card"><div class="trl-ct">Completed</div><p>Multi-physics digital twin developed and validated computationally across all six coupled domains. Simulation infrastructure, control model, and digital validation framework operational.</p></div>
-    <div class="trl-card"><div class="trl-ct">In Progress</div><p>Bench validation programme (VG1) active at Oxford University. Seven targeted hardware validation tests defined. Physical results will advance RFCA to TRL 4&ndash;5 upon completion.</p></div>
-  </div>
-</div>
-
-<div class="sec alt" id="technology">
-  <div class="sec-label">Core Technology</div>
-  <h2>Six-Domain Integration</h2>
-  <p class="sec-desc">The only known system integrating all six coupled physics domains into a unified RF plasma-catalyst design framework.</p>
-  <div class="domains">
-    <div class="domain"><span class="d-icon">&#8631;</span><div class="d-name">Flow</div><div class="d-desc">Velocity-shaped reactor geometry. Optimised residence time.</div></div>
-    <div class="domain"><span class="d-icon">&#9889;</span><div class="d-name">Field</div><div class="d-desc">RF electromagnetic distribution. Impedance-matched coupling.</div></div>
-    <div class="domain"><span class="d-icon">&#9675;</span><div class="d-name">Plasma</div><div class="d-desc">Non-thermal plasma generation. Reactive species at low temperature.</div></div>
-    <div class="domain"><span class="d-icon">&#11041;</span><div class="d-name">Catalyst</div><div class="d-desc">High-entropy alloy catalyst. Multi-element extended lifetime.</div></div>
-    <div class="domain"><span class="d-icon">&#9201;</span><div class="d-name">Ageing</div><div class="d-desc">Degradation modelling. Predictive lifetime and fouling recovery.</div></div>
-    <div class="domain"><span class="d-icon">&#11835;</span><div class="d-name">Control</div><div class="d-desc">Closed-loop adaptive firmware. Real-time impedance control.</div></div>
-  </div>
-</div>
-
-<div class="sec" id="firsts">
-  <div class="sec-label">World Firsts</div>
-  <h2>No Known Comparable Technology</h2>
-  <p class="sec-desc">Capabilities with no confirmed equivalent in any competitor, academic institution, or commercial programme.</p>
-  <div class="firsts">
-    <div class="first"><div class="first-tag">&#9632; World First</div><h3>Six-Domain Unified Integration</h3><p>First known system to integrate Flow, Field, Plasma, Catalyst, Ageing, and Control as fully coupled physics domains in a single RF plasma-catalyst design framework. No competitor currently replicates this integration.</p></div>
-    <div class="first"><div class="first-tag">&#9632; World First</div><h3>RF-Plasma-HEA Catalyst Co-Optimisation</h3><p>First known co-optimisation of RF field geometry, non-thermal plasma generation, and high-entropy alloy catalyst formulation as a unified design space. Conventional systems optimise each domain independently.</p></div>
-    <div class="first"><div class="first-tag">&#9632; World First</div><h3>Predictive Catalyst Ageing Model</h3><p>First known digital twin incorporating real-time catalyst ageing and fouling prediction coupled to closed-loop control adjustment. Industry standard approaches are reactive, not predictive.</p></div>
-    <div class="first"><div class="first-tag">&#9632; World First</div><h3>Impedance-Catalyst Feedback Architecture</h3><p>First known architecture where RF impedance matching is continuously updated as a function of catalyst state and flow conditions simultaneously, enabling real-time system-wide optimisation.</p></div>
-  </div>
-</div>
-
-<div class="sec alt" id="achievements">
-  <div class="sec-label">Programme Milestones</div>
-  <h2>Confirmed Achievements</h2>
-  <p class="sec-desc">Director-confirmed milestones. Status records as of Q1 2026.</p>
-  <div class="achs">
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Digital Twin &mdash; All Domains</h4><p>Multi-physics digital twin complete across all six coupled domains. Computational validation confirms full-system model internal consistency.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Oxford University Partnership</h4><p>Active bench validation programme (VG1) established. Seven hardware validation tests defined, scoped, and priced. In progress.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>TRL 3 Confirmed</h4><p>Experimental proof of concept established. Digital validation envelope complete across all modelled operating regions.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Closed-Loop Control Architecture</h4><p>Adaptive control firmware designed. Impedance, plasma density, and temperature control loops defined with sub-millisecond to sub-second response targets.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>IP Strategy Defined</h4><p>Three-year patent programme planned. Year 1 critical filings: core physics integration methods, HEA catalyst compositions, primary reactor geometries.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Commercial Product Suite</h4><p>Digital product suite developed. Four products IP-cleared for immediate sale across system overview, compliance, validation, and design methodology categories.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Grant Strategy Mapped</h4><p>EIC Transition (up to &euro;2.5M), DASA Emerging Innovations, and Innovate UK applications drafted. Target submissions from Q3 2026.</p></div></div>
-    <div class="ach"><div class="ach-ico">&#10003;</div><div><h4>Revenue Simulator &mdash; 36 Products</h4><p>Probability-weighted 5-year forecast model built. 36 products, 6 categories, milestone gate-unlock logic through 2030.</p></div></div>
-  </div>
-</div>
-
-<div class="sec" id="tools">
-  <div class="sec-label">Technical Infrastructure</div>
-  <h2>Tools Built &amp; Deployed</h2>
-  <p class="sec-desc">Proprietary and platform tools developed or integrated into RFCA's R&amp;D and commercial infrastructure.</p>
-  <div class="tools">
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>Multi-Physics Digital Twin</h4><p>Six-domain computational model coupling all physics layers. Simulation-ready across full operating envelope. Python-based.</p></div>
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>Simulation Evaluation Package</h4><p>Installable Python package. Parameter sweep capability. DOE outputs, Monte Carlo datasets, compliance-format artefacts.</p></div>
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>Revenue Simulator</h4><p>Probability-weighted 5-year forecast. 36 products, 6 categories, milestone gate-unlock logic. Conservative / moderate / aggressive scenarios.</p></div>
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>Adaptive Control Architecture</h4><p>Closed-loop firmware design. Impedance feedback (&lt;1ms), plasma density (&lt;10ms), temperature regulation (&lt;1s) unified control hierarchy.</p></div>
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>HEA Catalyst Design Framework</h4><p>Multi-element alloy methodology integrating catalyst composition with field and plasma parameters. Composition detail IP-protected.</p></div>
-    <div class="tool"><div class="tool-type">Built &mdash; Proprietary</div><h4>Validation Framework OxVal-01&ndash;07</h4><p>Seven-test hardware validation programme for Oxford bench testing. Each test maps to a specific physics domain and digital twin prediction.</p></div>
-    <div class="tool"><div class="tool-type">Platform</div><h4>Python Scientific Stack</h4><p>NumPy, SciPy, pandas, and domain-specific solvers across simulation and data processing pipelines.</p></div>
-    <div class="tool"><div class="tool-type">Platform</div><h4>Google Drive / Workspace</h4><p>9-folder structured archive with enforced naming convention, version control, and disclosure-level tiering across all RFCA documents.</p></div>
-    <div class="tool"><div class="tool-type">Platform</div><h4>Vercel / GitHub</h4><p>Static site deployment via Vercel connected to GitHub. Continuous deployment from kaned547-max/Rf-catalyst-website-.</p></div>
-  </div>
-</div>
-
-<div class="sec alt" id="products">
-  <div class="sec-label">Digital Products</div>
-  <h2>Products Available Now</h2>
-  <p class="sec-desc">Immediate-access digital downloads. Click any product to open a pre-filled purchase email &mdash; director responds within 1 business day.</p>
-  <div class="products">
-
-    <div class="product">
-      <div class="p-ref">REF: P01</div>
-      <div class="p-name">RF Plasma-Catalyst System Overview</div>
-      <div class="p-desc">Comprehensive technical architecture overview of RF plasma-catalyst integrated systems. Covers system design principles, physics domain coupling, market context, and regulatory drivers. Suitable for engineering teams evaluating the technology.</div>
-      <ul class="p-feats">
-        <li>Six-domain architecture overview</li>
-        <li>Market and regulatory context</li>
-        <li>Technology integration principles</li>
-        <li>Application sector mapping</li>
-        <li>IP-safe &mdash; no restricted content</li>
-      </ul>
-      <div class="p-price">&pound;149</div>
-      <a href="mailto:kaned547@gmail.com?subject=Purchase%20P01%20RF%20System%20Overview%20%C2%A3149&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%3A%0AProduct%3A%20P01%20RF%20Plasma-Catalyst%20System%20Overview%0APrice%3A%20%C2%A3149%0A%0APlease%20send%20payment%20and%20delivery%20instructions.%0A%0ARegards" class="btn-buy">Purchase &mdash; &pound;149</a>
-    </div>
-
-    <div class="product">
-      <div class="p-ref">REF: P04</div>
-      <div class="p-name">Emissions Compliance Navigator</div>
-      <div class="p-desc">Structured guide to Euro 7, EPA 2027+, and industrial emissions regulatory frameworks. Maps compliance requirements to RF plasma-catalyst system capabilities. Designed for engineering and regulatory teams.</div>
-      <ul class="p-feats">
-        <li>Euro 7 and EPA 2027+ framework mapping</li>
-        <li>Industrial VOC/NOx compliance overview</li>
-        <li>Technology-to-regulation alignment</li>
-        <li>Compliance artefact requirements</li>
-        <li>IP-safe &mdash; no restricted content</li>
-      </ul>
-      <div class="p-price">&pound;249</div>
-      <a href="mailto:kaned547@gmail.com?subject=Purchase%20P04%20Compliance%20Navigator%20%C2%A3249&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%3A%0AProduct%3A%20P04%20Emissions%20Compliance%20Navigator%0APrice%3A%20%C2%A3249%0A%0APlease%20send%20payment%20and%20delivery%20instructions.%0A%0ARegards" class="btn-buy">Purchase &mdash; &pound;249</a>
-    </div>
-
-    <div class="product">
-      <div class="p-ref">REF: P05</div>
-      <div class="p-name">Deep-Tech Validation Framework</div>
-      <div class="p-desc">Practitioner framework for structuring hardware and digital validation programmes. Covers test design, digital twin correlation, TRL progression planning, and evidence artefact generation for investor and OEM audiences.</div>
-      <ul class="p-feats">
-        <li>Hardware validation test design</li>
-        <li>Digital twin correlation approach</li>
-        <li>TRL progression planning guide</li>
-        <li>Validation evidence artefact templates</li>
-        <li>IP-safe &mdash; no restricted content</li>
-      </ul>
-      <div class="p-price">&pound;199</div>
-      <a href="mailto:kaned547@gmail.com?subject=Purchase%20P05%20Validation%20Framework%20%C2%A3199&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%3A%0AProduct%3A%20P05%20Deep-Tech%20Validation%20Framework%0APrice%3A%20%C2%A3199%0A%0APlease%20send%20payment%20and%20delivery%20instructions.%0A%0ARegards" class="btn-buy">Purchase &mdash; &pound;199</a>
-    </div>
-
-    <div class="product">
-      <div class="p-ref">REF: P06</div>
-      <div class="p-name">Advanced Systems Design Framework</div>
-      <div class="p-desc">Structured methodology for multi-physics system design in deep-tech industrial applications. Covers co-optimisation across coupled domains, design tradeoff analysis, FMEA integration, and control lineage documentation.</div>
-      <ul class="p-feats">
-        <li>Multi-physics co-optimisation method</li>
-        <li>Coupled domain design principles</li>
-        <li>FMEA integration approach</li>
-        <li>Control lineage documentation</li>
-        <li>IP-safe &mdash; no restricted content</li>
-      </ul>
-      <div class="p-price">&pound;299</div>
-      <a href="mailto:kaned547@gmail.com?subject=Purchase%20P06%20Design%20Framework%20%C2%A3299&body=Hello%2C%0A%0AI%20would%20like%20to%20purchase%3A%0AProduct%3A%20P06%20Advanced%20Systems%20Design%20Framework%0APrice%3A%20%C2%A3299%0A%0APlease%20send%20payment%20and%20delivery%20instructions.%0A%0ARegards" class="btn-buy">Purchase &mdash; &pound;299</a>
-    </div>
-
-    <div class="product hold">
-      <div class="p-ref">REF: P02</div>
-      <div class="hold-tag">Patent Gate &mdash; Coming Soon</div>
-      <div class="p-name">Digital Twin Evaluation Kernel</div>
-      <div class="p-desc">Full digital twin evaluation package. Available upon patent filing confirmation.</div>
-      <div class="p-price" style="color:var(--t3);">TBC</div>
-      <div class="btn-buy off">Pending Patent Gate</div>
-    </div>
-
-    <div class="product hold">
-      <div class="p-ref">REF: P03</div>
-      <div class="hold-tag">Patent Gate &mdash; Coming Soon</div>
-      <div class="p-name">OEM Python Evaluation Kernel</div>
-      <div class="p-desc">OEM-specific Python simulation kernel. Available upon patent filing confirmation.</div>
-      <div class="p-price" style="color:var(--t3);">TBC</div>
-      <div class="btn-buy off">Pending Patent Gate</div>
-    </div>
-
-  </div>
-</div>
-
-<div class="sec" id="enterprise">
-  <div class="sec-label">Enterprise Evaluation</div>
-  <h2>T1&ndash;T4 Partnership Tiers</h2>
-  <p class="sec-desc">Structured evaluation programmes for OEM technical teams, Tier 1 suppliers, industrial operators, and strategic licensing partners. All tiers require NDA. Pricing confirmed by director on enquiry.</p>
-  <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr><th>Tier</th><th>Programme</th><th>Scope Summary</th><th>Target Buyer</th><th>Enquire</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="t-ref">T1</span></td>
-          <td><strong style="color:#fff;">Simulation Evaluation Licence</strong><span class="t-note">Director sign-off required</span></td>
-          <td>Physics-responsive Python simulation package. Parameter sweep capability. API documentation. Single-organisation licence.</td>
-          <td>Tier 1 engineering teams, fleet operators, research institutions</td>
-          <td><a href="mailto:kaned547@gmail.com?subject=T1%20Simulation%20Evaluation%20Licence%20Enquiry&body=Hello%2C%0A%0AOrganisation%3A%0AApplication%3A%0AContact%3A%0A%0ARegards" class="t-link">Enquire &rarr;</a></td>
-        </tr>
-        <tr>
-          <td><span class="t-ref">T2</span></td>
-          <td><strong style="color:#fff;">Digital Twin Integration Pack</strong><span class="t-note">Director sign-off required</span></td>
-          <td>Extended simulation with DOE and Monte Carlo outputs. Telemetry module. Compliance artefact generation (Euro 7 / EPA). Integration interface.</td>
-          <td>OEM engineering, Tier 1 aftertreatment developers, industrial operators</td>
-          <td><a href="mailto:kaned547@gmail.com?subject=T2%20Digital%20Twin%20Integration%20Pack%20Enquiry&body=Hello%2C%0A%0AOrganisation%3A%0AApplication%3A%0AContact%3A%0A%0ARegards" class="t-link">Enquire &rarr;</a></td>
-        </tr>
-        <tr>
-          <td><span class="t-ref">T3</span></td>
-          <td><strong style="color:#fff;">Full System Evaluation Suite</strong><span class="t-note">Director sign-off required</span></td>
-          <td>All T1+T2 plus test suite, validation methodology, system state diagram, FMEA, and control lineage traceability.</td>
-          <td>Senior OEM engineering, programme management, licensing evaluation teams</td>
-          <td><a href="mailto:kaned547@gmail.com?subject=T3%20Full%20System%20Evaluation%20Suite%20Enquiry&body=Hello%2C%0A%0AOrganisation%3A%0AApplication%3A%0AContact%3A%0A%0ARegards" class="t-link">Enquire &rarr;</a></td>
-        </tr>
-        <tr>
-          <td><span class="t-ref">T4</span></td>
-          <td><strong style="color:#fff;">Strategic Partnership Programme</strong><span class="t-note">Director sign-off required</span></td>
-          <td>All T1&ndash;T3 deliverables. Workshop facilitation. Commercial proposal template. Dedicated technical support. Custom integration advisory.</td>
-          <td>OEM commercial leadership, strategic licensing partners, government-backed programmes</td>
-          <td><a href="mailto:kaned547@gmail.com?subject=T4%20Strategic%20Partnership%20Programme%20Enquiry&body=Hello%2C%0A%0AOrganisation%3A%0AApplication%3A%0AContact%3A%0A%0ARegards" class="t-link">Enquire &rarr;</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--t3);letter-spacing:.1em;">&#9658; All T1&ndash;T4 engagements require NDA execution prior to technical disclosure. Pricing confirmed by director on a per-enquiry basis.</p>
-</div>
-
-<div class="sec alt" id="markets">
-  <div class="sec-label">Market Sectors</div>
-  <h2>Target Applications</h2>
-  <p class="sec-desc">Combined addressable market estimated at &pound;3.3B&ndash;&pound;9.8B by 2030 across core segments.</p>
-  <div class="markets">
-    <div class="market"><span class="m-badge t1b">Tier 1 &mdash; 0&ndash;3yr</span><h4>Heavy Transport &amp; Automotive Aftertreatment</h4><div class="m-size">$8.2B (2024) &rarr; $12.1B (2030) &middot; CAGR 6.7%</div><p>Euro 7 and EPA 2027+ compliance drivers. Tier 1 suppliers, truck OEMs, fleet operators.</p></div>
-    <div class="market"><span class="m-badge t1b">Tier 1 &mdash; 0&ndash;3yr</span><h4>Industrial Emissions &amp; Process Exhaust</h4><div class="m-size">$22.0B (2024) &rarr; $31.4B (2030) &middot; CAGR 6.1%</div><p>VOC/NOx regulation tightening, carbon pricing. Chemical plants, refineries, maritime.</p></div>
-    <div class="market"><span class="m-badge t1b">Tier 1 &mdash; 0&ndash;3yr</span><h4>Defence RF-Assisted Combustion</h4><div class="m-size">$2.1B (2024) &rarr; $3.8B (2030) &middot; CAGR 10.4%</div><p>DoD advanced propulsion. SBIR/STTR pathway. Hypersonic and ramjet applications.</p></div>
-    <div class="market"><span class="m-badge t2b">Tier 2 &mdash; 3&ndash;7yr</span><h4>Hydrogen &amp; Ammonia Processing</h4><div class="m-size">$2.5B (2024) &rarr; $72.0B (2030) &middot; CAGR 72%</div><p>Ammonia cracking, H&#8322; purification, methane steam reforming. Largest growth market.</p></div>
-    <div class="market"><span class="m-badge t2b">Tier 2 &mdash; 3&ndash;7yr</span><h4>Aerospace Environmental Systems</h4><div class="m-size">$1.8B (2024) &rarr; $4.2B (2030) &middot; CAGR 15.2%</div><p>Cabin air treatment, hydrogen fuel purification, life support systems.</p></div>
-    <div class="market"><span class="m-badge t2b">Tier 2 &mdash; 3&ndash;7yr</span><h4>Grid-Scale Chemical Energy Conversion</h4><div class="m-size">$4.3B (2024) &rarr; $18.7B (2030) &middot; CAGR 28.3%</div><p>Power-to-X synthetic fuels, CO&#8322; conversion. EU e-fuels mandates 2026+.</p></div>
-  </div>
-</div>
-
-<div class="sec" id="contact">
-  <div class="sec-label">Contact</div>
-  <h2>Get In Touch</h2>
-  <div class="contact-grid">
-    <div>
-      <div class="c-title">Product Purchases, Enterprise &amp; Partnership Discussions</div>
-      <div class="c-desc">All purchases, T1&ndash;T4 enquiries, OEM evaluation discussions, and partnership conversations are directed to the founding director. NDA required for evaluation-level technical disclosure.</div>
-      <div class="c-row"><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:kaned547@gmail.com">kaned547@gmail.com</a></div></div>
-      <div class="c-row"><div class="c-lbl">Company</div><div class="c-val">RF Catalyst Automotive Ltd</div></div>
-      <div class="c-row"><div class="c-lbl">Registered</div><div class="c-val">England &amp; Wales, UK</div></div>
-      <div class="c-row"><div class="c-lbl">Validation</div><div class="c-val">Oxford University (active)</div></div>
-      <div class="c-row"><div class="c-lbl">Stage</div><div class="c-val">TRL 3 &mdash; Pre-revenue / Pilot</div></div>
-    </div>
-    <div class="channels">
-      <a href="mailto:kaned547@gmail.com?subject=Product%20Purchase%20Enquiry&body=Hello%2C%0A%0AProduct%20of%20interest%3A%0A%0ARegards" class="channel"><div class="ch-ico">&#128722;</div><div><div class="ch-lbl">Product Purchase</div><div class="ch-detail">P01, P04, P05, P06 &mdash; digital downloads</div></div></a>
-      <a href="mailto:kaned547@gmail.com?subject=Enterprise%20Evaluation%20Enquiry%20T1-T4&body=Hello%2C%0A%0AOrganisation%3A%0ATier%20of%20interest%3A%0AApplication%3A%0A%0ARegards" class="channel"><div class="ch-ico">&#9881;</div><div><div class="ch-lbl">Enterprise Evaluation</div><div class="ch-detail">T1&ndash;T4 simulation and system evaluation</div></div></a>
-      <a href="mailto:kaned547@gmail.com?subject=Technical%20Partnership%20Discussion&body=Hello%2C%0A%0AOrganisation%3A%0AContext%3A%0A%0ARegards" class="channel"><div class="ch-ico">&#11835;</div><div><div class="ch-lbl">Technical Partnership</div><div class="ch-detail">OEM evaluation, pilot programmes, licensing</div></div></a>
-      <a href="mailto:kaned547@gmail.com?subject=Investment%20Enquiry%20RFCA&body=Hello%2C%0A%0AContext%3A%0A%0ARegards" class="channel"><div class="ch-ico">&#9711;</div><div><div class="ch-lbl">Investment Enquiry</div><div class="ch-detail">NDA required for data room access</div></div></a>
-    </div>
-  </div>
-</div>
-
-<div class="sep"></div>
-
-<footer>
-  <div class="f-left">
-    <img src="logo.png" alt="RFCA" class="f-logo" onerror="this.style.display='none'">
-    <div class="f-text">RF Catalyst Automotive Ltd &mdash; UK Registered<br>Deep-technology emissions reduction &amp; energy transition systems</div>
-  </div>
-  <div class="f-right">
-    TRL 3 &mdash; Digital modelling complete<br>
-    Oxford University validation active<br>
-    <span class="f-email">kaned547@gmail.com</span><br>
-    <span style="font-size:9px;">&copy; RF Catalyst Automotive Ltd. All rights reserved.</span>
-  </div>
-</footer>
-
-</div>
+    <footer style="padding: 50px 10%; border-top: 1px solid var(--border); text-align: center; color: #4A5568;">
+        <p>© 2026 RF Catalyst Automotive Ltd. All Rights Reserved. | Disclosure Level: PUBLIC</p>
+    </footer>
 </body>
-</html>kaned547@gmail.com<section id="products">
-  <span class="section-label">// Revenue Engine — Tier 1 Intelligence</span>
-  <h2 class="section-title">Digital Portfolio <span class="accent">& Global Intelligence</span></h2>
-
-  <div class="products-grid">
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P01 — Level: Entry</div>
-        <div class="product-name">RF Plasma-Catalyst<br>Tech Overview</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">Foundational physics framework for RF integration into existing aftertreatment systems.</p>
-        <ul class="product-features">
-          <li>System Architecture</li>
-          <li>Cold-Start Delta Graphs</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£149</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P01" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P02 — Level: Strategic</div>
-        <div class="product-name">Digital Twin Simulation<br>Framework (Alpha)</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">Pre-configured COMSOL/Simulink parameters for RF field stability in catalytic reactors.</p>
-        <ul class="product-features">
-          <li>Coupled Physics Constants</li>
-          <li>Transient Cycle Logic</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£850</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P02" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P03 — Level: Advanced</div>
-        <div class="product-name">HEA Surface &<br>Energetics Analysis</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">Proprietary analysis of High Entropy Alloy behavior under RF plasma excitation.</p>
-        <ul class="product-features">
-          <li>Activation Energy Deltas</li>
-          <li>Surface Reaction Maps</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£1,200</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P03" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P04 — Level: Commercial</div>
-        <div class="product-name">Industry Application<br>Analysis Pack</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">TAM/SAM/SOM data for RF integration across Heavy Duty and Aerospace domains.</p>
-        <ul class="product-features">
-          <li>6 Market Segments</li>
-          <li>Investment Roadmap</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£249</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P04" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P05 — Level: Regulatory</div>
-        <div class="product-name">Emissions Compliance<br>Framework</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">Euro 7 and EPA 2027 navigation for Deep-Tech aftertreatment deployment.</p>
-        <ul class="product-features">
-          <li>Standard Alignment</li>
-          <li>Validation Milestones</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£199</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P05" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-header">
-        <div class="product-ref">P06 — Level: Global</div>
-        <div class="product-name">Market Tech<br>Intelligence</div>
-      </div>
-      <div class="product-body">
-        <p class="product-desc">Competitive landscape analysis: Passive Catalysts vs. RF Active Systems.</p>
-        <ul class="product-features">
-          <li>Competitor Benchmarks</li>
-          <li>Growth Projections</li>
-        </ul>
-      </div>
-      <div class="product-footer">
-        <span class="product-price">£299</span>
-        <a href="mailto:kaned547@gmail.com?subject=Purchase%20P06" class="btn-purchase">Buy →</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+</html>
