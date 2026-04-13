@@ -1,20 +1,13 @@
-RF-Catalyst Digital Services: Validating CO_2 and NO_x Neutralization through RF-Plasma Enhancement
-# RF Catalyst Digital Services (RFCA)
-**Status:** TRL-4 Verified | **Focus:** RF-Plasma & HEA Catalytic Optimization
+# RF Catalyst Automotive (RFCA) | Digital Asset Engine
 
-## 🚀 Core Value Proposition
-RFCA provides high-fidelity digital twins and hardware-validated simulation data for 
-next-generation aftertreatment systems. We reduce OEM R&D cycles by 35% through 
-predictive HEA (High-Entropy Alloy) synthesis modeling.
+## Core Mission
+To provide OEM-credible validation and simulation for RF-Plasma aftertreatment systems.
 
-## 📂 Directory Map
-- `/components`: Modular UI for the RF-Simulation Environment.
-- `/lib`: Proprietary (abstracted) physics engines for plasma stability.
-- `/data`: Normalized baseline data for NOₓ and CO₂ reduction targets.
-- `/docs`: Compliance matrices and TRL progression documentation.
+## System Architecture
+This repository contains:
+1. **Frontend:** High-performance HTML/CSS interface for product acquisition.
+2. **Simulation:** TRL 4-5 Interactive Physics Lab (Streamlit).
+3. **IP Abstract:** Proprietary Six-Domain physics integration schematics.
 
-## 💰 Commercial Access
-Direct procurement of Technical Dossiers and Feasibility Studies is available via 
-the [Integrated Storefront](https://rf-catalyst-website.vercel.app).
-
-**Contact:** kaned547@gmail.com
+## Contact
+For OEM Evaluation Packs or P01-P06 product keys, contact: kaned547@gmail.com
