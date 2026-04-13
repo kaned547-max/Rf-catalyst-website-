@@ -1,0 +1,48 @@
+import streamlit as st
+import numpy as np
+import plotly.graph_objects as go
+
+st.title("RFCA Interactive Physics Lab")
+st.markdown("### Education: From Exhaust Disturbance to Plasma Stabilization")
+
+# Mapping images to the education flow
+col1, col2 = st.columns(2)
+with col1:
+    st.image("1000016471.png", caption="Fig 1: Six-Domain Physics Integration")
+with col2:
+    st.image("1000016474.png", caption="Fig 2: Dynamic Impedance Tuning")
+
+st.divider()
+
+# Simulator Controls
+st.sidebar.header("Step 1: Define Exhaust Disturbance")
+flow_velocity = st.sidebar.slider("Flow Velocity (m/s)", 5, 50, 20)
+inlet_temp = st.sidebar.slider("Inlet Temp (°C)", 50, 350, 150)
+
+st.sidebar.header("Step 2: RF Control Logic")
+tuning_speed = st.sidebar.select_slider("Impedance Matching Response", options=["Standard", "RFCA Fast-Tuning", "Predictive AI"])
+
+# Logic: Abstracted from Image 1000016473 (Sensor Array -> RF Controller)
+efficiency_map = {"Standard": 0.65, "RFCA Fast-Tuning": 0.88, "Predictive AI": 0.96}
+base_reduction = efficiency_map[tuning_speed]
+
+# KPI Calculation
+nox_reduction = base_reduction * (1 + (200 - inlet_temp)/1000) 
+stability_index = 99.9 if tuning_speed != "Standard" else 82.5
+
+# Visualizing the "Plasma Load Output" (Image 1000016474 - Block D)
+fig = go.Figure(go.Indicator(
+    mode = "gauge+number",
+    value = nox_reduction * 100,
+    title = {'text': "NOx Conversion Efficiency (%)"},
+    gauge = {'axis': {'range': [0, 100]},
+             'bar': {'color': "#00E5FF"},
+             'steps': [
+                 {'range': [0, 70], 'color': "#111820"},
+                 {'range': [70, 100], 'color': "#0D1118"}]}
+))
+st.plotly_chart(fig, use_container_width=True)
+
+st.success(f"System Stability: {stability_index}% | Optimized for HEA Dielectric Monolith")
+
+st.info("Strategic Insight: Traditional systems fail at low temps. RFCA's co-optimized system maintains >90% conversion at <150°C.")
