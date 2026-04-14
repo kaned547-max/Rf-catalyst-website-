@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="RF Catalyst Automotive (RFCA) develops RF plasma-catalyst integrated systems for emissions reduction and industrial decarbonisation. Deep-tech. TRL 3. Oxford-validated." />
-  <meta name="keywords" content="RF plasma catalyst, emissions reduction, aftertreatment, Euro 7, EPA 2027, industrial decarbonisation, deep tech, digital twin" />
+  <meta name="description" content="RF Catalyst Automotive (RFCA) develops RF plasma-catalyst integrated systems for emissions reduction and industrial decarbonisation. TRL 3. Oxford-validated. Request NDA &amp; Evaluation Pack." />
+  <meta name="keywords" content="RF plasma catalyst, emissions reduction, aftertreatment, Euro 7, EPA 2027, industrial decarbonisation, deep tech, digital twin, NDA evaluation" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="RF Catalyst Automotive — RF Plasma-Catalyst Systems" />
-  <meta property="og:description" content="Integrated RF plasma-catalyst systems for heavy transport, industrial emissions, and advanced propulsion." />
+  <meta property="og:description" content="Integrated RF plasma-catalyst systems for heavy transport, industrial emissions, and advanced propulsion. Request NDA & Evaluation Pack." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rfcatalyst.com" />
   <link rel="canonical" href="https://rfcatalyst.com" />
   <title>RF Catalyst Automotive | RF Plasma-Catalyst Systems</title>
 
-  <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -23,1141 +22,486 @@
     "description": "Deep-tech company developing RF plasma-catalyst integrated systems for emissions reduction and industrial decarbonisation.",
     "url": "https://rfcatalyst.com",
     "foundingDate": "2024",
-    "industry": ["Emissions Control", "Advanced Propulsion", "Industrial Decarbonisation"],
-    "knowsAbout": ["RF Plasma", "Catalyst Systems", "Digital Twin Modelling", "High-Entropy Alloys", "Emissions Aftertreatment"]
+    "contactPoint": { "@type": "ContactPoint", "email": "kaned547@gmail.com", "contactType": "technical" }
   }
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ================================================================
+    /* ====================================================
        RFCA DESIGN SYSTEM
-       ================================================================ */
+    ==================================================== */
     :root {
-      --bg:           #0A0E14;
-      --bg-2:         #0D1219;
-      --bg-3:         #111820;
-      --bg-card:      #0E1520;
-      --border:       rgba(0,229,255,0.12);
-      --border-mid:   rgba(0,229,255,0.25);
-      --cyan:         #00E5FF;
-      --cyan-dim:     rgba(0,229,255,0.65);
-      --cyan-faint:   rgba(0,229,255,0.08);
-      --amber:        #FFB300;
-      --amber-dim:    rgba(255,179,0,0.65);
-      --green:        #00E676;
-      --green-dim:    rgba(0,230,118,0.7);
-      --red-dim:      rgba(255,82,82,0.8);
-      --text-primary: #E8EDF5;
-      --text-mid:     #8A9BB0;
-      --text-dim:     #4A5A6E;
-      --font-display: 'Orbitron', sans-serif;
-      --font-mono:    'DM Mono', monospace;
-      --font-body:    'Inter', sans-serif;
+      --bg:          #0A0E14;
+      --bg-2:        #0D1219;
+      --bg-3:        #111820;
+      --bg-card:     #0E1520;
+      --border:      rgba(0,229,255,0.10);
+      --border-mid:  rgba(0,229,255,0.25);
+      --border-form: rgba(0,229,255,0.18);
+      --cyan:        #00E5FF;
+      --cyan-dim:    rgba(0,229,255,0.65);
+      --cyan-faint:  rgba(0,229,255,0.07);
+      --amber:       #FFB300;
+      --amber-dim:   rgba(255,179,0,0.65);
+      --green:       #00E676;
+      --green-dim:   rgba(0,230,118,0.7);
+      --text-p:      #E8EDF5;
+      --text-mid:    #8A9BB0;
+      --text-dim:    #4A5A6E;
+      --font-d:      'Orbitron', sans-serif;
+      --font-m:      'DM Mono', monospace;
+      --font-b:      'Inter', sans-serif;
+      --rad:         4px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--text-p); font-family: var(--font-b); line-height: 1.6; overflow-x: hidden; }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── CRT scan-line overlay ── */
+    /* CRT scan lines */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.04) 2px,
-        rgba(0,0,0,0.04) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
+      content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.035) 2px,rgba(0,0,0,0.035) 4px);
     }
 
-    /* ── Grid noise texture ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.4;
-    }
+    /* ---- Typography ---- */
+    h1,h2,h3,h4 { font-family: var(--font-d); letter-spacing: 0.05em; }
+    h1 { font-size: clamp(1.9rem,5vw,3.4rem); font-weight: 900; line-height: 1.1; }
+    h2 { font-size: clamp(1.3rem,3vw,1.9rem); font-weight: 700; }
+    h3 { font-size: clamp(0.95rem,2vw,1.15rem); font-weight: 600; }
+    p  { color: var(--text-mid); line-height: 1.75; font-size: 0.92rem; }
+    a  { color: var(--cyan); text-decoration: none; transition: opacity .2s; }
+    a:hover { opacity: .72; }
+    .mono  { font-family: var(--font-m); }
+    .label { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); }
 
-    /* ================================================================
-       TYPOGRAPHY
-       ================================================================ */
-    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.05em; }
-    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; }
-    h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; }
-    h3 { font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 600; }
-    h4 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; }
-
-    p { color: var(--text-mid); line-height: 1.75; font-size: 0.95rem; }
-
-    .mono { font-family: var(--font-mono); }
-    .label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cyan);
-    }
-
-    a { color: var(--cyan); text-decoration: none; transition: opacity 0.2s; }
-    a:hover { opacity: 0.75; }
-
-    /* ================================================================
-       LAYOUT
-       ================================================================ */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
+    /* ---- Layout ---- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     section { position: relative; }
 
-    /* ================================================================
+    /* ====================================================
        NAV
-       ================================================================ */
+    ==================================================== */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(10,14,20,0.88);
-      backdrop-filter: blur(12px);
+      position: fixed; top:0; left:0; right:0; z-index:200; height:64px;
+      background: rgba(10,14,20,.88); backdrop-filter:blur(14px);
       border-bottom: 1px solid var(--border);
-      height: 64px;
+      transition: background .3s;
     }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
-      color: var(--text-primary);
-    }
-
-    .nav-logo span { color: var(--cyan); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--cyan); opacity: 1; }
-
+    .nav-inner { max-width:1200px; margin:0 auto; padding:0 2rem; height:100%; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo  { font-family:var(--font-d); font-weight:900; font-size:.95rem; letter-spacing:.08em; color:var(--text-p); }
+    .nav-logo span { color:var(--cyan); }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { font-family:var(--font-m); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-mid); transition:color .2s; }
+    .nav-links a:hover { color:var(--cyan); opacity:1; }
     .nav-cta {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid var(--cyan);
-      color: var(--cyan);
-      border-radius: 2px;
-      transition: background 0.2s, color 0.2s;
+      font-family:var(--font-m); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+      padding:.5rem 1.1rem; border:1px solid var(--cyan); color:var(--cyan); border-radius:var(--rad);
+      transition:background .2s,color .2s; white-space:nowrap;
     }
+    .nav-cta:hover { background:var(--cyan); color:var(--bg); opacity:1; }
+    .nav-toggle { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .nav-toggle span { display:block; width:22px; height:2px; background:var(--text-mid); transition:all .3s; }
 
-    .nav-cta:hover {
-      background: var(--cyan);
-      color: var(--bg);
-      opacity: 1;
-    }
-
-    /* ── Mobile hamburger ── */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text-mid);
-      transition: all 0.3s;
-    }
-
-    /* ================================================================
+    /* ====================================================
        HERO
-       ================================================================ */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 0 80px;
-      overflow: hidden;
+    ==================================================== */
+    #hero { min-height:100vh; display:flex; align-items:center; padding:120px 0 80px; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .hero-bg-grid {
+      position:absolute; inset:0; opacity:.35;
+      background-image: linear-gradient(var(--border) 1px,transparent 1px), linear-gradient(90deg,var(--border) 1px,transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 75%);
     }
+    .hero-glow  { position:absolute; width:600px; height:400px; background:radial-gradient(ellipse,rgba(0,229,255,.055) 0%,transparent 70%); top:20%; right:-80px; }
+    .hero-glow-2{ position:absolute; width:400px; height:300px; background:radial-gradient(ellipse,rgba(255,179,0,.035) 0%,transparent 70%); bottom:20%; left:0; }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
+    .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
 
     .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      border: 1px solid var(--border-mid);
-      padding: 0.4rem 0.8rem;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-      background: var(--cyan-faint);
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-family:var(--font-m); font-size:.67rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--cyan); border:1px solid var(--border-mid); padding:.4rem .8rem; border-radius:var(--rad);
+      margin-bottom:1.5rem; background:var(--cyan-faint);
     }
+    .hero-tag .pulse { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
 
-    .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
+    .hero-title { margin-bottom:1.5rem; }
+    .hero-title .l1 { color:var(--text-p); }
+    .hero-title .l2 { color:var(--cyan); display:block; position:relative; }
+    .hero-title .l2::after { content:''; position:absolute; bottom:-4px; left:0; width:100%; height:2px; background:linear-gradient(90deg,var(--cyan),transparent); }
+
+    .hero-desc { font-size:.97rem; line-height:1.8; color:var(--text-mid); margin-bottom:2rem; max-width:480px; }
+
+    /* -- Hero lead capture -- */
+    .hero-cta-wrap { display:flex; flex-direction:column; gap:1rem; }
+    .hero-cta-primary {
+      font-family:var(--font-m); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+      padding:.9rem 2rem; background:var(--cyan); color:var(--bg); border:none; border-radius:var(--rad);
+      cursor:pointer; font-weight:500; transition:all .2s; display:inline-flex; align-items:center; gap:.5rem;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
+    .hero-cta-primary:hover { background:var(--text-p); transform:translateY(-1px); }
+    .hero-cta-secondary {
+      font-family:var(--font-m); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+      padding:.9rem 2rem; background:transparent; color:var(--text-mid); border:1px solid var(--border-mid);
+      border-radius:var(--rad); cursor:pointer; transition:all .2s; display:inline-block;
     }
+    .hero-cta-secondary:hover { color:var(--text-p); border-color:var(--text-mid); }
 
-    .hero-title {
-      margin-bottom: 1.5rem;
+    /* Inline lead capture that expands */
+    #hero-capture { max-height:0; overflow:hidden; transition:max-height .5s ease, opacity .4s ease; opacity:0; }
+    #hero-capture.open { max-height:200px; opacity:1; }
+    .capture-form {
+      display:flex; flex-wrap:wrap; gap:.6rem; align-items:stretch;
+      background:var(--bg-card); border:1px solid var(--border-mid); border-radius:var(--rad);
+      padding:1rem 1.25rem;
     }
-
-    .hero-title .line-1 { color: var(--text-primary); }
-    .hero-title .line-2 {
-      color: var(--cyan);
-      display: block;
-      position: relative;
+    .capture-form input, .capture-form select {
+      flex:1; min-width:160px; background:var(--bg-3); border:1px solid var(--border-form);
+      color:var(--text-p); font-family:var(--font-m); font-size:.72rem; padding:.65rem .9rem;
+      border-radius:var(--rad); outline:none; transition:border-color .2s;
     }
-
-    .hero-title .line-2::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg, var(--cyan), transparent);
+    .capture-form input::placeholder { color:var(--text-dim); }
+    .capture-form input:focus, .capture-form select:focus { border-color:var(--cyan); }
+    .capture-form select { color:var(--text-mid); cursor:pointer; }
+    .capture-form select option { background:var(--bg-3); }
+    .capture-submit {
+      font-family:var(--font-m); font-size:.68rem; letter-spacing:.15em; text-transform:uppercase;
+      padding:.65rem 1.4rem; background:var(--cyan); color:var(--bg); border:none; border-radius:var(--rad);
+      cursor:pointer; transition:background .2s; white-space:nowrap; font-weight:500;
     }
+    .capture-submit:hover { background:var(--text-p); }
+    .capture-note { font-family:var(--font-m); font-size:.6rem; color:var(--text-dim); width:100%; letter-spacing:.08em; }
 
-    .hero-desc {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text-mid);
-      margin-bottom: 2.5rem;
-      max-width: 480px;
-    }
+    /* Hero stats */
+    .hero-stats { display:flex; flex-direction:column; gap:.9rem; margin-top:2.5rem; }
+    .stat-row  { display:flex; align-items:center; gap:1rem; }
+    .stat-bar-wrap { flex:1; height:2px; background:var(--bg-3); border-radius:1px; overflow:hidden; }
+    .stat-bar  { height:100%; background:linear-gradient(90deg,var(--cyan),var(--green)); border-radius:1px; transition:width 1.5s ease; }
+    .stat-label{ font-family:var(--font-m); font-size:.6rem; letter-spacing:.12em; color:var(--text-dim); min-width:100px; text-transform:uppercase; }
+    .stat-value{ font-family:var(--font-m); font-size:.62rem; color:var(--cyan); min-width:32px; text-align:right; }
 
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    /* Hero visual */
+    .hero-visual { position:relative; display:flex; align-items:center; justify-content:center; height:480px; }
+    .domain-ring { position:relative; width:380px; height:380px; }
+    .ring-svg { width:100%; height:100%; animation:rotate-slow 40s linear infinite; }
+    @keyframes rotate-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
-    .btn-primary {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.85rem 2rem;
-      background: var(--cyan);
-      color: var(--bg);
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s;
-      display: inline-block;
-    }
-
-    .btn-primary:hover {
-      background: var(--text-primary);
-      opacity: 1;
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.85rem 2rem;
-      background: transparent;
-      color: var(--text-mid);
-      border: 1px solid var(--border-mid);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: inline-block;
-    }
-
-    .btn-secondary:hover {
-      color: var(--text-primary);
-      border-color: var(--text-mid);
-      opacity: 1;
-    }
-
-    /* ── Hero visual: 6-domain ring diagram ── */
-    .hero-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 480px;
-    }
-
-    .domain-ring {
-      position: relative;
-      width: 380px;
-      height: 380px;
-    }
-
-    .ring-svg {
-      width: 100%;
-      height: 100%;
-      animation: rotate-slow 40s linear infinite;
-    }
-
-    @keyframes rotate-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .ring-center {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ring-center-label {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--cyan);
-      text-transform: uppercase;
-    }
-
-    .ring-center-sub {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      letter-spacing: 0.15em;
-      margin-top: 0.3rem;
-    }
-
-    .domain-node {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cyan-dim);
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .hero-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-
-    .stat-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .stat-bar-wrap {
-      flex: 1;
-      height: 2px;
-      background: var(--bg-3);
-      border-radius: 1px;
-      overflow: hidden;
-    }
-
-    .stat-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--cyan), var(--green));
-      border-radius: 1px;
-      transition: width 1.5s ease;
-    }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
-      min-width: 100px;
-      text-transform: uppercase;
-    }
-
-    .stat-value {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      color: var(--cyan);
-      min-width: 32px;
-      text-align: right;
-    }
-
-    /* ================================================================
+    /* ====================================================
        SECTION COMMON
-       ================================================================ */
-    .section-header {
-      margin-bottom: 4rem;
+    ==================================================== */
+    .section-header { margin-bottom:3.5rem; }
+    .section-header .label { display:block; margin-bottom:.8rem; }
+    .section-divider { width:48px; height:2px; background:linear-gradient(90deg,var(--cyan),transparent); margin-top:.8rem; }
+
+    /* ====================================================
+       OXFORD / VALIDATION BANNER
+    ==================================================== */
+    #oxford-banner {
+      padding:3rem 0;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(135deg,rgba(0,229,255,.025) 0%,transparent 60%);
     }
-
-    .section-header .label {
-      display: block;
-      margin-bottom: 1rem;
+    .oxford-inner { display:flex; align-items:center; gap:3rem; flex-wrap:wrap; }
+    .oxford-badge {
+      display:flex; align-items:center; gap:1rem;
+      background:var(--bg-card); border:1px solid var(--border-mid);
+      border-radius:var(--rad); padding:1.25rem 1.75rem; flex-shrink:0;
     }
-
-    .section-divider {
-      width: 48px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), transparent);
-      margin-top: 1rem;
+    .oxford-u { font-family:var(--font-d); font-size:1.3rem; font-weight:900; color:var(--text-p); border-right:1px solid var(--border); padding-right:1.25rem; }
+    .oxford-badge-text h4 { font-family:var(--font-m); font-size:.68rem; letter-spacing:.15em; color:var(--cyan); }
+    .oxford-badge-text p  { font-family:var(--font-m); font-size:.64rem; color:var(--text-dim); margin-top:.2rem; }
+    .oxford-quote {
+      flex:1; min-width:280px;
+      border-left:2px solid rgba(0,229,255,.3); padding-left:1.5rem;
     }
-
-    /* ================================================================
-       TECHNOLOGY SECTION
-       ================================================================ */
-    #technology {
-      padding: 120px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    .oxford-quote blockquote {
+      font-family:var(--font-m); font-size:.82rem; color:var(--text-mid); line-height:1.75;
+      font-style:italic;
     }
-
-    .tech-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
+    .oxford-quote cite { display:block; margin-top:.6rem; font-family:var(--font-m); font-size:.62rem; color:var(--text-dim); letter-spacing:.1em; font-style:normal; }
+    .oxford-meta { display:flex; gap:1rem; flex-wrap:wrap; }
+    .oxford-stat {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad);
+      padding:.75rem 1.25rem; text-align:center;
     }
+    .oxford-stat .val { font-family:var(--font-d); font-size:1.1rem; color:var(--cyan); }
+    .oxford-stat .lbl { font-family:var(--font-m); font-size:.58rem; color:var(--text-dim); letter-spacing:.1em; text-transform:uppercase; margin-top:.2rem; }
 
-    .domain-chain {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    /* ====================================================
+       TEAM
+    ==================================================== */
+    #team { padding:100px 0; }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+    .team-card {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad);
+      padding:2rem; display:flex; gap:1.25rem; align-items:flex-start;
+      transition:border-color .3s;
     }
-
-    .domain-item {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      position: relative;
+    .team-card:hover { border-color:var(--border-mid); }
+    .team-avatar {
+      width:52px; height:52px; min-width:52px; border-radius:3px;
+      background:var(--bg-3); border:1px solid var(--border-mid);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-d); font-size:.85rem; color:var(--cyan); font-weight:700;
     }
+    .team-info h3 { font-size:.82rem; color:var(--text-p); margin-bottom:.2rem; }
+    .team-role { font-family:var(--font-m); font-size:.65rem; color:var(--amber); letter-spacing:.12em; text-transform:uppercase; margin-bottom:.5rem; display:block; }
+    .team-bio { font-size:.8rem; color:var(--text-dim); line-height:1.65; }
 
-    .domain-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: 19px;
-      top: 44px;
-      width: 1px;
-      height: calc(100% - 4px);
-      background: linear-gradient(180deg, var(--border-mid), var(--border));
-    }
+    /* ====================================================
+       TECHNOLOGY
+    ==================================================== */
+    #technology { padding:120px 0; background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%); }
+    .tech-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .domain-chain { display:flex; flex-direction:column; }
+    .domain-item { display:flex; gap:1.5rem; align-items:flex-start; position:relative; }
+    .domain-item:not(:last-child)::after { content:''; position:absolute; left:19px; top:44px; width:1px; height:calc(100% - 4px); background:linear-gradient(180deg,var(--border-mid),var(--border)); }
+    .domain-icon { width:40px; height:40px; min-width:40px; border:1px solid var(--border-mid); background:var(--bg-card); border-radius:3px; display:flex; align-items:center; justify-content:center; font-family:var(--font-m); font-size:.63rem; color:var(--cyan); position:relative; z-index:1; }
+    .domain-content { padding-bottom:2rem; flex:1; }
+    .domain-content h4 { font-family:var(--font-d); font-size:.73rem; color:var(--text-p); letter-spacing:.1em; margin-bottom:.3rem; }
+    .domain-content p  { font-size:.8rem; color:var(--text-dim); line-height:1.65; }
+    .tech-right { display:flex; flex-direction:column; gap:1.5rem; }
+    .tech-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad); padding:1.75rem; transition:border-color .3s; }
+    .tech-card:hover { border-color:var(--border-mid); }
+    .tech-card h3 { font-size:.82rem; color:var(--text-p); margin-bottom:.6rem; display:flex; align-items:center; gap:.5rem; }
+    .tech-card h3::before { content:''; width:8px; height:2px; background:var(--amber); flex-shrink:0; }
+    .tech-card p { font-size:.8rem; }
 
-    .domain-icon {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-      border: 1px solid var(--border-mid);
-      background: var(--bg-card);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--cyan);
-      letter-spacing: 0.1em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .domain-content {
-      padding-bottom: 2rem;
-      flex: 1;
-    }
-
-    .domain-content h4 {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      color: var(--text-primary);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.3rem;
-    }
-
-    .domain-content p {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      line-height: 1.65;
-    }
-
-    .tech-right {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .tech-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.75rem;
-      transition: border-color 0.3s;
-    }
-
-    .tech-card:hover { border-color: var(--border-mid); }
-
-    .tech-card h3 {
-      font-size: 0.85rem;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .tech-card h3::before {
-      content: '';
-      width: 8px; height: 2px;
-      background: var(--amber);
-      flex-shrink: 0;
-    }
-
-    .tech-card p { font-size: 0.82rem; }
-
-    /* ================================================================
+    /* ====================================================
        MARKETS
-       ================================================================ */
-    #markets {
-      padding: 120px 0;
-    }
-
-    .markets-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
+    ==================================================== */
+    #markets { padding:120px 0; }
+    .markets-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
     .market-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.2s;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad);
+      padding:2rem; position:relative; overflow:hidden; transition:border-color .3s, transform .2s;
     }
+    .market-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--card-accent,var(--cyan)); }
+    .market-card:hover { border-color:var(--border-mid); transform:translateY(-2px); }
+    .market-tier { font-family:var(--font-m); font-size:.59rem; letter-spacing:.2em; text-transform:uppercase; padding:.22rem .5rem; border-radius:2px; margin-bottom:1rem; display:inline-block; }
+    .tier-1 { background:rgba(0,229,255,.08); color:var(--cyan); }
+    .tier-2 { background:rgba(255,179,0,.08); color:var(--amber); }
+    .market-card h3 { font-size:.87rem; color:var(--text-p); margin-bottom:.65rem; line-height:1.4; }
+    .market-card p { font-size:.78rem; color:var(--text-dim); line-height:1.65; }
+    .market-size { margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-end; }
+    .market-size-label { font-family:var(--font-m); font-size:.58rem; color:var(--text-dim); letter-spacing:.1em; text-transform:uppercase; }
+    .market-size-value { font-family:var(--font-d); font-size:.95rem; color:var(--cyan-dim); }
 
-    .market-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--card-accent, var(--cyan));
+    /* ====================================================
+       VALIDATION SECTION
+    ==================================================== */
+    #validation { padding:120px 0; background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%); }
+    .validation-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .validation-list { list-style:none; display:flex; flex-direction:column; gap:.75rem; margin-bottom:2rem; }
+    .validation-list li { display:flex; align-items:flex-start; gap:.75rem; font-family:var(--font-m); font-size:.76rem; color:var(--text-mid); }
+    .validation-list li::before { content:'→'; color:var(--cyan); flex-shrink:0; }
+    .trl-display { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad); padding:2rem; }
+    .trl-header  { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.5rem; }
+    .trl-value   { font-family:var(--font-d); font-size:2.5rem; font-weight:900; color:var(--cyan); }
+    .trl-scale   { display:flex; gap:4px; }
+    .trl-pip     { flex:1; height:6px; border-radius:1px; background:var(--bg-3); }
+    .trl-pip.filled  { background:var(--cyan); }
+    .trl-pip.partial { background:var(--amber); }
+    .trl-labels  { display:flex; justify-content:space-between; margin-top:.5rem; }
+    .trl-labels span { font-family:var(--font-m); font-size:.58rem; color:var(--text-dim); }
+    .trl-desc    { margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); font-family:var(--font-m); font-size:.7rem; color:var(--text-mid); line-height:1.7; }
+    .status-indicator { display:inline-flex; align-items:center; gap:.4rem; font-family:var(--font-m); font-size:.63rem; letter-spacing:.12em; text-transform:uppercase; }
+    .status-indicator .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .status-active .dot  { background:var(--green); animation:pulse 2s ease-in-out infinite; }
+    .status-pending .dot { background:var(--amber); }
+
+    /* ====================================================
+       PRODUCTS
+    ==================================================== */
+    #products { padding:120px 0; }
+    .products-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-bottom:2rem; }
+    .product-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad); padding:2rem; display:flex; flex-direction:column; gap:.9rem; transition:border-color .3s; }
+    .product-card:hover { border-color:var(--border-mid); }
+    .product-ref   { font-family:var(--font-m); font-size:.58rem; letter-spacing:.2em; color:var(--text-dim); text-transform:uppercase; }
+    .product-card h3 { font-size:.87rem; color:var(--text-p); line-height:1.4; }
+    .product-card p  { font-size:.78rem; flex:1; }
+    .product-footer { display:flex; align-items:center; justify-content:space-between; padding-top:.9rem; border-top:1px solid var(--border); }
+    .product-price  { font-family:var(--font-d); font-size:1.05rem; color:var(--amber); }
+    .product-link   { font-family:var(--font-m); font-size:.63rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cyan); display:flex; align-items:center; gap:.4rem; }
+    .product-link::after { content:'→'; }
+    .products-cta-row { text-align:center; margin-top:1rem; }
+    .btn-gumroad {
+      font-family:var(--font-m); font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+      padding:.85rem 2.2rem; background:var(--amber); color:var(--bg); border:none; border-radius:var(--rad);
+      cursor:pointer; transition:all .2s; display:inline-block; font-weight:600;
     }
+    .btn-gumroad:hover { background:var(--text-p); opacity:1; }
 
-    .market-card:hover {
-      border-color: var(--border-mid);
-      transform: translateY(-2px);
-    }
-
-    .market-card.primary { --card-accent: var(--cyan); }
-    .market-card.secondary { --card-accent: var(--amber); }
-    .market-card.defense { --card-accent: var(--green); }
-
-    .market-tier {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.5rem;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-
-    .tier-1 { background: rgba(0,229,255,0.1); color: var(--cyan); }
-    .tier-2 { background: rgba(255,179,0,0.1); color: var(--amber); }
-    .tier-3 { background: rgba(0,230,118,0.1); color: var(--green); }
-
-    .market-card h3 {
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-
-    .market-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.65; }
-
-    .market-size {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .market-size-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .market-size-value {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      color: var(--cyan-dim);
-    }
-
-    /* ================================================================
-       OXFORD / VALIDATION
-       ================================================================ */
-    #validation {
-      padding: 120px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-    }
-
-    .validation-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .validation-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-mid);
-      border-radius: 4px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .oxford-logo-placeholder {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: var(--text-primary);
-      letter-spacing: 0.05em;
-      border-right: 1px solid var(--border);
-      padding-right: 1rem;
-    }
-
-    .validation-badge-text h4 {
-      font-size: 0.72rem;
-      color: var(--cyan);
-      letter-spacing: 0.15em;
-    }
-
-    .validation-badge-text p {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 0.2rem;
-    }
-
-    .validation-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .validation-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-mid);
-    }
-
-    .validation-list li::before {
-      content: '→';
-      color: var(--cyan);
-      flex-shrink: 0;
-    }
-
-    .trl-display {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-    }
-
-    .trl-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1.5rem;
-    }
-
-    .trl-header .label { margin: 0; }
-
-    .trl-value {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--cyan);
-    }
-
-    .trl-scale {
-      display: flex;
-      gap: 4px;
-    }
-
-    .trl-pip {
-      flex: 1;
-      height: 6px;
-      border-radius: 1px;
-      background: var(--bg-3);
-    }
-
-    .trl-pip.filled { background: var(--cyan); }
-    .trl-pip.partial { background: var(--amber); }
-
-    .trl-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-    }
-
-    .trl-labels span {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-    }
-
-    .trl-desc {
-      margin-top: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-mid);
-      line-height: 1.7;
-    }
-
-    .status-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .status-indicator .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .status-active .dot { background: var(--green); animation: pulse 2s ease-in-out infinite; }
-    .status-pending .dot { background: var(--amber); }
-    .status-blocked .dot { background: var(--red-dim); }
-
-    /* ================================================================
-       DIGITAL PRODUCTS
-       ================================================================ */
-    #products {
-      padding: 120px 0;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: border-color 0.3s;
-    }
-
-    .product-card:hover { border-color: var(--border-mid); }
-
-    .product-ref {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .product-card h3 {
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      line-height: 1.4;
-    }
-
-    .product-card p { font-size: 0.8rem; flex: 1; }
-
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .product-price {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--amber);
-    }
-
-    .product-link {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .product-link::after { content: '→'; }
-
-    /* ================================================================
+    /* ====================================================
        ABOUT
-       ================================================================ */
-    #about {
-      padding: 120px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    ==================================================== */
+    #about { padding:120px 0; background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 50%,var(--bg) 100%); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+    .about-text h2 { margin-bottom:1.5rem; }
+    .about-text p  { margin-bottom:1.25rem; }
+    .about-facts   { display:flex; flex-direction:column; gap:1.5rem; }
+    .fact-card { background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--card-color,var(--cyan)); border-radius:var(--rad); padding:1.5rem; }
+    .fact-card.amber { --card-color:var(--amber); }
+    .fact-card.green { --card-color:var(--green); }
+    .fact-card h4 { font-family:var(--font-m); font-size:.68rem; color:var(--text-mid); margin-bottom:.5rem; letter-spacing:.12em; text-transform:uppercase; }
+    .fact-card .fact-value { font-family:var(--font-d); font-size:1.35rem; color:var(--text-p); }
+    .fact-card .fact-desc  { font-family:var(--font-m); font-size:.68rem; color:var(--text-dim); margin-top:.3rem; }
+
+    /* ====================================================
+       CONTACT — GATED FORM
+    ==================================================== */
+    #contact { padding:120px 0 60px; }
+    .contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* What happens next */
+    .next-steps { margin-top:2.5rem; }
+    .next-steps h4 { font-family:var(--font-m); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cyan); margin-bottom:1.25rem; }
+    .next-step-list { list-style:none; display:flex; flex-direction:column; gap:1rem; }
+    .next-step-list li { display:flex; gap:1rem; align-items:flex-start; }
+    .step-num { font-family:var(--font-d); font-size:.75rem; color:var(--cyan); min-width:22px; font-weight:700; padding-top:.1rem; }
+    .step-text h5 { font-family:var(--font-m); font-size:.72rem; color:var(--text-p); letter-spacing:.08em; margin-bottom:.15rem; }
+    .step-text p  { font-family:var(--font-m); font-size:.68rem; color:var(--text-dim); line-height:1.6; }
+
+    /* Form wrapper */
+    .contact-form-wrap {
+      background:var(--bg-card); border:1px solid var(--border-mid);
+      border-radius:var(--rad); padding:2.5rem; position:sticky; top:84px;
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
+    /* Step indicators */
+    .form-steps { display:flex; gap:.5rem; margin-bottom:2rem; align-items:center; }
+    .form-step-pip { font-family:var(--font-m); font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; padding:.3rem .7rem; border-radius:2px; border:1px solid var(--border); color:var(--text-dim); transition:all .3s; }
+    .form-step-pip.active { border-color:var(--cyan); color:var(--cyan); background:var(--cyan-faint); }
+    .form-step-pip.done   { border-color:var(--green); color:var(--green); background:rgba(0,230,118,.06); }
+    .form-step-sep { color:var(--text-dim); font-size:.6rem; }
+
+    /* Form fields */
+    .form-step { display:none; }
+    .form-step.active { display:block; }
+
+    .form-row { margin-bottom:1.1rem; }
+    .form-row label { display:block; font-family:var(--font-m); font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.4rem; }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width:100%; background:var(--bg-3); border:1px solid var(--border-form);
+      color:var(--text-p); font-family:var(--font-m); font-size:.78rem;
+      padding:.7rem .9rem; border-radius:var(--rad); outline:none; transition:border-color .2s;
     }
+    .form-row input::placeholder,
+    .form-row textarea::placeholder { color:var(--text-dim); }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { border-color:var(--cyan); }
+    .form-row select { color:var(--text-mid); cursor:pointer; }
+    .form-row select option { background:var(--bg-3); }
+    .form-row textarea { resize:vertical; min-height:80px; }
 
-    .about-text h2 { margin-bottom: 1.5rem; }
-    .about-text p { margin-bottom: 1.25rem; }
+    .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
 
-    .about-facts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .form-submit {
+      width:100%; font-family:var(--font-m); font-size:.74rem; letter-spacing:.15em; text-transform:uppercase;
+      padding:.9rem; background:var(--cyan); color:var(--bg); border:none; border-radius:var(--rad);
+      cursor:pointer; font-weight:600; transition:all .2s; margin-top:.5rem;
     }
+    .form-submit:hover { background:var(--text-p); transform:translateY(-1px); }
+    .form-submit:disabled { background:var(--text-dim); color:var(--bg-3); cursor:not-allowed; transform:none; }
 
-    .fact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.5rem;
-      border-left: 3px solid var(--card-color, var(--cyan));
+    /* Confirmation step */
+    .form-confirm { text-align:center; padding:1rem 0; }
+    .form-confirm .check-icon { font-size:2.5rem; margin-bottom:1rem; }
+    .form-confirm h3 { font-size:.9rem; color:var(--text-p); margin-bottom:.75rem; }
+    .form-confirm p  { font-size:.78rem; margin-bottom:1.5rem; }
+    .form-confirm-actions { display:flex; flex-direction:column; gap:.75rem; }
+    .btn-cal {
+      font-family:var(--font-m); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+      padding:.75rem 1.5rem; border:1px solid var(--border-mid); color:var(--text-mid);
+      background:transparent; border-radius:var(--rad); cursor:pointer; transition:all .2s; width:100%;
     }
+    .btn-cal:hover { border-color:var(--cyan); color:var(--cyan); }
 
-    .fact-card.amber { --card-color: var(--amber); }
-    .fact-card.green { --card-color: var(--green); }
-
-    .fact-card h4 {
-      font-size: 0.72rem;
-      color: var(--text-mid);
-      margin-bottom: 0.5rem;
+    /* Data note */
+    .data-note {
+      display:flex; gap:.6rem; align-items:flex-start; margin-top:1.25rem;
+      padding:.9rem 1rem; background:rgba(10,14,20,.6); border:1px solid var(--border);
+      border-radius:var(--rad);
     }
+    .data-note-icon { font-family:var(--font-m); font-size:.58rem; color:var(--text-dim); flex-shrink:0; margin-top:.05rem; }
+    .data-note p { font-family:var(--font-m); font-size:.62rem; color:var(--text-dim); line-height:1.6; }
+    .data-note a { font-size:.62rem; color:var(--cyan); }
 
-    .fact-card .fact-value {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--text-primary);
-    }
-
-    .fact-card .fact-desc {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      margin-top: 0.3rem;
-    }
-
-    /* ================================================================
-       CONTACT
-       ================================================================ */
-    #contact {
-      padding: 120px 0 160px;
-    }
-
-    .contact-inner {
-      max-width: 760px;
-    }
-
-    .contact-inner h2 { margin-bottom: 1rem; }
-    .contact-inner > p { margin-bottom: 3rem; }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.5rem;
-      transition: border-color 0.3s;
-    }
-
-    .contact-card:hover { border-color: var(--border-mid); }
-
-    .contact-card h4 { color: var(--text-mid); margin-bottom: 0.5rem; }
-
-    .contact-card a {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-primary);
-    }
-
-    .contact-card p { font-size: 0.78rem; margin-top: 0.4rem; }
-
+    /* NDA note */
     .nda-note {
-      background: rgba(255,179,0,0.05);
-      border: 1px solid rgba(255,179,0,0.2);
-      border-radius: 4px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
+      background:rgba(255,179,0,.04); border:1px solid rgba(255,179,0,.18);
+      border-radius:var(--rad); padding:1.1rem 1.4rem; display:flex; gap:.65rem; align-items:flex-start;
     }
+    .nda-note::before { content:'!'; font-family:var(--font-m); font-size:.68rem; color:var(--amber); border:1px solid var(--amber); width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+    .nda-note p { font-family:var(--font-m); font-size:.7rem; color:var(--amber-dim); line-height:1.7; }
 
-    .nda-note::before {
-      content: '!';
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--amber);
-      border: 1px solid var(--amber);
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
+    /* ====================================================
+       PRIVACY / TERMS SECTION
+    ==================================================== */
+    #legal { padding:60px 0; border-top:1px solid var(--border); }
+    .legal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .legal-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--rad); padding:1.5rem; }
+    .legal-card h4 { font-family:var(--font-m); font-size:.68rem; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin-bottom:.75rem; }
+    .legal-card p { font-size:.75rem; color:var(--text-dim); line-height:1.7; }
+    .legal-card p + p { margin-top:.5rem; }
 
-    .nda-note p {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--amber-dim);
-      line-height: 1.7;
-    }
-
-    /* ================================================================
+    /* ====================================================
        FOOTER
-       ================================================================ */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 0;
-    }
+    ==================================================== */
+    footer { border-top:1px solid var(--border); padding:2.5rem 0; }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+    .footer-logo  { font-family:var(--font-d); font-size:.82rem; letter-spacing:.1em; color:var(--text-dim); }
+    .footer-logo span { color:var(--cyan); }
+    .footer-meta  { font-family:var(--font-m); font-size:.62rem; color:var(--text-dim); letter-spacing:.1em; }
+    .footer-links { display:flex; gap:1.5rem; list-style:none; flex-wrap:wrap; }
+    .footer-links a { font-family:var(--font-m); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--text-dim); }
+    .footer-links a:hover { color:var(--cyan); opacity:1; }
 
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+    /* ====================================================
+       FADE IN
+    ==================================================== */
+    .fade-in { opacity:0; transform:translateY(18px); transition:opacity .65s ease, transform .65s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+    .fade-delay-1 { transition-delay:.1s; } .fade-delay-2 { transition-delay:.2s; }
+    .fade-delay-3 { transition-delay:.3s; } .fade-delay-4 { transition-delay:.4s; }
+    .fade-delay-5 { transition-delay:.5s; }
 
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-    }
-
-    .footer-logo span { color: var(--cyan); }
-
-    .footer-meta {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-
-    /* ================================================================
-       HERO BACKGROUND FX
-       ================================================================ */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .hero-bg-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 75%);
-      opacity: 0.4;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 70%);
-      top: 20%;
-      right: -100px;
-    }
-
-    .hero-glow-2 {
-      position: absolute;
-      width: 400px; height: 300px;
-      background: radial-gradient(ellipse, rgba(255,179,0,0.04) 0%, transparent 70%);
-      bottom: 20%;
-      left: 0;
-    }
-
-    /* ================================================================
-       ANIMATIONS
-       ================================================================ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-delay-1 { transition-delay: 0.1s; }
-    .fade-delay-2 { transition-delay: 0.2s; }
-    .fade-delay-3 { transition-delay: 0.3s; }
-    .fade-delay-4 { transition-delay: 0.4s; }
-    .fade-delay-5 { transition-delay: 0.5s; }
-
-    /* ================================================================
+    /* ====================================================
        RESPONSIVE
-       ================================================================ */
-    @media (max-width: 900px) {
-      .hero-grid,
-      .tech-grid,
-      .validation-inner,
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-
-      .hero-visual { height: 320px; }
-      .domain-ring { width: 280px; height: 280px; }
-
-      .markets-grid { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-
-      .nav-links, .nav-cta { display: none; }
-      .nav-toggle { display: flex; }
-
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 64px; left: 0; right: 0;
-        background: rgba(10,14,20,0.98);
-        border-bottom: 1px solid var(--border);
-        padding: 1.5rem 2rem;
-        gap: 1.25rem;
-      }
+    ==================================================== */
+    @media(max-width:900px){
+      .hero-grid,.tech-grid,.validation-inner,.about-grid,.contact-layout { grid-template-columns:1fr; gap:3rem; }
+      .hero-visual { height:300px; }
+      .domain-ring { width:260px; height:260px; }
+      .markets-grid { grid-template-columns:1fr; }
+      .products-grid { grid-template-columns:1fr; }
+      .legal-grid { grid-template-columns:1fr; }
+      .oxford-inner { flex-direction:column; gap:1.5rem; }
+      .contact-form-wrap { position:static; }
+      .nav-links,.nav-cta { display:none; }
+      .nav-toggle { display:flex; }
+      .nav-links.open { display:flex; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(10,14,20,.98); border-bottom:1px solid var(--border); padding:1.5rem 2rem; gap:1.25rem; }
+      .form-row-2 { grid-template-columns:1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ================================================================
+  <!-- ============================================================
        NAV
-       ================================================================ -->
+  ============================================================ -->
   <nav id="main-nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo">RF<span>CATALYST</span> AUTOMOTIVE</a>
@@ -1166,18 +510,19 @@
         <li><a href="#markets">Markets</a></li>
         <li><a href="#validation">Validation</a></li>
         <li><a href="#products">Products</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="#contact" class="nav-cta">Contact</a>
+      <a href="#contact" class="nav-cta">Request NDA &amp; Evaluation Pack</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ================================================================
+  <!-- ============================================================
        HERO
-       ================================================================ -->
+  ============================================================ -->
   <section id="hero">
     <div class="hero-bg">
       <div class="hero-bg-grid"></div>
@@ -1188,98 +533,101 @@
     <div class="container">
       <div class="hero-grid">
 
-        <!-- Left: text -->
+        <!-- LEFT -->
         <div>
-          <div class="hero-tag">Deep-Tech &nbsp;·&nbsp; TRL 3 &nbsp;·&nbsp; UK-Registered</div>
+          <div class="hero-tag"><span class="pulse"></span>Deep-Tech &nbsp;·&nbsp; TRL 3 &nbsp;·&nbsp; UK-Registered</div>
+
           <h1 class="hero-title">
-            <span class="line-1">RF Plasma-Catalyst</span><br/>
-            <span class="line-2">Integration Systems</span>
+            <span class="l1">RF Plasma-Catalyst</span><br/>
+            <span class="l2">Integration Systems</span>
           </h1>
+
           <p class="hero-desc">
             RFCA develops coupled RF plasma-catalyst reactor systems for heavy transport aftertreatment, industrial emissions control, and advanced propulsion. Six coupled physics domains. Fully modelled. Oxford-validated.
           </p>
-          <div class="hero-actions">
-            <a href="#technology" class="btn-primary">Explore Technology</a>
-            <a href="#contact" class="btn-secondary">Request Evaluation Pack</a>
+
+          <div class="hero-cta-wrap">
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <button class="hero-cta-primary" id="hero-nda-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                Request NDA &amp; Evaluation Pack →
+              </button>
+              <button class="hero-cta-secondary" onclick="document.getElementById('technology').scrollIntoView({behavior:'smooth'})">
+                Explore Technology
+              </button>
+            </div>
+
+            <!-- Inline lead capture -->
+            <div id="hero-capture">
+              <form class="capture-form" id="hero-lead-form" onsubmit="handleHeroCapture(event)">
+                <input type="email" name="email" placeholder="Work email address" required />
+                <select name="role" required>
+                  <option value="" disabled selected>Your role</option>
+                  <option>OEM / Tier 1 Engineer</option>
+                  <option>Investor / VC</option>
+                  <option>Industrial Operator</option>
+                  <option>Government / Grant Body</option>
+                  <option>Academic / Researcher</option>
+                  <option>Other</option>
+                </select>
+                <button type="submit" class="capture-submit">Get Pack →</button>
+                <p class="capture-note">Your details are used only to send the evaluation pack. See <a href="#legal">Privacy Policy</a>.</p>
+              </form>
+            </div>
           </div>
 
-          <div class="hero-stats" style="margin-top:2.5rem;">
+          <div class="hero-stats">
             <div class="stat-row">
               <span class="stat-label">Physics Domains</span>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" data-w="100%"></div></div>
               <span class="stat-value">6</span>
             </div>
             <div class="stat-row">
               <span class="stat-label">TRL Level</span>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:33%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" data-w="33%"></div></div>
               <span class="stat-value">3</span>
             </div>
             <div class="stat-row">
-              <span class="stat-label">Sim Domains</span>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:100%"></div></div>
+              <span class="stat-label">Domains Modelled</span>
+              <div class="stat-bar-wrap"><div class="stat-bar" data-w="100%"></div></div>
               <span class="stat-value">6/6</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: ring diagram -->
+        <!-- RIGHT: SVG ring -->
         <div class="hero-visual">
           <div class="domain-ring">
             <svg class="ring-svg" viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Outer ring -->
-              <circle cx="190" cy="190" r="170" stroke="rgba(0,229,255,0.08)" stroke-width="1"/>
-              <circle cx="190" cy="190" r="170" stroke="rgba(0,229,255,0.25)" stroke-width="1"
-                stroke-dasharray="40 15" stroke-dashoffset="0"/>
-
-              <!-- Mid ring -->
-              <circle cx="190" cy="190" r="130" stroke="rgba(0,229,255,0.06)" stroke-width="1"/>
-              <circle cx="190" cy="190" r="130" stroke="rgba(255,179,0,0.2)" stroke-width="1"
-                stroke-dasharray="28 12"/>
-
-              <!-- Inner ring -->
-              <circle cx="190" cy="190" r="85" stroke="rgba(0,229,255,0.12)" stroke-width="1"/>
-
-              <!-- Domain nodes on outer ring: Flow, Field, Plasma, Catalyst, Ageing, Control -->
-              <!-- Flow: top  (0deg = top after -90deg offset) -->
-              <circle cx="190" cy="20" r="14" fill="rgba(0,229,255,0.08)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+              <circle cx="190" cy="190" r="170" stroke="rgba(0,229,255,0.07)" stroke-width="1"/>
+              <circle cx="190" cy="190" r="170" stroke="rgba(0,229,255,0.22)" stroke-width="1" stroke-dasharray="40 15"/>
+              <circle cx="190" cy="190" r="130" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
+              <circle cx="190" cy="190" r="130" stroke="rgba(255,179,0,0.18)" stroke-width="1" stroke-dasharray="28 12"/>
+              <circle cx="190" cy="190" r="85" stroke="rgba(0,229,255,0.1)" stroke-width="1"/>
+              <!-- Nodes -->
+              <circle cx="190" cy="20" r="14" fill="rgba(0,229,255,0.07)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
               <text x="190" y="24" font-family="DM Mono,monospace" font-size="8" fill="#00E5FF" text-anchor="middle" letter-spacing="1">FLOW</text>
-
-              <!-- Field: 60deg -->
-              <circle cx="337" cy="105" r="14" fill="rgba(0,229,255,0.08)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+              <circle cx="337" cy="105" r="14" fill="rgba(0,229,255,0.07)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
               <text x="337" y="109" font-family="DM Mono,monospace" font-size="8" fill="#00E5FF" text-anchor="middle" letter-spacing="1">FIELD</text>
-
-              <!-- Plasma: 120deg -->
-              <circle cx="337" cy="275" r="14" fill="rgba(255,179,0,0.08)" stroke="rgba(255,179,0,0.4)" stroke-width="1"/>
+              <circle cx="337" cy="275" r="14" fill="rgba(255,179,0,0.07)" stroke="rgba(255,179,0,0.4)" stroke-width="1"/>
               <text x="337" y="279" font-family="DM Mono,monospace" font-size="8" fill="#FFB300" text-anchor="middle" letter-spacing="1">PLASMA</text>
-
-              <!-- Catalyst: 180deg (bottom) -->
-              <circle cx="190" cy="360" r="14" fill="rgba(0,230,118,0.08)" stroke="rgba(0,230,118,0.4)" stroke-width="1"/>
+              <circle cx="190" cy="360" r="14" fill="rgba(0,230,118,0.07)" stroke="rgba(0,230,118,0.4)" stroke-width="1"/>
               <text x="190" y="364" font-family="DM Mono,monospace" font-size="8" fill="#00E676" text-anchor="middle" letter-spacing="1">CATALYST</text>
-
-              <!-- Ageing: 240deg -->
-              <circle cx="43" cy="275" r="14" fill="rgba(255,179,0,0.08)" stroke="rgba(255,179,0,0.3)" stroke-width="1"/>
+              <circle cx="43" cy="275" r="14" fill="rgba(255,179,0,0.07)" stroke="rgba(255,179,0,0.3)" stroke-width="1"/>
               <text x="43" y="279" font-family="DM Mono,monospace" font-size="8" fill="#FFB300" text-anchor="middle" letter-spacing="1">AGEING</text>
-
-              <!-- Control: 300deg -->
-              <circle cx="43" cy="105" r="14" fill="rgba(0,229,255,0.08)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
+              <circle cx="43" cy="105" r="14" fill="rgba(0,229,255,0.07)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
               <text x="43" y="109" font-family="DM Mono,monospace" font-size="8" fill="#00E5FF" text-anchor="middle" letter-spacing="1">CTRL</text>
-
-              <!-- Connecting lines -->
-              <line x1="190" y1="34" x2="190" y2="105" stroke="rgba(0,229,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="324" y1="112" x2="269" y2="147" stroke="rgba(0,229,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="323" y1="268" x2="268" y2="232" stroke="rgba(255,179,0,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="190" y1="346" x2="190" y2="275" stroke="rgba(0,230,118,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="57" y1="268" x2="113" y2="232" stroke="rgba(255,179,0,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="56" y1="112" x2="112" y2="147" stroke="rgba(0,229,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
-
-              <!-- Center cross-hairs -->
-              <line x1="170" y1="190" x2="210" y2="190" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <line x1="190" y1="170" x2="190" y2="210" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <circle cx="190" cy="190" r="4" fill="rgba(0,229,255,0.6)"/>
-
-              <!-- Label in center area -->
-              <text x="190" y="182" font-family="Orbitron,sans-serif" font-size="8" fill="rgba(0,229,255,0.7)" text-anchor="middle" letter-spacing="2">RFCA</text>
-              <text x="190" y="198" font-family="DM Mono,monospace" font-size="6" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="1">INTEGRATED</text>
+              <!-- Spokes -->
+              <line x1="190" y1="34" x2="190" y2="105" stroke="rgba(0,229,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="324" y1="112" x2="269" y2="147" stroke="rgba(0,229,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="323" y1="268" x2="268" y2="232" stroke="rgba(255,179,0,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="190" y1="346" x2="190" y2="275" stroke="rgba(0,230,118,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="57" y1="268" x2="113" y2="232" stroke="rgba(255,179,0,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="56" y1="112" x2="112" y2="147" stroke="rgba(0,229,255,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+              <line x1="170" y1="190" x2="210" y2="190" stroke="rgba(0,229,255,0.18)" stroke-width="1"/>
+              <line x1="190" y1="170" x2="190" y2="210" stroke="rgba(0,229,255,0.18)" stroke-width="1"/>
+              <circle cx="190" cy="190" r="4" fill="rgba(0,229,255,0.55)"/>
+              <text x="190" y="183" font-family="Orbitron,sans-serif" font-size="8" fill="rgba(0,229,255,0.65)" text-anchor="middle" letter-spacing="2">RFCA</text>
+              <text x="190" y="199" font-family="DM Mono,monospace" font-size="6" fill="rgba(255,255,255,0.22)" text-anchor="middle" letter-spacing="1">INTEGRATED</text>
             </svg>
           </div>
         </div>
@@ -1288,9 +636,83 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
+       OXFORD BANNER
+  ============================================================ -->
+  <div id="oxford-banner">
+    <div class="container">
+      <div class="oxford-inner fade-in">
+        <div class="oxford-badge">
+          <div class="oxford-u">Oxford</div>
+          <div class="oxford-badge-text">
+            <h4>Independent Validation Partner</h4>
+            <p>OxVal Programme &nbsp;·&nbsp; 2025–2026 &nbsp;·&nbsp; Active</p>
+          </div>
+        </div>
+
+        <div class="oxford-quote">
+          <blockquote>
+            "The six-domain simulation framework demonstrates internally consistent multi-physics coupling across all modelled domains. The digital twin architecture is structurally sound and ready for progression to hardware validation."
+          </blockquote>
+          <cite>— Oxford University OxVal Programme, Technical Review Summary (VG1–VG3 Complete)</cite>
+        </div>
+
+        <div class="oxford-meta">
+          <div class="oxford-stat">
+            <div class="val">6/6</div>
+            <div class="lbl">Domains Reviewed</div>
+          </div>
+          <div class="oxford-stat">
+            <div class="val">TRL 3</div>
+            <div class="lbl">Confirmed</div>
+          </div>
+          <div class="oxford-stat">
+            <div class="val" style="color:var(--green)">Active</div>
+            <div class="lbl">Programme Status</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TEAM
+  ============================================================ -->
+  <section id="team">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="label">Leadership</span>
+        <h2>Team</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="team-grid">
+
+        <div class="team-card fade-in fade-delay-1">
+          <div class="team-avatar">KD</div>
+          <div class="team-info">
+            <h3>Kane Duffy</h3>
+            <span class="team-role">Founding Director &amp; Technical Lead</span>
+            <p class="team-bio">Systems architect and founder of RF Catalyst Automotive. Responsible for the multi-domain integration framework, digital twin architecture, and strategic direction. Leads all technical, commercial, and IP development from concept to Oxford validation.</p>
+          </div>
+        </div>
+
+        <div class="team-card fade-in fade-delay-2">
+          <div class="team-avatar" style="color:var(--text-dim);border-color:var(--border);">+</div>
+          <div class="team-info">
+            <h3>Technical Advisory</h3>
+            <span class="team-role">Oxford University — OxVal Programme</span>
+            <p class="team-bio">Independent technical validation oversight provided by Oxford University engineers under the OxVal programme. External review of simulation framework integrity, domain coupling, and progression criteria toward hardware validation.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        TECHNOLOGY
-       ================================================================ -->
+  ============================================================ -->
   <section id="technology">
     <div class="container">
       <div class="section-header fade-in">
@@ -1300,8 +722,6 @@
       </div>
 
       <div class="tech-grid">
-
-        <!-- Domain chain -->
         <div class="domain-chain">
           <div class="domain-item fade-in fade-delay-1">
             <div class="domain-icon">FLW</div>
@@ -1347,33 +767,31 @@
           </div>
         </div>
 
-        <!-- Right: tech cards -->
         <div class="tech-right">
           <div class="tech-card fade-in fade-delay-1">
             <h3>Digital Twin Modelling</h3>
-            <p>Complete six-domain multi-physics digital twin built using open-source simulation infrastructure: OpenFOAM, OpenEMS, ZAPDOS/MOOSE, Cantera, and SciPy/PyMC. All domains modelled and ready for hardware validation.</p>
+            <p>Complete six-domain multi-physics digital twin built on open-source simulation infrastructure: OpenFOAM, OpenEMS, ZAPDOS/MOOSE, Cantera, and SciPy/PyMC. All domains modelled and under Oxford independent validation.</p>
           </div>
           <div class="tech-card fade-in fade-delay-2">
             <h3>High-Entropy Alloy Catalysts</h3>
-            <p>Multi-element alloy catalyst compositions engineered for RF-enhanced performance under non-thermal plasma activation conditions. Designed for reduced precious metal loading without sacrifice to conversion efficiency.</p>
+            <p>Multi-element alloy catalyst compositions engineered for RF-enhanced performance under non-thermal plasma activation. Designed for reduced precious metal loading without sacrifice to conversion efficiency.</p>
           </div>
           <div class="tech-card fade-in fade-delay-3">
             <h3>Velocity-Shaped Reactor Geometry</h3>
-            <p>Reactor geometry co-optimised with field distribution and flow velocity profiles. Integrated design framework couples fluid, electromagnetic, and chemical domains into a unified geometry-chemistry-field solution.</p>
+            <p>Reactor geometry co-optimised with field distribution and flow velocity profiles. Integrated design couples fluid, electromagnetic, and chemical domains into a unified geometry-chemistry-field solution.</p>
           </div>
           <div class="tech-card fade-in fade-delay-4">
             <h3>No Known Competitor Integration</h3>
-            <p>No existing commercial or research system integrates all six domains into a unified design framework. Traditional catalyst OEMs, plasma system vendors, and emissions control integrators each address partial domains only.</p>
+            <p>Traditional catalyst OEMs, plasma system vendors, and emissions control integrators each address partial domains only. No system currently integrates all six physics domains into a unified design framework.</p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
        MARKETS
-       ================================================================ -->
+  ============================================================ -->
   <section id="markets">
     <div class="container">
       <div class="section-header fade-in">
@@ -1383,110 +801,67 @@
       </div>
 
       <div class="markets-grid">
-
-        <div class="market-card primary fade-in fade-delay-1">
+        <div class="market-card fade-in fade-delay-1" style="--card-accent:var(--cyan)">
           <span class="market-tier tier-1">Tier 1 — 0–3 Years</span>
           <h3>Heavy Transport &amp; Automotive Aftertreatment</h3>
-          <p>RF plasma-catalyst integration for exhaust aftertreatment systems. Regulatory drivers: Euro 7 (2025–2027) and EPA 2027+ heavy-duty standards. Target buyers: Tier 1 suppliers, truck OEMs, fleet operators, and retrofit providers.</p>
+          <p>Euro 7 (2025–2027) and EPA 2027+ compliance. Target buyers: Tier 1 suppliers, truck OEMs, fleet operators, retrofit providers.</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">Market 2024</div>
-              <div class="market-size-value">$8.2B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">Forecast 2030</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$12.1B</div>
-            </div>
+            <div><div class="market-size-label">Market 2024</div><div class="market-size-value">$8.2B</div></div>
+            <div style="text-align:right"><div class="market-size-label">Forecast 2030</div><div class="market-size-value" style="color:var(--green-dim)">$12.1B</div></div>
           </div>
         </div>
-
-        <div class="market-card secondary fade-in fade-delay-2">
+        <div class="market-card fade-in fade-delay-2" style="--card-accent:var(--amber)">
           <span class="market-tier tier-1">Tier 1 — 0–3 Years</span>
           <h3>Industrial Emissions &amp; Process Exhaust</h3>
-          <p>VOC/NOx reduction and catalyst regeneration for chemical plants, refineries, waste processing, and maritime applications. Regulatory pressure from tightening EU/EPA industrial air quality standards and carbon pricing mechanisms.</p>
+          <p>VOC/NOx reduction and catalyst regeneration for chemical plants, refineries, waste processing, and maritime applications.</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">Market 2024</div>
-              <div class="market-size-value">$22.0B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">Forecast 2030</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$31.4B</div>
-            </div>
+            <div><div class="market-size-label">Market 2024</div><div class="market-size-value">$22.0B</div></div>
+            <div style="text-align:right"><div class="market-size-label">Forecast 2030</div><div class="market-size-value" style="color:var(--green-dim)">$31.4B</div></div>
           </div>
         </div>
-
-        <div class="market-card defense fade-in fade-delay-3">
+        <div class="market-card fade-in fade-delay-3" style="--card-accent:var(--green)">
           <span class="market-tier tier-1">Tier 1 — Strategic</span>
           <h3>Defence RF-Assisted Combustion</h3>
-          <p>RF plasma integration for advanced propulsion: hypersonic combustion control, ramjet/scramjet stabilisation, and solid propellant ignition. DoD advanced propulsion funding. SBIR/STTR Phase I entry pathway identified.</p>
+          <p>Hypersonic combustion control, ramjet/scramjet stabilisation, solid propellant ignition. DoD funding. SBIR/STTR Phase I entry pathway.</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">DoD Annual</div>
-              <div class="market-size-value">$2.1B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">SBIR Relevant</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$180M/yr</div>
-            </div>
+            <div><div class="market-size-label">DoD Annual</div><div class="market-size-value">$2.1B</div></div>
+            <div style="text-align:right"><div class="market-size-label">SBIR Relevant</div><div class="market-size-value" style="color:var(--green-dim)">$180M/yr</div></div>
           </div>
         </div>
-
-        <div class="market-card fade-in fade-delay-1" style="--card-accent: rgba(0,229,255,0.3)">
+        <div class="market-card fade-in fade-delay-1" style="--card-accent:rgba(0,229,255,.3)">
           <span class="market-tier tier-2">Tier 2 — 3–7 Years</span>
           <h3>Hydrogen &amp; Ammonia Processing</h3>
-          <p>RF plasma-enhanced ammonia cracking, hydrogen purification, and methane steam reforming. Significant market growth driven by green hydrogen infrastructure buildout and industrial decarbonisation mandates.</p>
+          <p>RF plasma-enhanced ammonia cracking, hydrogen purification, and methane steam reforming for green hydrogen infrastructure.</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">Market 2024</div>
-              <div class="market-size-value">$2.5B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">Forecast 2030</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$72.0B</div>
-            </div>
+            <div><div class="market-size-label">Market 2024</div><div class="market-size-value">$2.5B</div></div>
+            <div style="text-align:right"><div class="market-size-label">Forecast 2030</div><div class="market-size-value" style="color:var(--green-dim)">$72.0B</div></div>
           </div>
         </div>
-
-        <div class="market-card fade-in fade-delay-2" style="--card-accent: rgba(0,229,255,0.2)">
+        <div class="market-card fade-in fade-delay-2" style="--card-accent:rgba(0,229,255,.2)">
           <span class="market-tier tier-2">Tier 2 — 3–7 Years</span>
           <h3>Aerospace Environmental Systems</h3>
-          <p>Cabin air treatment, hydrogen fuel purification, and life support chemistry. Certification pathway under DO-160 and FAA TSO. Long-cycle but large addressable value.</p>
+          <p>Cabin air treatment, hydrogen fuel purification, life support chemistry. DO-160 / FAA TSO certification pathway (3–5 years).</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">Market 2024</div>
-              <div class="market-size-value">$1.8B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">Forecast 2030</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$4.2B</div>
-            </div>
+            <div><div class="market-size-label">Market 2024</div><div class="market-size-value">$1.8B</div></div>
+            <div style="text-align:right"><div class="market-size-label">Forecast 2030</div><div class="market-size-value" style="color:var(--green-dim)">$4.2B</div></div>
           </div>
         </div>
-
-        <div class="market-card fade-in fade-delay-3" style="--card-accent: rgba(0,229,255,0.2)">
+        <div class="market-card fade-in fade-delay-3" style="--card-accent:rgba(0,229,255,.2)">
           <span class="market-tier tier-2">Tier 2 — 3–7 Years</span>
           <h3>Chemical Energy Conversion</h3>
-          <p>Power-to-X synthetic fuels, CO₂ conversion, and waste gas valorisation. EU e-fuels mandates from 2026 and IRA incentives provide near-term policy pull for deployment at industrial scale.</p>
+          <p>Power-to-X synthetic fuels, CO₂ conversion, waste gas valorisation. EU e-fuels mandates from 2026 and IRA incentives.</p>
           <div class="market-size">
-            <div>
-              <div class="market-size-label">Market 2024</div>
-              <div class="market-size-value">$4.3B</div>
-            </div>
-            <div style="text-align:right">
-              <div class="market-size-label">Forecast 2030</div>
-              <div class="market-size-value" style="color:var(--green-dim)">$18.7B</div>
-            </div>
+            <div><div class="market-size-label">Market 2024</div><div class="market-size-value">$4.3B</div></div>
+            <div style="text-align:right"><div class="market-size-label">Forecast 2030</div><div class="market-size-value" style="color:var(--green-dim)">$18.7B</div></div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
        VALIDATION
-       ================================================================ -->
+  ============================================================ -->
   <section id="validation">
     <div class="container">
       <div class="section-header fade-in">
@@ -1496,36 +871,17 @@
       </div>
 
       <div class="validation-inner">
-
         <div class="fade-in">
-          <div class="validation-badge">
-            <div class="oxford-logo-placeholder">Oxford</div>
-            <div class="validation-badge-text">
-              <h4>Technical Validation Partner</h4>
-              <p class="mono" style="font-size:0.72rem">Active &nbsp;·&nbsp; OxVal Programme</p>
-            </div>
-          </div>
-
-          <p style="margin-bottom:1.5rem">
-            RFCA's multi-physics digital twin models are undergoing structured third-party technical validation at the University of Oxford. The validation programme covers all six coupled physics domains.
-          </p>
-
+          <p style="margin-bottom:1.5rem">RFCA's multi-physics digital twin is undergoing structured third-party technical validation at the University of Oxford. The programme covers all six coupled physics domains under the OxVal independent review framework.</p>
           <ul class="validation-list">
             <li>Independent validation of six-domain simulation framework</li>
-            <li>Structured test matrix across OxVal-01 through OxVal-07 test classes</li>
-            <li>Validation results to underpin investor and OEM technical claims</li>
-            <li>Validation programme priced and in active execution</li>
+            <li>Structured test matrix: OxVal-01 through OxVal-07 test classes</li>
+            <li>Validation results underpin investor and OEM technical claims (NDA-level)</li>
+            <li>Programme priced and in active execution — target TRL 4 confirmation</li>
           </ul>
-
-          <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem;">
-            <div class="status-indicator status-active">
-              <span class="dot"></span>
-              <span class="mono" style="font-size:0.62rem; color:var(--green)">Validation Active</span>
-            </div>
-            <div class="status-indicator status-pending">
-              <span class="dot"></span>
-              <span class="mono" style="font-size:0.62rem; color:var(--amber)">Hardware Phase: Pending</span>
-            </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;">
+            <div class="status-indicator status-active"><span class="dot"></span><span class="mono" style="font-size:.62rem;color:var(--green)">Validation Active</span></div>
+            <div class="status-indicator status-pending"><span class="dot"></span><span class="mono" style="font-size:.62rem;color:var(--amber)">Hardware Phase: Q3 2026</span></div>
           </div>
         </div>
 
@@ -1536,106 +892,94 @@
               <span class="trl-value">3</span>
             </div>
             <div class="trl-scale">
-              <div class="trl-pip filled"></div>
-              <div class="trl-pip filled"></div>
-              <div class="trl-pip filled"></div>
-              <div class="trl-pip partial"></div>
-              <div class="trl-pip"></div>
-              <div class="trl-pip"></div>
-              <div class="trl-pip"></div>
-              <div class="trl-pip"></div>
-              <div class="trl-pip"></div>
+              <div class="trl-pip filled"></div><div class="trl-pip filled"></div><div class="trl-pip filled"></div>
+              <div class="trl-pip partial"></div><div class="trl-pip"></div><div class="trl-pip"></div>
+              <div class="trl-pip"></div><div class="trl-pip"></div><div class="trl-pip"></div>
             </div>
-            <div class="trl-labels">
-              <span>TRL 1</span>
-              <span>TRL 9</span>
-            </div>
-            <div class="trl-desc">
-              TRL 3 confirmed. Digital modelling across all six coupled domains is complete and independently validated at concept proof level. Progression to TRL 4–5 requires hardware build and experimental validation. Oxford programme targets TRL 4 confirmation.
-            </div>
+            <div class="trl-labels"><span>TRL 1</span><span>TRL 9</span></div>
+            <div class="trl-desc">TRL 3 confirmed. Digital modelling across all six coupled domains complete. Oxford programme targets TRL 4 confirmation upon hardware build and experimental validation.</div>
           </div>
-
-          <div class="tech-card fade-in fade-delay-3" style="margin-top:1.5rem;">
+          <div class="tech-card fade-in fade-delay-3" style="margin-top:1.5rem">
             <h3>Open-Source Simulation Stack</h3>
-            <p style="font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); line-height:1.8">
+            <p style="font-family:var(--font-m);font-size:.7rem;color:var(--text-dim);line-height:1.85">
               OpenFOAM &nbsp;·&nbsp; OpenEMS &nbsp;·&nbsp; ZAPDOS/MOOSE<br/>
               Cantera &nbsp;·&nbsp; SciPy/PyMC &nbsp;·&nbsp; python-control
             </p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
        DIGITAL PRODUCTS
-       ================================================================ -->
+  ============================================================ -->
   <section id="products">
     <div class="container">
       <div class="section-header fade-in">
         <span class="label">Engineering Resources</span>
         <h2>Digital Products</h2>
         <div class="section-divider"></div>
-        <p style="margin-top:1rem; max-width:600px">
-          RFCA publishes practitioner-grade engineering reference materials for emissions, RF plasma, and compliance engineering. Available via Gumroad.
-        </p>
+        <p style="margin-top:1rem;max-width:600px">Practitioner-grade engineering reference materials for emissions, RF plasma, compliance, and digital twin simulation. No RFCA-specific IP. Available immediately via Gumroad.</p>
       </div>
 
       <div class="products-grid">
-
         <div class="product-card fade-in fade-delay-1">
           <span class="product-ref">P01 &nbsp;·&nbsp; Engineering Reference</span>
           <h3>RF System Overview / Catalytic Aftertreatment Engineering Primer</h3>
-          <p>Structured technical primer covering RF plasma physics, catalytic aftertreatment system design, and integration fundamentals. For engineers evaluating RF-assisted catalyst platforms.</p>
+          <p>Structured technical primer: RF plasma physics, catalytic aftertreatment system design, integration fundamentals. For engineers evaluating RF-assisted catalyst platforms.</p>
           <div class="product-footer">
             <span class="product-price">£149</span>
-            <a href="https://kaned.gumroad.com" target="_blank" rel="noopener" class="product-link">View on Gumroad</a>
+            <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="product-link">Buy on Gumroad</a>
           </div>
         </div>
 
         <div class="product-card fade-in fade-delay-2">
           <span class="product-ref">P04 &nbsp;·&nbsp; Compliance Engineering</span>
           <h3>Euro 7 / EPA Compliance Engineering Pack</h3>
-          <p>Comprehensive technical reference for Euro 7 and EPA 2027 heavy-duty compliance engineering. Covers emissions limits, system architecture requirements, test cycle methodology, and compliance strategy.</p>
+          <p>Comprehensive Euro 7 and EPA 2027 heavy-duty compliance reference. Emissions limits, system architecture, test cycle methodology, and compliance strategy.</p>
           <div class="product-footer">
             <span class="product-price">£249</span>
-            <a href="https://kaned.gumroad.com" target="_blank" rel="noopener" class="product-link">View on Gumroad</a>
+            <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="product-link">Buy on Gumroad</a>
           </div>
         </div>
 
         <div class="product-card fade-in fade-delay-3">
           <span class="product-ref">P05 &nbsp;·&nbsp; ROI Calculator</span>
           <h3>RF Plasma Technology Engineer's Reference &amp; Emissions Reduction ROI Calculator</h3>
-          <p>Technical reference for RF plasma system engineering paired with an interactive ROI calculator for emissions reduction investment decisions. Parametric model with configurable fleet and process inputs.</p>
+          <p>Technical reference paired with an interactive ROI calculator for emissions reduction investment decisions. Parametric model with configurable fleet and process inputs.</p>
           <div class="product-footer">
             <span class="product-price">£199</span>
-            <a href="https://kaned.gumroad.com" target="_blank" rel="noopener" class="product-link">View on Gumroad</a>
+            <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="product-link">Buy on Gumroad</a>
           </div>
         </div>
 
         <div class="product-card fade-in fade-delay-4">
           <span class="product-ref">P06 &nbsp;·&nbsp; Flagship Bundle</span>
           <h3>Digital Twin Engineering Suite</h3>
-          <p>Flagship product bundle: technical PDF reference, Python simulation toolkit, and interactive React Digital Twin Lab. Covers all six coupled physics domains at practitioner depth. NON-CALIBRATED simulation outputs.</p>
+          <p>Flagship bundle: PDF reference, Python simulation toolkit, and interactive React Digital Twin Lab. Covers all six physics domains at practitioner depth. NON-CALIBRATED outputs.</p>
           <div class="product-footer">
             <span class="product-price">£299</span>
-            <a href="https://kaned.gumroad.com" target="_blank" rel="noopener" class="product-link">View on Gumroad</a>
+            <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="product-link">Buy on Gumroad</a>
           </div>
         </div>
-
       </div>
 
-      <div class="nda-note fade-in">
-        <p>For OEM evaluation packs (T1–T4), technical datasheet access, and NDA-gated partner materials, contact us directly. Evaluation packs require an executed NDA prior to distribution.</p>
+      <div class="products-cta-row fade-in">
+        <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="btn-gumroad">
+          View All Products on Gumroad →
+        </a>
       </div>
 
+      <div class="nda-note fade-in" style="margin-top:2rem">
+        <p>For OEM evaluation packs (T1–T4), NDA-gated technical datasheets, and partner materials — use the contact form below. Evaluation content requires an executed NDA prior to distribution.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
        ABOUT
-       ================================================================ -->
+  ============================================================ -->
   <section id="about">
     <div class="container">
       <div class="section-header fade-in">
@@ -1645,91 +989,240 @@
       </div>
 
       <div class="about-grid">
-
         <div class="about-text fade-in">
-          <p>RF Catalyst Automotive (RFCA) is a UK-registered deep-technology company developing RF plasma-catalyst integrated reactor systems for emissions reduction, industrial decarbonisation, and advanced propulsion applications.</p>
+          <p>RF Catalyst Automotive Ltd (RFCA) is a UK-registered deep-technology company developing RF plasma-catalyst integrated reactor systems for emissions reduction, industrial decarbonisation, and advanced propulsion.</p>
           <p>The company's technical foundation is a multi-domain physics framework coupling fluid dynamics, RF electromagnetic fields, non-thermal plasma, catalytic surface chemistry, ageing prediction, and closed-loop control into a unified design and modelling system.</p>
           <p>No commercial or research system currently integrates all six domains. This integration represents RFCA's primary technical and commercial differentiator.</p>
           <p>RFCA is pre-revenue, bootstrapped, and progressing from TRL 3 through structured Oxford University validation toward hardware build and pilot partner engagement.</p>
         </div>
-
         <div class="about-facts fade-in fade-delay-2">
           <div class="fact-card">
             <h4>Stage</h4>
             <div class="fact-value">Pre-Revenue</div>
-            <div class="fact-desc mono">Bootstrapped &nbsp;·&nbsp; Deep-tech</div>
+            <div class="fact-desc">Bootstrapped · Deep-tech · Self-funded</div>
           </div>
           <div class="fact-card amber">
             <h4>Technology Readiness</h4>
             <div class="fact-value">TRL 3</div>
-            <div class="fact-desc mono">All 6 domains modelled &amp; validated at concept level</div>
+            <div class="fact-desc">All 6 domains modelled · Oxford validation active</div>
           </div>
           <div class="fact-card green">
             <h4>Validation Partner</h4>
             <div class="fact-value">Oxford</div>
-            <div class="fact-desc mono">Active programme &nbsp;·&nbsp; OxVal-01 → OxVal-07</div>
+            <div class="fact-desc">OxVal-01 → OxVal-07 · Active programme</div>
           </div>
           <div class="fact-card">
             <h4>Capital Cycle Target</h4>
             <div class="fact-value">2026–2032</div>
-            <div class="fact-desc mono">Revenue &amp; licensing milestones defined</div>
+            <div class="fact-desc">Revenue and licensing milestones defined</div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
-       CONTACT
-       ================================================================ -->
+  <!-- ============================================================
+       CONTACT — GATED FORM
+  ============================================================ -->
   <section id="contact">
     <div class="container">
-      <div class="contact-inner">
-        <div class="section-header fade-in">
-          <span class="label">Engage</span>
-          <h2>Contact</h2>
-          <div class="section-divider"></div>
+      <div class="section-header fade-in">
+        <span class="label">Engage</span>
+        <h2>Request NDA &amp; Evaluation Pack</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="contact-layout">
+
+        <!-- LEFT: context + what happens next -->
+        <div class="fade-in">
+          <p style="margin-bottom:1.5rem">
+            OEM technical evaluation packs, NDA execution, investor materials, and strategic partnership enquiries are handled through this form. All enquiries are reviewed and responded to within five working days.
+          </p>
+
+          <div class="nda-note" style="margin-bottom:2rem">
+            <p>Performance data, system mechanism detail, and quantified technical claims are disclosed under NDA only. The NDA template is distributed as part of the initial response.</p>
+          </div>
+
+          <div class="next-steps">
+            <h4>What Happens Next</h4>
+            <ul class="next-step-list">
+              <li>
+                <span class="step-num">01</span>
+                <div class="step-text">
+                  <h5>NDA Issued Within 24 Hours</h5>
+                  <p>A standard bilateral NDA is emailed to your work address within one working day of your enquiry. You review and countersign — no solicitor required for standard terms.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div class="step-text">
+                  <h5>Evaluation Pack Delivered</h5>
+                  <p>On NDA execution, the relevant evaluation pack is dispatched: performance data, system architecture summary, integration specification, and digital twin documentation — calibrated to your application.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div class="step-text">
+                  <h5>Technical Review Call Scheduled</h5>
+                  <p>You book a 45-minute technical review call at a time that suits your team. RFCA's founding director leads the call. No sales — engineering to engineering.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <p class="fade-in" style="margin-top:1rem; margin-bottom:2.5rem">
-          For OEM technical evaluation enquiries, NDA execution, investor contact, grant collaboration, or media requests. All enquiries are reviewed and responded to within five working days.
-        </p>
+        <!-- RIGHT: gated form -->
+        <div class="fade-in fade-delay-2">
+          <div class="contact-form-wrap">
 
-        <div class="contact-grid fade-in">
-          <div class="contact-card">
-            <h4 class="label">General &amp; Technical Enquiries</h4>
-            <a href="mailto:kaned547@gmail.com">kaned547@gmail.com</a>
-            <p>Technical evaluation, OEM packs, product questions</p>
-          </div>
-          <div class="contact-card">
-            <h4 class="label">Investor &amp; Partnership</h4>
-            <a href="mailto:kaned547@gmail.com">kaned547@gmail.com</a>
-            <p>Investment enquiries, NDA execution, strategic partnership</p>
-          </div>
-          <div class="contact-card">
-            <h4 class="label">Digital Products</h4>
-            <a href="https://kaned.gumroad.com" target="_blank" rel="noopener">kaned.gumroad.com</a>
-            <p>Engineering reference materials, technical guides</p>
-          </div>
-          <div class="contact-card">
-            <h4 class="label">Registered</h4>
-            <span class="mono" style="font-size:0.8rem; color:var(--text-primary)">United Kingdom</span>
-            <p>RF Catalyst Automotive Ltd</p>
-          </div>
-        </div>
+            <div class="form-steps">
+              <span class="form-step-pip active" id="pip-1">01 Details</span>
+              <span class="form-step-sep">›</span>
+              <span class="form-step-pip" id="pip-2">02 Enquiry</span>
+              <span class="form-step-sep">›</span>
+              <span class="form-step-pip" id="pip-3">03 Confirm</span>
+            </div>
 
-        <div class="nda-note fade-in" style="margin-top:2rem;">
-          <p>OEM evaluation packs and partner technical materials require a non-disclosure agreement prior to distribution. NDA templates available on request. Performance data and system detail is disclosed under NDA only.</p>
+            <!-- Step 1 -->
+            <div class="form-step active" id="step-1">
+              <div class="form-row-2">
+                <div class="form-row">
+                  <label for="f-name">Full Name *</label>
+                  <input type="text" id="f-name" placeholder="Dr. Jane Smith" required />
+                </div>
+                <div class="form-row">
+                  <label for="f-org">Organisation *</label>
+                  <input type="text" id="f-org" placeholder="Bosch Emissions Systems" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="f-email">Work Email *</label>
+                <input type="email" id="f-email" placeholder="j.smith@organisation.com" required />
+              </div>
+              <div class="form-row">
+                <label for="f-role">Your Role *</label>
+                <select id="f-role" required>
+                  <option value="" disabled selected>Select your function</option>
+                  <option>OEM / Tier 1 — Engineering</option>
+                  <option>OEM / Tier 1 — Commercial</option>
+                  <option>Industrial Operator</option>
+                  <option>Investor / Venture Capital</option>
+                  <option>Government / Grant Body</option>
+                  <option>Academic / Researcher</option>
+                  <option>Defence / Aerospace</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <button class="form-submit" onclick="goStep(2)">Continue →</button>
+
+              <div class="data-note">
+                <span class="data-note-icon">🔒</span>
+                <p>Details collected for NDA issuance and evaluation pack delivery only. Not shared with third parties. See <a href="#legal">Privacy Policy</a>.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="form-step" id="step-2">
+              <div class="form-row">
+                <label for="f-interest">Primary Interest *</label>
+                <select id="f-interest" required>
+                  <option value="" disabled selected>Select enquiry type</option>
+                  <option>OEM Technical Evaluation (T1–T4)</option>
+                  <option>Investment / Series A Discussion</option>
+                  <option>Industrial Pilot Partnership</option>
+                  <option>Grant / Funded R&amp;D Collaboration</option>
+                  <option>Defence / Propulsion Application</option>
+                  <option>Licensing Enquiry</option>
+                  <option>Media / Press Enquiry</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="f-context">Brief Context <span style="color:var(--text-dim);font-size:.58rem;letter-spacing:.06em;">(optional — helps us send the right pack)</span></label>
+                <textarea id="f-context" placeholder="e.g. Euro 7 compliance project, fleet of 800 HGVs, timeline Q4 2026..."></textarea>
+              </div>
+              <div class="form-row" style="display:flex;align-items:center;gap:.6rem;">
+                <input type="checkbox" id="f-nda-consent" style="width:auto;min-width:unset;flex-shrink:0;" required />
+                <label for="f-nda-consent" style="font-family:var(--font-m);font-size:.65rem;color:var(--text-dim);letter-spacing:.06em;text-transform:none;margin:0;cursor:pointer">
+                  I understand that detailed technical and performance information is shared under NDA only, and I consent to receiving the RFCA standard bilateral NDA for review.
+                </label>
+              </div>
+              <button class="form-submit" onclick="submitForm()" id="submit-btn">Submit Enquiry →</button>
+              <button onclick="goStep(1)" style="background:none;border:none;font-family:var(--font-m);font-size:.65rem;color:var(--text-dim);cursor:pointer;margin-top:.5rem;letter-spacing:.1em">← Back</button>
+
+              <div class="data-note" style="margin-top:1rem">
+                <span class="data-note-icon">🔒</span>
+                <p>Submitting this form does not create any legal obligation. The NDA is a standard bilateral agreement. Data handled per <a href="#legal">Privacy Policy</a>.</p>
+              </div>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div class="form-step" id="step-3">
+              <div class="form-confirm">
+                <div class="check-icon">✦</div>
+                <h3>Enquiry Received</h3>
+                <p>We will review your enquiry and issue the NDA to your work email address within one working day. Check your inbox — including spam — for an email from kaned547@gmail.com.</p>
+                <div class="form-confirm-actions">
+                  <a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener" class="form-submit" style="text-align:center;display:block;text-decoration:none">
+                    Browse Digital Products on Gumroad →
+                  </a>
+                  <button class="btn-cal" onclick="openCalendly()">
+                    📅 &nbsp;Book Technical Review Call (Optional)
+                  </button>
+                  <p style="font-family:var(--font-m);font-size:.62rem;color:var(--text-dim);margin-top:.25rem">
+                    You can also book a call after receiving the evaluation pack. Response time: ≤5 working days.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ================================================================
+  <!-- ============================================================
+       LEGAL / PRIVACY / TERMS
+  ============================================================ -->
+  <section id="legal">
+    <div class="container">
+      <div class="section-header fade-in" style="margin-bottom:2rem">
+        <span class="label">Legal</span>
+        <h2>Privacy, Terms &amp; Data</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="legal-grid fade-in">
+        <div class="legal-card">
+          <h4>Privacy Policy</h4>
+          <p>RF Catalyst Automotive Ltd ("RFCA") collects contact information (name, email, organisation, role) submitted via this website solely for the purpose of responding to enquiries, issuing NDAs, and distributing evaluation materials.</p>
+          <p>Your data is not sold, transferred, or shared with third parties. It is stored securely and retained only for the duration of the business relationship or enquiry. You may request deletion at any time by emailing kaned547@gmail.com.</p>
+          <p>This website does not use tracking cookies, advertising pixels, or third-party analytics. Google Fonts is loaded from Google's CDN — subject to Google's privacy policy.</p>
+        </div>
+
+        <div class="legal-card">
+          <h4>Terms of Use</h4>
+          <p>All content on this website is published for informational purposes only. No content constitutes a binding commercial offer, technical specification, or performance guarantee unless confirmed in a signed agreement.</p>
+          <p>Technical and market data presented on this site is at PUBLIC / GREEN disclosure level. No proprietary performance data, catalyst compositions, system mechanism detail, or IP-sensitive content is included.</p>
+          <p>Unauthorised reproduction, distribution, or adaptation of website content without written permission from RFCA is prohibited. © 2026 RF Catalyst Automotive Ltd. All rights reserved.</p>
+        </div>
+
+        <div class="legal-card">
+          <h4>Data Handling — Forms &amp; Contact</h4>
+          <p>When you submit a form on this website, the following data is collected: full name, work email, organisation, role, and any optional context notes you provide.</p>
+          <p><strong style="color:var(--text-p)">How it is used:</strong> To issue the RFCA standard bilateral NDA, to dispatch the appropriate evaluation pack, and to schedule a technical review call if requested.</p>
+          <p><strong style="color:var(--text-p)">Retention:</strong> Enquiry data is retained for a maximum of 24 months or until deletion is requested. NDA-executed contacts are retained for the duration of the commercial relationship.</p>
+          <p style="margin-top:.5rem">Data handling enquiries: <a href="mailto:kaned547@gmail.com">kaned547@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        FOOTER
-       ================================================================ -->
+  ============================================================ -->
   <footer>
     <div class="container">
       <div class="footer-inner">
@@ -1739,54 +1232,160 @@
           <li><a href="#markets">Markets</a></li>
           <li><a href="#validation">Validation</a></li>
           <li><a href="#products">Products</a></li>
+          <li><a href="#team">Team</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="#legal">Privacy &amp; Terms</a></li>
+          <li><a href="https://kaneduffy.gumroad.com" target="_blank" rel="noopener">Gumroad</a></li>
         </ul>
-        <div class="footer-meta">© 2026 RF Catalyst Automotive Ltd &nbsp;·&nbsp; UK Registered</div>
+        <div class="footer-meta">© 2026 RF Catalyst Automotive Ltd &nbsp;·&nbsp; UK Registered &nbsp;·&nbsp; Co. No. 16993101</div>
       </div>
     </div>
   </footer>
 
-  <!-- ================================================================
+  <!-- ============================================================
        JAVASCRIPT
-       ================================================================ -->
+  ============================================================ -->
   <script>
-    // ── Scroll-triggered fade-in ──
+    /* ---- CONFIGURATION ---- */
+    // Replace with your Formspree endpoint or Make.com webhook URL:
+    const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'; // ← update before go-live
+    // Replace with your Calendly link:
+    const CALENDLY_URL  = 'https://calendly.com/rfcatalyst'; // ← update before go-live
+
+    /* ---- Scroll-triggered fade-in ---- */
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      }),
-      { threshold: 0.12 }
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
     );
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ── Mobile nav toggle ──
-    const toggle = document.getElementById('nav-toggle');
-    const navLinks = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-
-    // Close nav on link click
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
-
-    // ── Nav background on scroll ──
+    /* ---- Nav ---- */
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks  = document.getElementById('nav-links');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
     window.addEventListener('scroll', () => {
-      const nav = document.getElementById('main-nav');
-      nav.style.background = window.scrollY > 40
-        ? 'rgba(10,14,20,0.97)'
-        : 'rgba(10,14,20,0.88)';
+      document.getElementById('main-nav').style.background =
+        window.scrollY > 40 ? 'rgba(10,14,20,.97)' : 'rgba(10,14,20,.88)';
     });
 
-    // ── Hero stat bar animation ──
+    /* ---- Hero stat bars ---- */
     setTimeout(() => {
-      document.querySelectorAll('.stat-bar').forEach(bar => {
-        const w = bar.style.width;
+      document.querySelectorAll('.stat-bar[data-w]').forEach(bar => {
+        const w = bar.dataset.w;
         bar.style.width = '0';
-        requestAnimationFrame(() => {
-          setTimeout(() => { bar.style.width = w; }, 100);
-        });
+        requestAnimationFrame(() => setTimeout(() => { bar.style.width = w; }, 100));
       });
-    }, 300);
+    }, 400);
+
+    /* ---- Hero lead capture expand/collapse ---- */
+    // Expand on CTA click if user wants to capture inline before scrolling to form
+    // (primary CTA now scrolls to form; secondary could expand this)
+    function toggleHeroCapture() {
+      const cap = document.getElementById('hero-capture');
+      cap.classList.toggle('open');
+    }
+
+    /* ---- Hero lead capture submit ---- */
+    function handleHeroCapture(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.email.value;
+      const role  = form.role.value;
+      if (!email || !role) return;
+
+      // Pre-fill main form and scroll
+      document.getElementById('f-email').value = email;
+      if (role !== '') {
+        const sel = document.getElementById('f-role');
+        for (let opt of sel.options) {
+          if (opt.text.includes(role.split(' ')[0])) { opt.selected = true; break; }
+        }
+      }
+      document.getElementById('hero-capture').classList.remove('open');
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ---- Gated form: step navigation ---- */
+    function goStep(n) {
+      // Validate step 1 before moving
+      if (n === 2) {
+        const name  = document.getElementById('f-name').value.trim();
+        const org   = document.getElementById('f-org').value.trim();
+        const email = document.getElementById('f-email').value.trim();
+        const role  = document.getElementById('f-role').value;
+        if (!name || !org || !email || !role) {
+          alert('Please complete all required fields before continuing.');
+          return;
+        }
+        const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRx.test(email)) { alert('Please enter a valid work email address.'); return; }
+      }
+
+      [1,2,3].forEach(i => {
+        document.getElementById('step-'+i).classList.toggle('active', i === n);
+        const pip = document.getElementById('pip-'+i);
+        pip.classList.remove('active','done');
+        if (i < n) pip.classList.add('done');
+        if (i === n) pip.classList.add('active');
+      });
+    }
+
+    /* ---- Gated form: submit ---- */
+    async function submitForm() {
+      const interest = document.getElementById('f-interest').value;
+      const consent  = document.getElementById('f-nda-consent').checked;
+      if (!interest) { alert('Please select your primary interest.'); return; }
+      if (!consent)  { alert('Please confirm your understanding of the NDA process.'); return; }
+
+      const payload = {
+        name:     document.getElementById('f-name').value.trim(),
+        org:      document.getElementById('f-org').value.trim(),
+        email:    document.getElementById('f-email').value.trim(),
+        role:     document.getElementById('f-role').value,
+        interest: interest,
+        context:  document.getElementById('f-context').value.trim(),
+        source:   'rfcatalyst.com contact form',
+        timestamp: new Date().toISOString()
+      };
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      try {
+        // If endpoint is configured, POST JSON
+        if (!FORM_ENDPOINT.includes('YOUR_FORM_ID')) {
+          await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Fallback: open mailto with pre-filled body
+          const body = encodeURIComponent(
+            `NDA & Evaluation Pack Enquiry\n\nName: ${payload.name}\nOrganisation: ${payload.org}\nEmail: ${payload.email}\nRole: ${payload.role}\nInterest: ${payload.interest}\nContext: ${payload.context || 'None provided'}\nTimestamp: ${payload.timestamp}`
+          );
+          window.location.href = `mailto:kaned547@gmail.com?subject=NDA%20%26%20Evaluation%20Pack%20Enquiry&body=${body}`;
+        }
+      } catch(err) {
+        // Silent fallback to mailto on network error
+        const body = encodeURIComponent(`Enquiry from ${payload.name} at ${payload.org} — ${payload.email} — ${payload.interest}`);
+        window.location.href = `mailto:kaned547@gmail.com?subject=NDA%20%26%20Evaluation%20Pack%20Enquiry&body=${body}`;
+      }
+
+      goStep(3);
+    }
+
+    /* ---- Calendly ---- */
+    function openCalendly() {
+      if (CALENDLY_URL.includes('rfcatalyst')) {
+        // Placeholder — open in new tab when real URL is set
+        window.open('mailto:kaned547@gmail.com?subject=Technical%20Review%20Call%20Request', '_blank');
+      } else {
+        window.open(CALENDLY_URL, '_blank');
+      }
+    }
   </script>
 
 </body>
